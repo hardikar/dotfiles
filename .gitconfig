@@ -1,0 +1,10 @@
+[color]
+	ui = true
+[user]
+	name = Shreedhar Hardikar
+	email = hardikar@cs.wisc.edu\n
+[core]
+	editor = vim
+	autocrlf = input
+[push]
+	default = current
