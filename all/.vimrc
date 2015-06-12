@@ -28,6 +28,8 @@ set matchtime=3
 vnoremap < <gv
 vnoremap > >gv
 
+" Re-map q to just try and quit
+nnoremap q :q<CR>
 
 " Enable wambat color
 "" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
