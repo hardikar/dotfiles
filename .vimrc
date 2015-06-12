@@ -98,3 +98,7 @@ let g:syntastic_check_on_wq = 0
 
 nnoremap <leader>p :SyntasticCheck<CR>
 nnoremap <leader>P :SyntasticToggleMode<CR>
+
+" Reset VIM color nonsense in tmux
+set t_ut=
+redraw
