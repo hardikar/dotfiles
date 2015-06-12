@@ -14,11 +14,15 @@ set autoindent
 
 
 " General awesome features
-set ruler " Show the position in the file
-set number " Show line numbers on the side
+set ruler " Show line numbers on the file
 set ignorecase " Ignore cases while searching
 set smartcase " /The matches only The but /the matches both The and the
 set incsearch " Show the next matching thing right away
+
+set relativenumber 
+autocmd InsertEnter * :set number " Show the position in the file
+autocmd InsertLeave * :set relativenumber " Shows relative positions to the current line
+
 
 " the cursor will briefly jump to the matching brace when you insert one
 set showmatch
