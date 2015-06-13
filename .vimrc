@@ -37,7 +37,9 @@ nnoremap q :q<CR>
 
 " Enable wambat color
 "" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
-set term=xterm-256color
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+" set term=xterm-256color
+set term=screen-256color " because tmux REALLY likes term=screen
 color wombat256mod
 
 " Remember enough
@@ -48,6 +50,14 @@ set undolevels=700
 "" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 "" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 execute pathogen#infect()
+
+" Backups and swap files
+" set nobackup
+" set nowritebackup
+set noswapfile
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
 
 " ================================================================================
 " VIM plugins
@@ -99,6 +109,3 @@ let g:syntastic_check_on_wq = 0
 nnoremap <leader>p :SyntasticCheck<CR>
 nnoremap <leader>P :SyntasticToggleMode<CR>
 
-" Reset VIM color nonsense in tmux
-set t_ut=
-redraw
