@@ -2,20 +2,26 @@
 
 echo "installing dotfiles"
 
-echo "initializing submodule(s)"
-git submodule update --init --recursive
-
 source install/link.sh
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "running on OSX"
-    source osx/install_osx.sh
+    source install/install_osx.sh
+    # homebrew's zsh sits at /usr/local/bin/zsh
+    ZSH="/usr/local/bin/zsh"
 elif [ "$(uname)" == "Linux" ]; then
     echo "running on Linux"
     # Really I only want to support CentOS for now.
-    # source osx/install_centos.sh
+    # source install/install_centos.sh
+    ZSH=$(which zsh)
 fi
 
-echo "configuring zsh as default shell"
-chsh -s $(which zsh)
+source install/install_all.sh
+
+
+echo "configuring $ZSH as default shell"
+if [[ -z $(grep $ZSH /etc/shells) ]]; then
+    sudo -s 'echo /usr/local/bin/zsh >> /etc/shells'
+fi
+chsh -s $ZSH $USER
 
