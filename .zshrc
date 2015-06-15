@@ -58,4 +58,7 @@ if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
 
+# Useful key bindings for history
+bindkey '^J' down-line-or-history
+bindkey '^K' up-line-or-history
 
