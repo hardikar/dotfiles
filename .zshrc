@@ -46,10 +46,14 @@ if [[ -d ~/bin ]]; then
     fi
 
 # Load up shell theme
+# Credits to https://github.com/chriskempson/base16
 source ~/.zsh/themes/base16-chalk.dark.sh
 
 # Load up common aliases
 source ~/.zsh/aliases.sh
+
+# Load up useful functions
+source ~/.zsh/functions.sh
 
 export EDITOR='vim'
 
