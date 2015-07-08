@@ -53,12 +53,11 @@ source ~/.zsh/aliases.sh
 
 export EDITOR='vim'
 
-# Load local overrides
-if [[ -a ~/.localrc ]]; then
-    source ~/.localrc
-fi
-
 # Useful key bindings for history
 bindkey '^J' down-line-or-history
 bindkey '^K' up-line-or-history
 
+# Load local overrides
+if [[ -a ~/.localrc ]]; then
+    source ~/.localrc
+fi
