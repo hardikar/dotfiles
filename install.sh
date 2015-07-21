@@ -12,7 +12,7 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(uname)" == "Linux" ]; then
     echo "running on Linux"
     # Really I only want to support CentOS for now.
-    # source install/install_centos.sh
+    source install/install_centos.sh
     ZSH=$(which zsh)
 fi
 
