@@ -11,7 +11,7 @@ yum install -y hddtemp
 
 # Install missing development tools
 yum install -y java-1.8.0-openjdk.x86_64
-yum install -y pip
+yum install -y python-pip
 
 # Install other useful tools
 yum install -y ffmpeg ffprobe
