@@ -16,3 +16,7 @@ source install/yum.sh
 echo "installing centos settings"
 # Settings include setting up config files at right places
 # source centos_settings.sh
+
+
+echo "finally updating all the packages to the latest version"
+# yum update -y
