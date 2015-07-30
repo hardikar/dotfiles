@@ -109,3 +109,21 @@ let g:syntastic_check_on_wq = 0
 nnoremap <leader>p :SyntasticCheck<CR>
 nnoremap <leader>P :SyntasticToggleMode<CR>
 
+
+" Settings for vim-notes plugin
+" cd ~/.vim/bundle && \
+" git clone https://github.com/xolox/vim-misc.git && \
+" git clone https://github.com/xolox/vim-notes.git
+let g:notes_directories = ['~/notes']
+let g:notes_smart_quotes = 0
+let g:notes_suffix = '.md'
+let g:notes_list_bullets = ['-', '*', '->', '+']
+
+" Limit notes to auto-indent for notes filetype
+autocmd FileType notes setlocal textwidth=120
+
+
+" Settings for nerdtree plugin
+" cd ~/.vim/bundle && \
+" git clone https://github.com/scrooloose/nerdtree.git
+map <C-n> :NERDTreeToggle<CR>
