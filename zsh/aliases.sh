@@ -34,3 +34,5 @@ alias glog="git log --graph --decorate --all"
 # Enable 256-color more by default
 alias tmux="tmux -2"
 
+# Other aliases
+alias ldate="date +%Y-%m-%d-%H-%M"
