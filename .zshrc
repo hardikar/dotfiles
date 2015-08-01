@@ -43,7 +43,7 @@ path=(
 # check for custom bin directory and add to path
 if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
-    fi
+fi
 
 # Load up shell theme
 # Credits to https://github.com/chriskempson/base16
