@@ -24,6 +24,7 @@ yum install -y youtube-dl
 yum install -y tree
 yum install -y zsh
 yum install -y tmux
+yum install -y vim
 
 # Install NTFS
 yum install -y ntfs-3g
