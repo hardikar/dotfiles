@@ -57,9 +57,36 @@ source ~/.zsh/functions.sh
 
 export EDITOR='vim'
 
-# Useful key bindings for history
+# Useful key bindings
+# Vim-like CTRL movement keys
 bindkey '^J' down-line-or-history
 bindkey '^K' up-line-or-history
+bindkey '^H' backward-char
+bindkey '^L' forward-char
+
+# ctrl + f/b/w move at word level
+bindkey '^F' forward-word
+bindkey '^W' backward-word
+bindkey '^B' backward-word
+
+# Alt + f/w/b delete at word level
+bindkey '^[f' kill-word
+bindkey '^[w' backward-kill-word
+bindkey '^[b' backward-kill-word
+
+# New zsh widget to print workspace status on ctrl+space
+vcs-status(){
+    \print; zle push-line; # push the current command on the buffer stack
+    if [ -d .git ]; then
+        git status 
+    else
+        ls -l
+    fi
+    zle accept-line;
+}
+
+zle -N vcs-status
+bindkey '^ ' vcs-status
 
 # Load local overrides
 if [[ -a ~/.localrc ]]; then
