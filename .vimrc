@@ -32,7 +32,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Re-map q to just try and quit
-nnoremap q :q<CR>
+" nnoremap q :q<CR>
 
 " Map emacs-like keys for moving to beginning/end of line
 map <C-a> <Home>
