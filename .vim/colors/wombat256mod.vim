@@ -49,6 +49,13 @@ hi DiffDelete	ctermfg=232		ctermbg=168		cterm=none		guifg=#242424	guibg=#3e3969	
 hi DiffChange	ctermfg=232		ctermbg=60										guibg=#382a37
 hi DiffText		ctermfg=152		ctermbg=53		cterm=underline					guibg=#73186e	gui=none
 
+" Some Spelling highlighting
+hi SpellBad		ctermfg=9		ctermbg=0		cterm=underline	
+hi SpellCap		ctermfg=4		ctermbg=0		cterm=underline	
+hi SpellLocal	ctermfg=4		ctermbg=0		cterm=underline	
+hi SpellRare	ctermfg=4		ctermbg=0		cterm=underline	
+
+
 "hi CursorIM
 "hi Directory
 "hi IncSearch
@@ -60,10 +67,6 @@ hi DiffText		ctermfg=152		ctermbg=53		cterm=underline					guibg=#73186e	gui=none
 "hi Question
 "hi Scrollbar
 "hi SignColumn
-"hi SpellBad
-"hi SpellCap
-"hi SpellLocal
-"hi SpellRare
 "hi TabLine
 "hi TabLineFill
 "hi TabLineSel

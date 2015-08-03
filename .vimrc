@@ -61,11 +61,16 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+let mapleader = " "
+
+
+" Toggle spelling on/off
+nmap <silent> <leader>s :set spell!<CR>
+
 
 " ================================================================================
 " VIM plugins
 " ================================================================================
-let mapleader = " "
 
 " Python IDE - Jedi VIM
 "" cd ~/.vim/bundle/ && git clone --recursive https://github.com/davidhalter/jedi-vim.git
