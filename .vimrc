@@ -4,13 +4,12 @@ set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 set shiftwidth=4
 
-" Rust syntax highlighting
-filetype indent on 
-au BufNewFile,BufRead *.rs set filetype=rust
-
 " Turn on syntax highlighting
 syntax on
 set autoindent 
+
+" Turn on soft wrapping for text files
+autocmd FileType text setlocal wrap linebreak
 
 
 " General awesome features
@@ -34,6 +33,10 @@ vnoremap > >gv
 
 " Re-map q to just try and quit
 nnoremap q :q<CR>
+
+" Map emacs-like keys for moving to beginning/end of line
+map <C-a> <Home>
+map <C-e> <End>
 
 " Enable wambat color
 "" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
