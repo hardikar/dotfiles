@@ -135,3 +135,27 @@ autocmd FileType notes setlocal textwidth=120
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
 map <C-n> :NERDTreeToggle<CR>
+
+
+" Setting for VimOrganizer plugin
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org            call org#SetOrgFileType()
+let g:org_capture_file = '~/notes/org_files/mycaptures.org'
+command! OrgCapture :call org#CaptureBuffer()
+command! OrgCaptureFile :call org#OpenCaptureFile()
+
+let g:org_todo_setup='TODO STARTED PENDING | DONE CANCELLED'
+let g:org_agenda_select_dirs=["~/notes/org_files"]
+let g:org_agenda_files = split(glob("~/notes/org_files/org-mod*.org"),"\n")
+
+" OrgCustomColors() allows a user to set highlighting for particular items
+function! OrgCustomColors()
+"    let g:org_todo_custom_highlights = 
+"               \     { 'NEXT': { 'guifg':'#888888', 'guibg':'#222222',
+"               \              'ctermfg':'gray', 'ctermbg':'darkgray'},
+"               \      'WAITING': { 'guifg':'#aa3388', 
+"               \                 'ctermfg':'red' } }
+endfunction
+
+
+
