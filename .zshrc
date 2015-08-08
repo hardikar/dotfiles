@@ -89,6 +89,6 @@ zle -N vcs-status
 bindkey '^ ' vcs-status
 
 # Load local overrides
-if [[ -a ~/.localrc ]]; then
-    source ~/.localrc
+if [[ -a ~/.local_zshrc ]]; then
+    source ~/.local_zshrc 
 fi

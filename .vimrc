@@ -158,4 +158,11 @@ function! OrgCustomColors()
 endfunction
 
 
+" ================================================================================
+" Final work
+" ================================================================================
 
+" Override general settings with system specific ones
+if filereadable($HOME."/.local_vimrc")
+    source ~/.local_vimrc
+endif
