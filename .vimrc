@@ -158,8 +158,21 @@ function! OrgCustomColors()
 endfunction
 
 
+" Settings for vimux plugin
+" cd ~/.vim/bundle && \
+" git clone https://github.com/benmills/vimux.git
+nnoremap <Leader>tp :VimuxPromptCommand<CR>
+nnoremap <Leader>tl :VimuxRunLastCommand<CR>
+" This will either open a new pane or use the nearest pane and set it as the
+" vimux runner pane for the other vimux commands. You can control if this command
+" uses the nearest pane or always creates a new one with g:VimuxUseNearest
+nnoremap <Leader>to :VimuxOpenPane<CR>
+nnoremap <Leader>tq :VimuxCloseRunner<CR>
+nnoremap <Leader>tc :VimuxInterruptRunner<CR>
+" map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+
 " ================================================================================
-" Final work
+" Finally
 " ================================================================================
 
 " Override general settings with system specific ones
