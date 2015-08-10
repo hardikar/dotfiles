@@ -35,8 +35,8 @@ vnoremap > >gv
 " nnoremap q :q<CR>
 
 " Map emacs-like keys for moving to beginning/end of line
-map <C-a> <Home>
-map <C-e> <End>
+noremap <C-a> <Home>
+noremap <C-e> <End>
 
 " Enable wambat color
 "" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
@@ -134,7 +134,9 @@ autocmd FileType notes setlocal textwidth=120
 " Settings for nerdtree plugin
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
-map <C-n> :NERDTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<CR>
+" Close vim if NERDTree is the only remaining window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 " Setting for VimOrganizer plugin
