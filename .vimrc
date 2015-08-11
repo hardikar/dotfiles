@@ -56,6 +56,9 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" Show filename in status bar
+set statusline=%F
+
 " ================================================================================
 " Major remappings
 " ================================================================================
