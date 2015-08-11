@@ -23,23 +23,18 @@ autocmd InsertEnter * :set number " Show the position in the file
 autocmd InsertLeave * :set relativenumber " Shows relative positions to the current line
 
 
+" resize splits once window is resized
+autocmd VimResized * execute "normal! \<c-w>="
+
+" Enable mouse selection whenever possible
+set mouse=a
+
 " the cursor will briefly jump to the matching brace when you insert one
 set showmatch
 set matchtime=3
 
-" Easier moving of code block
-vnoremap < <gv
-vnoremap > >gv
-
-" Re-map q to just try and quit
-" nnoremap q :q<CR>
-
-" Map emacs-like keys for moving to beginning/end of line
-noremap <C-a> <Home>
-noremap <C-e> <End>
-
 " Enable wambat color
-"" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
+" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 " set term=xterm-256color
 set term=screen-256color " because tmux REALLY likes term=screen
@@ -61,12 +56,50 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" ================================================================================
+" Major remappings
+" ================================================================================
+
 let mapleader = " "
+
+" Save a million keystrokes
+nnoremap ; :
+
+" Easier moving of code block
+vnoremap < <gv
+vnoremap > >gv
+
+" Re-map q to just try and quit
+" nnoremap q :q<CR>
+
+" Map emacs-like keys for moving to beginning/end of line
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
 
 
 " Toggle spelling on/off
 nmap <silent> <leader>s :set spell!<CR>
 
+
+" Mappings for command mode
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-L> <Right>
+cnoremap <C-H> <Left>
+cnoremap <C-J> <Up>
+cnoremap <C-K> <Down>
+
+" Mappings home row keys
+noremap H ^
+noremap L $
+
+" Toggle invisibles
+noremap <Leader>i :set list!<CR>
+
+nnoremap <up>       :bp<CR>
+nnoremap <down>     :bn<CR>
+nnoremap <left>     :tabp<CR>
+nnoremap <right>    :tabn<CR>
 
 " ================================================================================
 " VIM plugins
@@ -137,6 +170,8 @@ autocmd FileType notes setlocal textwidth=120
 noremap <Leader>n :NERDTreeToggle<CR>
 " Close vim if NERDTree is the only remaining window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Show current file in NERDTree
+map <silent> <Leader>m :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 
 
 " Setting for VimOrganizer plugin
