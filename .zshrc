@@ -65,14 +65,14 @@ bindkey '^H' backward-char
 bindkey '^L' forward-char
 
 # ctrl + f/b/w move at word level
-bindkey '^F' forward-word
-bindkey '^W' backward-word
-bindkey '^B' backward-word
-
-# Alt + f/w/b delete at word level
-bindkey '^[f' kill-word
-bindkey '^[w' backward-kill-word
-bindkey '^[b' backward-kill-word
+# bindkey '^f' forward-word
+# bindkey '^W' backward-word
+# bindkey '^B' backward-word
+# 
+# # Alt + f/w/b delete at word level
+# bindkey '^[f' kill-word
+# bindkey '^[w' backward-kill-word
+# bindkey '^[b' backward-kill-word
 
 # New zsh widget to print workspace status on ctrl+space
 vcs-status(){
