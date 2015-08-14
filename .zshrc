@@ -15,6 +15,8 @@ setopt AUTO_PUSHD
 unsetopt beep
 
 bindkey -e
+autoload -U select-word-style
+select-word-style bash
 # End of lines configured by zsh-newuser-install
 #
 # The following lines were added by compinstall
