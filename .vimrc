@@ -178,7 +178,7 @@ noremap <Leader>n :NERDTreeToggle<CR>
 " Close vim if NERDTree is the only remaining window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Show current file in NERDTree
-map <silent> <Leader>m :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+map <silent> <Leader>m :NERDTreeFind<CR>
 
 
 " Setting for VimOrganizer plugin
@@ -213,6 +213,7 @@ nnoremap <Leader>tl :VimuxRunLastCommand<CR>
 nnoremap <Leader>to :VimuxOpenPane<CR>
 nnoremap <Leader>tq :VimuxCloseRunner<CR>
 nnoremap <Leader>tc :VimuxInterruptRunner<CR>
+nnoremap <Leader>vz :VimuxZoomRunner<CR>
 " map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 
 " ================================================================================
