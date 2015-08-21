@@ -89,8 +89,8 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-L> <Right>
 cnoremap <C-H> <Left>
-cnoremap <C-J> <Up>
-cnoremap <C-K> <Down>
+cnoremap <C-J> <Down>
+cnoremap <C-K> <Up>
 
 " Mappings home row keys
 noremap H ^
