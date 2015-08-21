@@ -104,6 +104,10 @@ nnoremap <down>     :bn<CR>
 nnoremap <left>     :tabp<CR>
 nnoremap <right>    :tabn<CR>
 
+" Quick fix list traversal
+nnoremap <silent> <leader>] :cnext<CR>  
+nnoremap <silent> <leader>[ :cprevious<CR>
+
 " ================================================================================
 " VIM plugins
 " ================================================================================
