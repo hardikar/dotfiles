@@ -1,3 +1,7 @@
+" F*** vi
+set nocompatible
+set modelines=0
+
 " Tab incantations
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
@@ -17,6 +21,19 @@ set ruler " Show line numbers on the file
 set ignorecase " Ignore cases while searching
 set smartcase " /The matches only The but /the matches both The and the
 set incsearch " Show the next matching thing right away
+set gdefault  " Set global by default for substitute. Use g for local
+
+set showmode " Show current mode on the last line when in insert/visual etc
+set showcmd " Show's the current command at the bottom right corner
+set hidden " Opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
+set wildmenu " Command mode completion
+set cursorline " Highlight the screen line of the cursor
+set ttyfast " Fast terminal connection
+set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
+set laststatus=2 " Always have a status line on
+
+" Automatically save a file going away
+autocmd FocusLost * :wa
 
 set relativenumber 
 autocmd InsertEnter * :set number " Show the position in the file
