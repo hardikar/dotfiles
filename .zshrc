@@ -28,10 +28,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# Set up a colored prompt
-autoload -U colors && colors
-PROMPT="%m %{$fg[green]%}[%2d]%{$reset_color%} %(?..%{$fg[red]%})$ %{$reset_color%}"
-
 export PATH=
 path=(
     /usr/local/bin/
@@ -56,6 +52,9 @@ source ~/.zsh/aliases.sh
 
 # Load up useful functions
 source ~/.zsh/functions.sh
+
+# Load up prompt settings
+source ~/.zsh/prompt.sh
 
 export EDITOR='vim'
 

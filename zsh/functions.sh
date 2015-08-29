@@ -21,3 +21,19 @@ function extract() {
         echo "'$1' is not a valid file"
     fi
 }
+
+# New zsh widget to print workspace status on ctrl+space
+vcs-status(){
+    \print; zle push-line; # push the current command on the buffer stack
+    if [ -d .git ]; then
+        git status 
+    else
+        ls -l
+    fi
+    zle accept-line;
+}
+
+zle -N vcs-status
+bindkey '^ ' vcs-status
+
+
