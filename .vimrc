@@ -1,7 +1,6 @@
 " F*** vi
 set nocompatible
 set modelines=0
-
 " Tab incantations
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
@@ -79,8 +78,8 @@ set statusline=%n:      " Buffer number
 set statusline+=%m\     " Modifiable flag
 set statusline+=%F      " Full path of the file
 set statusline+=%=      " left/right separator
-set statusline+=%l/%L   " Cursor line/total lines
 set statusline+=%c,     " Cursor column
+set statusline+=%l/%L   " Cursor line/total lines
 set statusline+=\ %P    " Percent through file
 
 
