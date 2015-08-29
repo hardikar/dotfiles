@@ -90,6 +90,10 @@ vcs-status(){
 zle -N vcs-status
 bindkey '^ ' vcs-status
 
+# ZSH highlighting plugin
+# git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # Load local overrides
 if [[ -a ~/.local_zshrc ]]; then
     source ~/.local_zshrc 
