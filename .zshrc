@@ -3,22 +3,27 @@
 HISTFILE=~/.histfile
 HISTSIZE=16000
 SAVEHIST=16000
+setopt APPEND_HISTORY         # Append history file
+setopt INC_APPEND_HISTORY     # Append as you type, instead of end of session 
 setopt HIST_VERIFY
-setopt EXTENDED_HISTORY
+setopt EXTENDED_HISTORY       # Save date & exec time
+setopt SHARE_HISTORY          # Share history with all open shells
+setopt HIST_IGNORE_DUPS       # Ignore duplicate commands if one after the other
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_ALL_DUPS
-setopt INC_APPEND_HISTORY 
-setopt APPEND_HISTORY
-setopt COMPLETE_ALIASES
+setopt COMPLETE_ALIASES 
 
 setopt AUTO_PUSHD
-unsetopt beep
+setopt NO_BEEP
+setopt AUTO_CD  # foo is cd foo if foo is a directory
+unsetopt flowcontrol # ^S doesn't block input
+
+setopt AUTO_MENU
 
 bindkey -e
 autoload -U select-word-style
 select-word-style bash
-# End of lines configured by zsh-newuser-install
-#
+
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/hardikar/.zshrc'
 
@@ -65,6 +70,8 @@ bindkey '^K' up-line-or-history
 bindkey '^H' backward-char
 bindkey '^L' forward-char
 
+bindkey '^U' undo
+
 # ctrl + f/b/w move at word level
 # bindkey '^f' forward-word
 # bindkey '^W' backward-word
@@ -74,20 +81,6 @@ bindkey '^L' forward-char
 # bindkey '^[f' kill-word
 # bindkey '^[w' backward-kill-word
 # bindkey '^[b' backward-kill-word
-
-# New zsh widget to print workspace status on ctrl+space
-vcs-status(){
-    \print; zle push-line; # push the current command on the buffer stack
-    if [ -d .git ]; then
-        git status 
-    else
-        ls -l
-    fi
-    zle accept-line;
-}
-
-zle -N vcs-status
-bindkey '^ ' vcs-status
 
 # ZSH highlighting plugin
 # git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
