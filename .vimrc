@@ -90,23 +90,40 @@ set statusline+=\ %P    " Percent through file
 
 let mapleader = " "
 
+" Toggle spelling on/off
+nmap <silent> <leader>s :set spell!<CR>
+
+" Toggle invisibles
+noremap <Leader>i :set list!<CR>
+
+" Quick fix list traversal
+nnoremap <silent> <leader>] :cnext<CR>
+nnoremap <silent> <leader>[ :cprevious<CR>
+
+
 " Save a million keystrokes
 nnoremap ; :
+cnoremap <C-;> <C-C>
 
 " Easier moving of code block
 vnoremap < <gv
 vnoremap > >gv
 
+" Remap tab to % for matching parentheses etc
+vnoremap <tab> %
+nnoremap <tab> %
+
+" Ignore F1
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
 " Re-map q to just try and quit
 " nnoremap q :q<CR>
 
 " Map emacs-like keys for moving to beginning/end of line
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-
-
-" Toggle spelling on/off
-nmap <silent> <leader>s :set spell!<CR>
+noremap <C-a> <Home>
+noremap <C-e> <End>
 
 
 " Mappings for command mode
@@ -121,17 +138,14 @@ cnoremap <C-K> <Up>
 noremap H ^
 noremap L $
 
-" Toggle invisibles
-noremap <Leader>i :set list!<CR>
-
 nnoremap <up>       :bp<CR>
 nnoremap <down>     :bn<CR>
 nnoremap <left>     :tabp<CR>
 nnoremap <right>    :tabn<CR>
 
-" Quick fix list traversal
-nnoremap <silent> <leader>] :cnext<CR>  
-nnoremap <silent> <leader>[ :cprevious<CR>
+" Use python/perl regex, why learn another one?
+nnoremap / /\v
+vnoremap / /\v
 
 " ================================================================================
 " VIM plugins
