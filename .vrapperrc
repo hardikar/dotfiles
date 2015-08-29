@@ -1,0 +1,6 @@
+map L $
+map H ^
+set autoindent
+set ignorecase
+set smartcase
+
