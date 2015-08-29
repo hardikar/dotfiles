@@ -73,8 +73,16 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" Show filename in status bar
-set statusline=%F
+" Status bar
+set statusline=         " Empty status bar
+set statusline=%n:      " Buffer number
+set statusline+=%m\     " Modifiable flag
+set statusline+=%F      " Full path of the file
+set statusline+=%=      " left/right separator
+set statusline+=%l/%L   " Cursor line/total lines
+set statusline+=%c,     " Cursor column
+set statusline+=\ %P    " Percent through file
+
 
 " ================================================================================
 " Major remappings
