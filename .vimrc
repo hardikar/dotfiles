@@ -95,8 +95,8 @@ nmap <silent> <leader>s :set spell!<CR>
 noremap <Leader>i :set list!<CR>
 
 " Quick fix list traversal
-nnoremap <silent> <leader>] :cnext<CR>
-nnoremap <silent> <leader>[ :cprevious<CR>
+nnoremap <silent> <leader>n :cnext<CR>
+nnoremap <silent> <leader>N :cprevious<CR>
 
 
 " Save a million keystrokes
@@ -211,7 +211,7 @@ autocmd FileType notes setlocal textwidth=120
 " Settings for nerdtree plugin
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
-noremap <Leader>n :NERDTreeToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR>
 " Close vim if NERDTree is the only remaining window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Show current file in NERDTree
