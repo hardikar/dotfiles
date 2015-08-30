@@ -8,7 +8,7 @@ function git_prompt_info() {
   if [[ -z $ref ]]; then
     git_prompt_short_sha
   else
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_upstream)${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
 
@@ -31,11 +31,28 @@ parse_git_dirty () {
   fi
 }
 
-# Checks if there are commits ahead from remote
-function git_prompt_ahead() {
-  if $(echo "$(git log origin/$(current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
-    echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
+
+parse_git_upstream () {
+  # Your branch is ahead of 'origin/master' by 1 commit.
+  gitstat=$(git status 2>/dev/null | grep -E 'Your branch is (?:ahead|behind|up-to-date) (?:of|to|with)? ?[^ ]+(?: by \d+? commits?)?')
+
+  gitcommitcount=$(echo ${gitstat} | grep -E -o 'by \d+ commits?' | grep -E -o '\d+')
+
+  if [[ $(echo ${gitstat} | grep -c "is ahead of") > 0 ]]; then
+    echo -n "$ZSH_THEME_GIT_PROMPT_AHEAD${gitcommitcount} "
+    return
   fi
+
+  if [[ $(echo ${gitstat} | grep -c "is behind") > 0 ]]; then
+    echo -n "$ZSH_THEME_GIT_PROMPT_BEHIND${gitcommitcount} "
+    return
+  fi 
+
+  if [[ $(echo ${gitstat} | grep -c "is up-to-date with") > 0 ]]; then
+    echo -n "$ZSH_THEME_GIT_PROMPT_EQUAL "
+    return
+  fi 
+
 }
 
 # Formats prompt string for current git commit short SHA

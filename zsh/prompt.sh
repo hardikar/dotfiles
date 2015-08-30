@@ -15,6 +15,9 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%})"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="^"
+ZSH_THEME_GIT_PROMPT_BEHIND="v"
+ZSH_THEME_GIT_PROMPT_EQUAL="="
 
 # PROMPT="%m %{$fg[green]%}[%2d]%{$reset_color%} %(?..%{$fg[red]%})$ %{$reset_color%} $(git_prompt_info)"
 
