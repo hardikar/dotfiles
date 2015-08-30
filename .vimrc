@@ -37,6 +37,8 @@ set relativenumber
 autocmd InsertEnter * :set number " Show the position in the file
 autocmd InsertLeave * :set relativenumber " Shows relative positions to the current line
 
+" Folding
+set foldmethod=syntax
 
 " resize splits once window is resized
 autocmd VimResized * execute "normal! \<c-w>="
@@ -98,6 +100,9 @@ noremap <Leader>i :set list!<CR>
 nnoremap <silent> <leader>n :cnext<CR>
 nnoremap <silent> <leader>N :cprevious<CR>
 
+" Folding key bindings
+nnoremap <Leader><Space> za
+vnoremap <Leader><Space> za
 
 " Save a million keystrokes
 nnoremap ; :
