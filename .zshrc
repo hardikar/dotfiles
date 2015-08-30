@@ -35,7 +35,7 @@ compinit
 
 export PATH=
 path=(
-    /usr/local/bin/
+    /usr/local/bin
     /usr/bin
     /bin
     /usr/sbin
