@@ -20,7 +20,6 @@ if s:InTmuxSession()
   function TmuxSetBuffer()
     if RegChanged()
       let cmd = 'tmux set-buffer "'. g:reg . '"'
-      echom cmd
       silent call system(cmd)
     endif
   endfunction
