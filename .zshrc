@@ -84,7 +84,9 @@ bindkey '^U' undo
 
 # ZSH highlighting plugin
 # git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-# source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ $ZSH_VERSION > 4.3 ]]; then
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Load local overrides
 if [[ -a ~/.local_zshrc ]]; then
