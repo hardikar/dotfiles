@@ -1,6 +1,11 @@
 #
 # git.zsh copied from the oh-my-zsh and heavily modified
 #
+if [[ -z $(echo "echo" | grep -P "echo" 2>&1 >/dev/null && echo $?) ]] ; then
+    alias egrep='grep -E'
+else
+    alias egrep='grep -P'
+fi
 
 # get the name of the branch we are on
 function git_prompt_info() {
@@ -34,9 +39,9 @@ parse_git_dirty () {
 
 parse_git_upstream () {
   # Your branch is ahead of 'origin/master' by 1 commit.
-  gitstat=$(git status 2>/dev/null | grep -E 'Your branch is (?:ahead|behind|up-to-date) (?:of|to|with)? ?[^ ]+(?: by \d+? commits?)?')
+  gitstat=$(git status 2>/dev/null | egrep 'Your branch is (?:ahead|behind|up-to-date) (?:of|to|with)? ?[^ ]+(?: by \d+? commits?)?')
 
-  gitcommitcount=$(echo ${gitstat} | grep -E -o 'by \d+ commits?' | grep -E -o '\d+')
+  gitcommitcount=$(echo ${gitstat} | egrep -o 'by \d+ commits?' | egrep -o '\d+')
 
   if [[ $(echo ${gitstat} | grep -c "is ahead of") > 0 ]]; then
     echo -n "$ZSH_THEME_GIT_PROMPT_AHEAD${gitcommitcount} "
