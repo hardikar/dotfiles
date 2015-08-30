@@ -14,7 +14,6 @@ set autoindent
 " Turn on soft wrapping for text files
 autocmd FileType text setlocal wrap linebreak
 
-
 " General awesome features
 set ruler " Show line numbers on the file
 set ignorecase " Ignore cases while searching
@@ -253,6 +252,12 @@ nnoremap <Leader>tq :VimuxCloseRunner<CR>
 nnoremap <Leader>tc :VimuxInterruptRunner<CR>
 nnoremap <Leader>vz :VimuxZoomRunner<CR>
 " map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+
+" Settings for my very own tmux-vim
+autocmd CursorHold * call TmuxSetBuffer()
+autocmd CursorHoldI * call TmuxSetBuffer()
+autocmd InsertEnter * call TmuxSetBuffer()
+
 
 " ================================================================================
 " Finally
