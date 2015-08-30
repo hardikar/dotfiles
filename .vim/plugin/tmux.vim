@@ -24,6 +24,10 @@ if s:InTmuxSession()
       silent call system(cmd)
     endif
   endfunction
+  " Settings for my very own tmux-vim
+  autocmd CursorHold * call TmuxSetBuffer()
+  autocmd CursorHoldI * call TmuxSetBuffer()
+  autocmd InsertEnter * call TmuxSetBuffer()
 else
   " Set clipboard as unnamed to interact better with tmux
   set clipboard=unnamed

@@ -253,11 +253,6 @@ nnoremap <Leader>tc :VimuxInterruptRunner<CR>
 nnoremap <Leader>vz :VimuxZoomRunner<CR>
 " map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 
-" Settings for my very own tmux-vim
-autocmd CursorHold * call TmuxSetBuffer()
-autocmd CursorHoldI * call TmuxSetBuffer()
-autocmd InsertEnter * call TmuxSetBuffer()
-
 
 " ================================================================================
 " Finally
