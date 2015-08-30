@@ -1,6 +1,6 @@
 # Lines configured by zsh-newuser-install
 
-HISTFILE=~/.histfile
+HISTFILE=~/.history
 HISTSIZE=16000
 SAVEHIST=16000
 setopt APPEND_HISTORY         # Append history file
@@ -84,7 +84,7 @@ bindkey '^U' undo
 
 # ZSH highlighting plugin
 # git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Load local overrides
 if [[ -a ~/.local_zshrc ]]; then
