@@ -1,0 +1,16 @@
+"3.10.1 (created: 2015/08/25 00:41:59)
+
+source! /Users/hardikar/.vimperatorrc.local
+
+nnoremap d <Nop>
+nnoremap bd d
+
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-L> <Right>
+cnoremap <C-H> <Left>
+cnoremap <C-J> <Down>
+cnoremap <C-K> <Up>
+
+nnoremap j 5j
+nnoremap k 5k
