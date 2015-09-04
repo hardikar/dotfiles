@@ -141,6 +141,10 @@ cnoremap <C-K> <Up>
 noremap H ^
 noremap L $
 
+" Looking for crtl for scrolling is such a pain
+noremap U <C-U>
+noremap D <C-D>
+
 nnoremap <up>       :bp<CR>
 nnoremap <down>     :bn<CR>
 nnoremap <left>     :tabp<CR>

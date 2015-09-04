@@ -2,9 +2,15 @@
 
 source! /Users/hardikar/.vimperatorrc.local
 
-nnoremap d <Nop>
+nnoremap d <Nop> " Stop d form closing the buffer
+" So that I don't have to search for Ctrl in the browse
+nnoremap U <C-U>
+nnoremap D <C-D>
+
+" (buffer)-d
 nnoremap bd d
 
+" Copied from vimrc
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-L> <Right>
@@ -12,5 +18,9 @@ cnoremap <C-H> <Left>
 cnoremap <C-J> <Down>
 cnoremap <C-K> <Up>
 
+" Faster scrolling
 nnoremap j 5j
 nnoremap k 5k
+
+" Increase the font size
+hi CmdLine -append font-size:15px
