@@ -50,6 +50,10 @@ set ttyfast " Fast terminal connection
 set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
 set laststatus=2 " Always have a status line on
 
+" Split settings
+set splitbelow
+set splitright
+
 " Fancy line numbering
 set relativenumber
 set ruler " Show line numbers on the file
@@ -174,6 +178,31 @@ nnoremap <right>    :tabn<CR>
 " Use python/perl regex, why learn another one?
 nnoremap / /\v
 vnoremap / /\v
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Don't move when pressing *
+nnoremap * *<C-O>
+
+" ================================================================================
+" Wildmenu settings
+" ================================================================================
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+
+set wildignore+=*.orig                           " Merge resolution files
 
 " ================================================================================
 " VIM plugins
