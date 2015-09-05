@@ -2,13 +2,45 @@
 
 source! /Users/hardikar/.vimperatorrc.local
 
-nnoremap d <Nop> " Stop d form closing the buffer
+" ================================================================================
+" Firefox settings
+" ================================================================================
+
+" Make Firefox run faster by using JIT
+set! javascript.options.jit.chrome=true
+
+" don't close window when closed last tab
+set! browser.tabs.closeWindowWithLastTab=false
+
+" ================================================================================
+" General Settings
+" ================================================================================
+
+" Don't focus input fields after loading page
+set focuscontent
+
+" Only show firefox's default results on :open prompts
+set complete=l
+set maxitems=10
+
+" Save millions of keystrokes
+nnoremap ; :
+vnoremap ; :
+nnoremap <C-;> :
+vnoremap <C-;> :
+
+" This are hints to links on the page
+set hintchars='qwertyuip1234890'
+" Need <CR> whenever following hints
+set followhints=1
+
+" ================================================================================
+" General Navigation
+" ================================================================================
+
 " So that I don't have to search for Ctrl in the browse
 nnoremap U <C-U>
 nnoremap D <C-D>
-
-" (buffer)-d
-nnoremap bd d
 
 " Copied from vimrc
 cnoremap <C-A> <Home>
@@ -22,5 +54,45 @@ cnoremap <C-K> <Up>
 nnoremap j 5j
 nnoremap k 5k
 
-" Increase the font size
-hi CmdLine -append font-size:15px
+" ================================================================================
+" Tab navigation
+" ================================================================================
+
+" Easier tab movements
+nnoremap tj  :tabfirst<CR>
+nnoremap tk  :tablast<CR>
+nnoremap tl  :tabnext<CR>
+nnoremap th  :tabprev<CR>
+
+nnoremap b :buffer<Space>
+
+
+" ================================================================================
+" Theme settings
+" ================================================================================
+
+" Hints CSS
+hi Hint font-family: monospace; font-size: 13px; font-weight: bold; text-transform: lowercase; color: white; background-color: grey; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px; 
+
+" make caret mode's bar more visible
+set! ui.caretWidth=1
+set! ui.caretBlinkTime=1000
+
+" ================================================================================
+" Commands
+" ================================================================================
+
+:command! close quit
+
+" ================================================================================
+" Forget the bad habits
+" ================================================================================
+
+" Stop d form closing the buffer
+nnoremap d <Nop>
+
+" Stop backspace from going back
+nnoremap <BS> <Nop>
+
+" Don't open the stupid source mode
+nnoremap gf <Nop>
