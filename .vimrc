@@ -1,21 +1,41 @@
+" .vimrc
+" Author : Shreedhar Hardikar (hardikar@cs.wisc.edu)
+"
+" ================================================================================
+" Initialize pathogen
+" ================================================================================
+
+" Install the pathogen VIM plugin manager
+"" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+"" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+execute pathogen#infect()
+
+" ================================================================================
+" Basic options
+" ================================================================================
+
 " F*** vi
 set nocompatible
 set modelines=0
+
+" Remember enough
+set history=750
+set undolevels=700
+
+" Turn on syntax highlighting
+syntax on
+
 " Tab incantations
+set autoindent " Indent according to the previous line automatically
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 set shiftwidth=4
 
-" Turn on syntax highlighting
-syntax on
-set autoindent 
-
 " Turn on soft wrapping for text files
 autocmd FileType text setlocal wrap linebreak
 
 " General awesome features
-set ruler " Show line numbers on the file
 set ignorecase " Ignore cases while searching
 set smartcase " /The matches only The but /the matches both The and the
 set incsearch " Show the next matching thing right away
@@ -30,41 +50,21 @@ set ttyfast " Fast terminal connection
 set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
 set laststatus=2 " Always have a status line on
 
-" Automatically save a file going away
-autocmd FocusLost * :wa
-
-set relativenumber 
+" Fancy line numbering
+set relativenumber
+set ruler " Show line numbers on the file
 autocmd InsertEnter * :set number " Show the position in the file
 autocmd InsertLeave * :set relativenumber " Shows relative positions to the current line
-
-" Folding
-set foldmethod=syntax
-
-" resize splits once window is resized
-autocmd VimResized * execute "normal! \<c-w>="
-
-" Enable mouse selection whenever possible
-set mouse=a
 
 " the cursor will briefly jump to the matching brace when you insert one
 set showmatch
 set matchtime=3
 
-" Enable wambat color
-" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-" set term=xterm-256color
-set term=screen-256color " because tmux REALLY likes term=screen
-color wombat256mod
+" Folding
+set foldmethod=syntax
 
-" Remember enough
-set history=750
-set undolevels=700
-
-" Install the pathogen VIM plugin manager
-"" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-"" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-execute pathogen#infect()
+" Enable mouse selection whenever possible
+set mouse=a
 
 " Backups and swap files
 " set nobackup
@@ -73,7 +73,9 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" ================================================================================
 " Status bar
+" ================================================================================
 set statusline=         " Empty status bar
 set statusline=%n:      " Buffer number
 set statusline+=%m\     " Modifiable flag
@@ -82,6 +84,27 @@ set statusline+=%=      " left/right separator
 set statusline+=%c,     " Cursor column
 set statusline+=%l/%L   " Cursor line/total lines
 set statusline+=\ %P    " Percent through file
+
+" ================================================================================
+" Vim theme : Enable wambat color
+" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
+" ================================================================================
+
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+" set term=xterm-256color
+set term=screen-256color " because tmux REALLY likes term=screen
+color wombat256mod
+
+
+" ================================================================================
+" General Auto-commands
+" ================================================================================
+
+" resize splits once window is resized
+autocmd VimResized * execute "normal! \<c-w>="
+
+" Automatically save a file going away
+autocmd FocusLost * :wa
 
 
 " ================================================================================
@@ -121,9 +144,6 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" Re-map q to just try and quit
-" nnoremap q :q<CR>
-
 " Map emacs-like keys for moving to beginning/end of line
 noremap <C-a> <Home>
 noremap <C-e> <End>
@@ -145,6 +165,7 @@ noremap L $
 noremap U <C-U>
 noremap D <C-D>
 
+" Remap the cursor keys to something else
 nnoremap <up>       :bp<CR>
 nnoremap <down>     :bn<CR>
 nnoremap <left>     :tabp<CR>
@@ -228,7 +249,7 @@ map <silent> <Leader>m :NERDTreeFind<CR>
 
 
 " Setting for VimOrganizer plugin
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au BufEnter *.org            call org#SetOrgFileType()
 let g:org_capture_file = '~/notes/org_files/mycaptures.org'
 command! OrgCapture :call org#CaptureBuffer()
@@ -240,10 +261,10 @@ let g:org_agenda_files = split(glob("~/notes/org_files/org-mod*.org"),"\n")
 
 " OrgCustomColors() allows a user to set highlighting for particular items
 function! OrgCustomColors()
-"    let g:org_todo_custom_highlights = 
+"    let g:org_todo_custom_highlights =
 "               \     { 'NEXT': { 'guifg':'#888888', 'guibg':'#222222',
 "               \              'ctermfg':'gray', 'ctermbg':'darkgray'},
-"               \      'WAITING': { 'guifg':'#aa3388', 
+"               \      'WAITING': { 'guifg':'#aa3388',
 "               \                 'ctermfg':'red' } }
 endfunction
 
