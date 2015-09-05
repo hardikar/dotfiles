@@ -1,9 +1,7 @@
 #
 # git.zsh copied from the oh-my-zsh and heavily modified
 #
-if [[ -z $(echo "echo" | grep -P "echo" 2>&1 >/dev/null && echo $?) ]] ; then
-    alias egrep='grep -E'
-else
+if [[ $(echo "echo" | grep -P "echo" 2>&1 >/dev/null && echo $?) == 0 ]] ; then
     alias egrep='grep -P'
 fi
 
