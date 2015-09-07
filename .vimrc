@@ -186,6 +186,20 @@ nnoremap N Nzzzv
 " Don't move when pressing *
 nnoremap * *<C-O>
 
+" Better navigating through omnicomplete option list
+set completeopt=longest,menuone
+" Limit the height of the menu
+set pumheight=10
+
+" A most standard IDE like keys
+inoremap <expr><Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+inoremap <expr><C-J> pumvisible() ? "\<C-N>" : "\<C-J>"
+inoremap <expr><C-K> pumvisible() ? "\<C-P>" : "\<C-K>"
+inoremap <expr><Esc> pumvisible() ? "\<C-E>" : "\<Esc>"
+inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+
+
 " ================================================================================
 " Wildmenu settings
 " ================================================================================
@@ -217,23 +231,6 @@ let g:jedi#goto_assignments_command = "<leader>a"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
-
-" Better navigating through omnicomplete option list
-"" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 
 " syntastic for Pylint support
