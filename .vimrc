@@ -309,9 +309,6 @@ nnoremap <Leader>tc :VimuxInterruptRunner<CR>
 nnoremap <Leader>vz :VimuxZoomRunner<CR>
 " map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 
-" From plugin/rename.vim
-map <leader>r :call RenameFile()<cr>
-
 " ================================================================================
 " Finally
 " ================================================================================
