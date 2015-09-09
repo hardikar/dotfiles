@@ -70,9 +70,15 @@ nnoremap b :buffer<Space>
 " Hints CSS
 hi Hint font-family: monospace; font-size: 13px; font-weight: bold; text-transform: lowercase; color: white; background-color: grey; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px; 
 
+" Command line
+hi CmdLine background: black; color: white; transition: all 0.25s; font-size:13px;
+hi CmdLine>* font-family: monospace; font-size:13px;
+
+hi StatusLine color: black; background: white; font-weight: normal; font-size:13px;
+
 " make caret mode's bar more visible
 set! ui.caretWidth=1
-set! ui.caretBlinkTime=1000
+set! ui.caretBlinkTime=300
 
 " ================================================================================
 " Commands
