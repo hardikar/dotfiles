@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<root>
+<item>
+    <name>Vi arrows</name>
+    <appendix>CTRL+ hjkl act as arrow keys in all applications.</appendix>
+
+    <identifier>private.vi_arrows</identifier>
+
+    <!-- This is the basic mapping. -->
+    <autogen>__KeyToKey__ KeyCode::H, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_LEFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::J, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_DOWN</autogen>
+    <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_UP</autogen>
+    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_RIGHT</autogen>
+</item>
+</root>

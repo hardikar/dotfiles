@@ -10,3 +10,4 @@ Import using
 $ sh $DOTFILES/karabiner-import.sh
 ```
 
+Also do '''cp $DOTFILES/osx/private.xml ~/Library/Application\ Support/Karabiner/private.xml''' to copy custom settings to be loaded into Karabiner.

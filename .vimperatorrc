@@ -38,10 +38,6 @@ set followhints=1
 " General Navigation
 " ================================================================================
 
-" So that I don't have to search for Ctrl in the browse
-nnoremap U <C-U>
-nnoremap D <C-D>
-
 " Copied from vimrc
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
