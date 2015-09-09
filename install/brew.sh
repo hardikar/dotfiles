@@ -26,3 +26,7 @@ brew install xvid
 # Random stuff
 brew install boost --with-python
 brew install ledger
+
+# Casks
+brew install caskroom/cask/brew-cask
+brew install cask karabiner
