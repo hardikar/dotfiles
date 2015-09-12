@@ -202,6 +202,8 @@ inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.mp3,*.mp4,*.m4a                " other binary files
+set wildignore+=*.pdf                            " other binary files
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
@@ -238,13 +240,18 @@ set statusline+=%*
 
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+
+" Automatically close when no errors, but don't auto-open
+let g:syntastic_auto_loc_list = 2
+" But keep the list ready
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+
+" When to run Syntastic
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 nnoremap <leader>p :SyntasticCheck<CR>
-nnoremap <leader>P :SyntasticToggleMode<CR>
+nnoremap <leader>P :SyntasticReset<CR>
 
 
 " Settings for vim-notes plugin
@@ -291,19 +298,23 @@ function! OrgCustomColors()
 endfunction
 
 
-" Settings for vimux plugin
+" ctrl-p plugin
 " cd ~/.vim/bundle && \
-" git clone https://github.com/benmills/vimux.git
-nnoremap <Leader>tp :VimuxPromptCommand<CR>
-nnoremap <Leader>tl :VimuxRunLastCommand<CR>
-" This will either open a new pane or use the nearest pane and set it as the
-" vimux runner pane for the other vimux commands. You can control if this command
-" uses the nearest pane or always creates a new one with g:VimuxUseNearest
-nnoremap <Leader>to :VimuxOpenPane<CR>
-nnoremap <Leader>tq :VimuxCloseRunner<CR>
-nnoremap <Leader>tc :VimuxInterruptRunner<CR>
-nnoremap <Leader>vz :VimuxZoomRunner<CR>
-" map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+" git clone https://github.com/kien/ctrlp.vim.git
+
+" Enabling various ctrl-p extensions
+" quickfix - searches in the quickfix window
+" undo - searches the undo tree
+" line - searches a line in the open buffers
+" mixed - Default+Buffer+MRU combo
+let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo']
+
+" Use prefixed count to determine the mode for ctrl-p
+" 0 - Mixed mode
+" 1 - Line mode
+" 2 - Quickfix
+" 3 - Undo
+let g:ctrlp_cmd = 'exec "CtrlP".get(["Mixed", "Line", "QuickFix", "Undo"], v:count)'
 
 " ================================================================================
 " Finally
