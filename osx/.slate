@@ -49,7 +49,7 @@ alias thirdmid   move screenOriginX+screenSizeX/3;screenOriginY   screenSizeX/3;
 alias thirdright move screenOriginX+2*screenSizeX/3;screenOriginY screenSizeX/3;screenSizeY
 
 alias bigleft  move screenOriginX;screenOriginY               2*screenSizeX/3;screenSizeY
-alias bigmid   move screenOriginX+screenSizeX/6;screenOriginY 2*screenSizeX/3;screenSizeY
+alias bigmid   move screenOriginX+screenSizeX/6;screenOriginY+screenSizeY/12 2*screenSizeX/3;5*screenSizeY/6
 alias bigright move screenOriginX+screenSizeX/3;screenOriginY 2*screenSizeX/3;screenSizeY
 
 
@@ -64,7 +64,7 @@ alias evernote     focus 'Evernote'
 # Key bindings
 ################################################################################
 
-# Focus settings using h-j-k-l
+# Focus settings using HYPER + h-j-k-l
 bind h:${hyper} focus left
 bind j:${hyper} focus down
 bind k:${hyper} focus up
@@ -82,7 +82,7 @@ bind m:${hyper} ${chat}
 bind o:${hyper} ${editor}
 bind i:${hyper} ${terminal}
 
-# Move windows
+# Move windows: Use SHIFT+HYPER
 #     K  
 #   H   L
 #     J 
