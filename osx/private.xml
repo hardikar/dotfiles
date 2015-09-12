@@ -12,4 +12,14 @@
     <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_UP</autogen>
     <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_RIGHT</autogen>
 </item>
+<item>
+    <name>Ctrl to Hyper</name>
+    <appendix>Changes the ctrl keys to Hyper (CMD+SHIFT+OPT+CTRL)</appendix>
+    <identifier>private.ctrl_to_hyper</identifier>
+
+    <autogen>__KeyToKey__ 
+        KeyCode::CONTROL_L, 
+        KeyCode::COMMAND_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L
+    </autogen>
+</item>
 </root>
