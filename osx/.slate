@@ -54,6 +54,8 @@ alias bigright move screenOriginX+screenSizeX/3;screenOriginY 2*screenSizeX/3;sc
 
 
 alias browser      focus 'Firefox'
+alias chrome       focus 'Google Chrome'
+alias work_mail         focus 'Microsoft Outlook'
 alias terminal     focus 'iTerm'
 alias chat         focus 'Telegram'
 alias editor       focus 'MacVim'
@@ -81,6 +83,9 @@ bind m:${hyper} ${chat}
 
 bind o:${hyper} ${editor}
 bind i:${hyper} ${terminal}
+
+bind y:${hyper} ${chrome}
+bind u:${hyper} ${work_mail}
 
 # Move windows: Use SHIFT+HYPER
 #     K  
