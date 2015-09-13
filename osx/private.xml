@@ -19,7 +19,7 @@
 
     <autogen>__KeyToKey__ 
         KeyCode::CONTROL_L, 
-        KeyCode::COMMAND_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L
+        KeyCode::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L 
     </autogen>
 </item>
 </root>
