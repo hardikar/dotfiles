@@ -31,7 +31,7 @@ nnoremap <C-;> :
 vnoremap <C-;> :
 
 " This are hints to links on the page
-set hintchars='qwertyuip1234890'
+set hintchars='1234890'
 " Need <CR> whenever following hints
 set followhints=1
 
@@ -68,9 +68,31 @@ nnoremap e ;
 " General Navigation
 " ================================================================================
 
+javascript <<EOF
+/* 
+ * Hacked up Home and End during command mode
+ */
+    mappings.addUserMap([modes.COMMAND_LINE], ['<C-a>'], "",
+        function(){
+            var cmdlinelen = 1000; 
+            try {
+                cmdlinelen = commandline._commandWidget.value.length + 3;
+            } catch(e) {}
+            events.feedkeys(Array(cmdlinelen).join('<Left>'));
+        },
+        {noremap: true});
+    mappings.addUserMap([modes.COMMAND_LINE], ['<C-e>'], "",
+        function(){
+            var cmdlinelen = 1000; 
+            try {
+                cmdlinelen = commandline._commandWidget.value.length + 3;
+            } catch(e) {}
+            events.feedkeys(Array(cmdlinelen).join('<Right>'));
+        },
+        {noremap: true});
+EOF
+
 " Copied from vimrc
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
 cnoremap <C-L> <Right>
 cnoremap <C-H> <Left>
 cnoremap <C-J> <Down>
@@ -91,6 +113,7 @@ nnoremap <Right>  :tabnext<CR>
 nnoremap <Left>  :tabprev<CR>
 
 nnoremap b :buffer<Space>
+nnoremap m :tabmove<Space>
 
 
 " ================================================================================
@@ -128,3 +151,6 @@ nnoremap <BS> <Nop>
 
 " Don't open the stupid source mode
 nnoremap gf <Nop>
+
+" CMD+F : Don't need you anymore
+nnoremap <M-F> <Nop>
