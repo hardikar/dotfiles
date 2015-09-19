@@ -107,10 +107,6 @@ color wombat256mod
 " resize splits once window is resized
 autocmd VimResized * execute "normal! \<c-w>="
 
-" Automatically save a file going away
-autocmd FocusLost * :wa
-
-
 " ================================================================================
 " Major remappings
 " ================================================================================

@@ -1,6 +1,35 @@
 "3.10.1 (created: 2015/08/25 00:41:59)
+" For reference, liberator DOM elements
+"  Array.prototype.slice.call(document.getElementsByTagName('*')).map(function (e) e.id).filter(function (e) e.indexOf('liberator') == 0)
+" 0: "liberator-stringbundles"
+" 1: "liberator-charset-bundle"
+" 2: "liberator-visualbell"
+" 3: "liberator-separator"
+" 4: "liberator-multiline-output"
+" 5: "liberator-completions"
+" 6: "liberator-bottombar"
+" 7: "liberator-bottombar-deck"
+" 8: "liberator-statusline"
+" 9: "liberator-mode-toolbar"
+" 10: "liberator-mode"
+" 11: "liberator-message-toolbar"
+" 12: "liberator-message"
+" 13: "liberator-status"
+" 14: "liberator-status-ssl"
+" 15: "liberator-status-input"
+" 16: "liberator-status-location"
+" 17: "liberator-status-bookmark"
+" 18: "liberator-status-history"
+" 19: "liberator-status-tabcount"
+" 20: "liberator-status-position"
+" 21: "liberator-commandline"
+" 22: "liberator-commandline-prompt-text"
+" 23: "liberator-commandline-prompt"
+" 24: "liberator-commandline-command"
+" 25: "liberator-multiline-input"
 
 source! /Users/hardikar/.vimperatorrc.local
+
 
 " ================================================================================
 " Firefox settings
@@ -11,6 +40,7 @@ set! javascript.options.jit.chrome=true
 
 " don't close window when closed last tab
 set! browser.tabs.closeWindowWithLastTab=false
+
 
 " ================================================================================
 " General Settings
@@ -138,6 +168,8 @@ set! ui.caretBlinkTime=300
 " ================================================================================
 
 :command! close quit
+:command! pintab set apptab
+:command! unpintab set noapptab
 
 " ================================================================================
 " Forget the bad habits
