@@ -171,6 +171,9 @@ set! ui.caretBlinkTime=300
 :command! pintab set apptab
 :command! unpintab set noapptab
 
+command! loadConfig source ~/.vimperatorrc
+command! reloadPlugins :js liberator.pluginFiles = {}; liberator.loadPlugins();
+
 " ================================================================================
 " Forget the bad habits
 " ================================================================================
