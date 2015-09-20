@@ -238,14 +238,14 @@ mappings.addUserMap([modes.NORMAL],
         ['<C-W><C-V>'],
         '',
         function () {
-            VerticalSplitAndOpen("");
+            VerticalSplitAndOpenRight("");
         }
     );
 mappings.addUserMap([modes.NORMAL],
         ['<C-W><C-S>'],
         '',
         function () {
-            SplitAndOpen("");
+            SplitAndOpenBelow("");
         }
     );
 
