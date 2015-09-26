@@ -88,7 +88,7 @@ function mod(n, m) {
 function CycleTiles(){
     // Get all child panels by traversing the tree for the current layout
     var selectedLayout = tileTabs.lastActiveLayout;
-    if (! layout)
+    if (! selectedLayout)
         return;
 
     var allChildPanels = getAllChildPanelsFromTile(selectedLayout.rootTile);
@@ -100,7 +100,6 @@ function CycleTiles(){
 
     // Compute the panelID of the next tab
     var nextTileIndex = mod(currentTileIndex - 1, allChildPanels.length);
-    alert(nextTileIndex);
     var nextPanelId = allChildPanels[nextTileIndex].panelID;
 
     SelectBufferByPanelId(nextPanelId);

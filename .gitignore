@@ -1,2 +1,7 @@
 .DS_Store
+
 .vim/.netrwhist
+
+# Local to laptop settings
+.vimperator/info/
+.vimperator/plugin/hilltor.js
