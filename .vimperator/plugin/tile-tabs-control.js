@@ -45,6 +45,9 @@ function SyncScrolling(args){
     liberator.execute("emenu Tile.Sync Scroll");
 }
 
+/*
+ * From the given rootTile, traverse the graph and generate 
+ */
 function getAllChildPanelsFromTile(rootTile) {
     var allChildPanels = [];
 
@@ -116,13 +119,26 @@ function SelectTileInternal(watchType, d){
     var selectedTile = tileTabs.findTileByPanel(selectedLayout.rootTile, selectedTab.linkedPanel);
 
     // Traverse back up the tree to find the "correct" kind of parent.
+    var done = false;
     var tile = selectedTile;
-    while (tile) {
+    while (!done && tile) {
         var parentTile = tile.parentTile;
-        if ( parentTile.type == watchType ){
-            //Bingo
-            break;
+        if ( !parentTile ) {
+            // No parents to check
+            done = true;
+        }
+        else if ( parentTile.type == watchType ){
+            var currentTileIndex = parentTile.childTiles.indexOf(tile);
+            var nextTileIndex = currentTileIndex + d;
+            if (nextTileIndex >= 0 && nextTileIndex < parentTile.childTiles.length) {
+                // Bingo
+                done = true;
+            } else {
+                // Out of tiles -> let's move up
+                tile = parentTile;
+            }
         } else {
+            // OK not the type I'm looking for -> let's move up
             tile = parentTile;
         }
     }
@@ -130,20 +146,19 @@ function SelectTileInternal(watchType, d){
         // We failed, return quietly
         return;
     } else {
-        var currentTileIndex = parentTile.childTiles.indexOf(tile);
-
-        var nextTileIndex = mod(currentTileIndex + d, parentTile.childTiles.length);
+        // We found either a "panel" or a subtree in the right direction
         var nextTile = parentTile.childTiles[nextTileIndex];
 
         var nextPanelId = "";
-        if (nextTile.type != 'panel') {
+        if (nextTile.type == 'panel') {
+            // our sibling is a panel
+            nextPanelId = nextTile.panelID;
+        } else {
             // oh well we must list all out child panels then
             var allChildPanels = getAllChildPanelsFromTile(nextTile);
             // ff we find any, just grab that panelID
-            nextPanelId = allChildPanels.length >= 1 ? allChildPanels[0].panelID : "";
-        }else {
-            // our sibling is a panel
-            nextPanelId = nextTile.panelID;
+            nextPanelId = allChildPanels.length >= 1 ?
+                allChildPanels[allChildPanels.length-1].panelID : "";
         }
 
         SelectBufferByPanelId(nextPanelId);
