@@ -10,6 +10,10 @@
  *  <C-W>z          Zoom out selected pane
  *
  *  Added commands vsplit, split, syncscroll
+ *  TODO : Add support for expanding and shrinking panes using <C-W>+ and <C-W>-
+ *  TODO : Add support for using <C-W>t and <C-W>b to go the top and bottom pane respectively
+ *  TODO : Add support for moving windows around
+ *  TODO : Add support for opening hints as splits in the current window
  *
  * @author hardikar
  */
