@@ -49,6 +49,7 @@ set cursorline " Highlight the screen line of the cursor
 set ttyfast " Fast terminal connection
 set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
 set laststatus=2 " Always have a status line on
+set tildeop " Change case is now an operator
 
 " Split settings
 set splitbelow
@@ -59,6 +60,9 @@ set relativenumber
 set ruler " Show line numbers on the file
 autocmd InsertEnter * :set number " Show the position in the file
 autocmd InsertLeave * :set relativenumber " Shows relative positions to the current line
+
+" Additional "bracket" types
+set matchpairs=(:),{:},[:],<:>
 
 " the cursor will briefly jump to the matching brace when you insert one
 set showmatch
@@ -131,6 +135,11 @@ vnoremap <Leader><Space> za
 nnoremap ; :
 cnoremap <C-;> <C-C>
 
+" We just lost the power of ; so bring it back in another way
+nnoremap : ,
+" While we're at it, define , to redo the previous f,t command
+nnoremap , ;
+
 " Easier moving of code block
 vnoremap < <gv
 vnoremap > >gv
@@ -161,6 +170,22 @@ cnoremap <C-K> <Up>
 noremap H ^
 noremap L $
 
+" Setup a scroll lock so that j,k stay in the same place relative to the
+" window
+function! ToggleScrollLock()
+    if exists("g:ScrollLock")
+        unlet g:ScrollLock
+        nnoremap j j
+        nnoremap k k
+    else
+        let g:ScrollLock = 1
+        nnoremap j <C-E>j
+        nnoremap k <C-Y>k
+    endif
+endfunction
+nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
+
+
 " Remap the cursor keys to something else
 nnoremap <up>       :bp<CR>
 nnoremap <down>     :bn<CR>
@@ -176,7 +201,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " Don't move when pressing *
-nnoremap * *<C-O>
+" nnoremap * *<C-O>
 
 " Better navigating through omnicomplete option list
 set completeopt=longest,menuone
