@@ -65,10 +65,10 @@ export EDITOR='vim'
 
 # Useful key bindings
 # Vim-like CTRL movement keys
-bindkey '^J' down-line-or-history
-bindkey '^K' up-line-or-history
-bindkey '^H' backward-char
-bindkey '^L' forward-char
+# bindkey '^J' down-line-or-history
+# bindkey '^K' up-line-or-history
+# bindkey '^H' backward-char
+# bindkey '^L' forward-char
 
 bindkey '^U' undo
 
