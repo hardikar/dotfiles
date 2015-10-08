@@ -118,10 +118,10 @@ autocmd VimResized * execute "normal! \<c-w>="
 let mapleader = " "
 
 " Toggle spelling on/off
-nmap <silent> <leader>s :set spell!<CR>
+nnoremap <silent> <leader>s :set spell!<CR>
 
 " Toggle invisibles
-noremap <Leader>i :set list!<CR>
+nnoremap <Leader>i :set list!<CR>
 
 " Quick fix list traversal
 nnoremap <silent> <leader>n :cnext<CR>
@@ -161,10 +161,6 @@ noremap <C-e> <End>
 " Mappings for command mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
-cnoremap <C-L> <Right>
-cnoremap <C-H> <Left>
-cnoremap <C-J> <Down>
-cnoremap <C-K> <Up>
 
 " Mappings home row keys
 noremap H ^
@@ -259,8 +255,8 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
+"let g:syntastic_error_symbol = "✗"
+"let g:syntastic_warning_symbol = "⚠"
 
 " Automatically close when no errors, but don't auto-open
 let g:syntastic_auto_loc_list = 2
