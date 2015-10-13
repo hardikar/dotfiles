@@ -222,6 +222,17 @@ inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 " This replicates the idea of closing a tab
 " nnoremap <leader>bq :bp <BAR> bd #<CR>
 
+function! ToggleQuickFix()
+    if exists("g:QuickfixWindowOpen")
+        unlet g:QuickfixWindowOpen
+        cclose
+    else
+        let g:QuickfixWindowOpen = 1
+        copen
+    endif
+endfunction
+nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
+
 " ================================================================================
 " Wildmenu settings
 " ================================================================================
