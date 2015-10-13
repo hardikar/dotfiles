@@ -216,7 +216,6 @@ inoremap <expr><Esc> pumvisible() ? "\<C-E>" : "\<Esc>"
 inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " Easier buffers
-" TODO Buffergator plugin is under evaluation
 " nnoremap <Leader>b :buffers<CR>:buffer<Space>
 
 " Close the current buffer and move to the previous one
@@ -312,6 +311,13 @@ endfunction
 " ctrl-p plugin
 " cd ~/.vim/bundle && \
 " git clone https://github.com/kien/ctrlp.vim.git
+let g:ctrlp_map = '<Leader><Space>'
+
+" 'r' - the nearest ancestor that contains one of these directories or files:
+" .git .hg .svn .bzr _darcs
+" 'a' - directory of current file, but only if the current working directory outside of CtrlP is
+" not a direct ancestor
+let g:ctrlp_working_path_mode = 'ra'
 
 " Enabling various ctrl-p extensions
 " quickfix - searches in the quickfix window
@@ -321,11 +327,22 @@ endfunction
 let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo']
 
 " Use prefixed count to determine the mode for ctrl-p
-" 0 - Mixed mode
-" 1 - Line mode
-" 2 - Quickfix
-" 3 - Undo
-let g:ctrlp_cmd = 'exec "CtrlP".get(["Mixed", "Line", "QuickFix", "Undo"], v:count)'
+" 0 - Last Mode
+" 1 - Mixed mode
+" 2 - Line mode
+" 3 - Quickfix
+" 4 - Undo
+let g:ctrlp_cmd = 'exec "CtrlP".get(["LastMode", "Mixed", "Line", "QuickFix", "Undo"], v:count)'
+
+
+" Buffergator plugin
+" git clone https://github.com/jeetsukumaran/vim-buffergator
+let g:buffergator_viewport_split_policy = "B"
+let g:buffergator_hsplit_size = 10
+
+" Suppress the standard key maps
+let g:buffergator_suppress_keymaps = 1
+nnoremap <Leader>b :BuffergatorToggle<CR>
 
 " ================================================================================
 " Finally
