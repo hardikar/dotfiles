@@ -70,6 +70,8 @@ set matchtime=3
 
 " Folding
 set foldmethod=syntax
+" Auto-fold everything above fold level 10
+set foldlevel=10
 
 " Enable mouse selection whenever possible
 set mouse=a
@@ -84,14 +86,15 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " ================================================================================
 " Status bar
 " ================================================================================
-set statusline=         " Empty status bar
-set statusline=%n:      " Buffer number
-set statusline+=%m\     " Modifiable flag
-set statusline+=%F      " Full path of the file
-set statusline+=%=      " left/right separator
-set statusline+=%c,     " Cursor column
-set statusline+=%l/%L   " Cursor line/total lines
-set statusline+=\ %P    " Percent through file
+set statusline=          " Empty status bar
+set statusline=%n:       " Buffer number
+set statusline+=%m\      " Modifiable flag
+set statusline+=%F       " Full path of the file
+set statusline+=%=       " left/right separator
+set statusline+=%l,      " Cursor line
+set statusline+=%c\      " Cursor column
+set statusline+=\|\ %L   " Cursor line/total lines
+set statusline+=\ (%P)     " Percent through file
 
 " ================================================================================
 " Vim theme : Enable wambat color
@@ -128,8 +131,8 @@ nnoremap <silent> <leader>n :cnext<CR>
 nnoremap <silent> <leader>N :cprevious<CR>
 
 " Folding key bindings
-nnoremap <Leader><Space> za
-vnoremap <Leader><Space> za
+nnoremap <Tab> za
+vnoremap <Tab> za
 
 " Save a million keystrokes
 nnoremap ; :
@@ -145,8 +148,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Remap tab to % for matching parentheses etc
-vnoremap <tab> %
-nnoremap <tab> %
+" vnoremap <tab> %
+" nnoremap <tab> %
 
 " Ignore F1
 inoremap <F1> <ESC>
@@ -212,6 +215,13 @@ inoremap <expr><C-K> pumvisible() ? "\<C-P>" : "\<C-K>"
 inoremap <expr><Esc> pumvisible() ? "\<C-E>" : "\<Esc>"
 inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
+" Easier buffers
+" TODO Buffergator plugin is under evaluation
+" nnoremap <Leader>b :buffers<CR>:buffer<Space>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+" nnoremap <leader>bq :bp <BAR> bd #<CR>
 
 " ================================================================================
 " Wildmenu settings
@@ -255,9 +265,6 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-"let g:syntastic_error_symbol = "✗"
-"let g:syntastic_warning_symbol = "⚠"
-
 " Automatically close when no errors, but don't auto-open
 let g:syntastic_auto_loc_list = 2
 " But keep the list ready
@@ -269,19 +276,6 @@ let g:syntastic_check_on_wq = 0
 
 nnoremap <leader>p :SyntasticCheck<CR>
 nnoremap <leader>P :SyntasticReset<CR>
-
-
-" Settings for vim-notes plugin
-" cd ~/.vim/bundle && \
-" git clone https://github.com/xolox/vim-misc.git && \
-" git clone https://github.com/xolox/vim-notes.git
-let g:notes_directories = ['~/notes']
-let g:notes_smart_quotes = 0
-let g:notes_suffix = '.md'
-let g:notes_list_bullets = ['-', '*', '->', '+']
-
-" Limit notes to auto-indent for notes filetype
-autocmd FileType notes setlocal textwidth=120
 
 
 " Settings for nerdtree plugin
