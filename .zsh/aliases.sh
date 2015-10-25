@@ -5,7 +5,9 @@ else # OS X `ls`
     colorflag="-G"
 fi
 
+################################################################################
 # Filesystem aliases
+################################################################################
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....="cd ../../.."
@@ -21,22 +23,42 @@ alias rmf="rm -rf"
 
 alias grep='grep --color=auto'
 
-
+################################################################################
 # Git aliases
-alias gcam="git commit -am"
+################################################################################
+alias gc="git commit"
 alias gcm="git commit -m"
-alias gsu="git submodule update"
-alias gs="git status"
-alias gl="git log"
-alias gc="git checkout"
-alias glog="git log --graph --decorate --all"
+alias gcam="git commit -am"
 
+alias ga="git add"
+alias grm="git rm"
+alias gd="git diff"
+alias gdc="git diff --cached"
+
+alias gco="git checkout"
+alias gs="git status"
+alias gr="git reset"
+alias grh="git reset --hard"
+
+alias gsu="git submodule update"
+alias gl="git log"
+alias glog="git log --graph --decorate"
+
+################################################################################
+# Tmux aliases
+################################################################################
 # Enable 256-color more by default
+alias tm="tmux -2"
+alias tma="tmux -2 --attach"
 alias tmux="tmux -2"
+
+
+################################################################################
+# Other aliases
+################################################################################
 
 # Process control aliases
 alias jobs='jobs -l'
 
-# Other aliases
 alias ldate="date +%Y-%m-%d-%H-%M"
 
