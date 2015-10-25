@@ -186,10 +186,10 @@ nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
 
 
 " Remap the cursor keys to something else
-nnoremap <up>       :bp<CR>
-nnoremap <down>     :bn<CR>
-nnoremap <left>     :tabp<CR>
-nnoremap <right>    :tabn<CR>
+nnoremap <up>       <Nop>
+nnoremap <down>     <Nop>
+nnoremap <left>     <Nop>
+nnoremap <right>    <Nop>
 
 " Use python/perl regex, why learn another one?
 nnoremap / /\v

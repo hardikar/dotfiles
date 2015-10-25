@@ -62,3 +62,7 @@ alias jobs='jobs -l'
 
 alias ldate="date +%Y-%m-%d-%H-%M"
 
+# Because I always forget this :(
+alias cl="clear"
+alias cls="clear"
+
