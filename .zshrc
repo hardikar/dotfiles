@@ -47,6 +47,9 @@ path=(
 if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
+if [[ -d ~/scripts ]]; then
+    export PATH=~/scripts:$PATH
+fi
 
 # Load up shell theme
 # Credits to https://github.com/chriskempson/base16

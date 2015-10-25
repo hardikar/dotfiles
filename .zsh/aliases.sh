@@ -48,7 +48,6 @@ alias glog="git log --graph --decorate"
 # Tmux aliases
 ################################################################################
 # Enable 256-color more by default
-alias tm="tmux -2"
 alias tma="tmux -2 --attach"
 alias tmux="tmux -2"
 
