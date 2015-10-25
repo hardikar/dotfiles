@@ -170,6 +170,8 @@ set! ui.caretBlinkTime=300
 :command! close quit
 :command! pintab set apptab
 :command! unpintab set noapptab
+:command! read emenu View.Enter Reader View
+:command! noread emenu View.Close Reader View
 
 command! loadConfig source ~/.vimperatorrc
 command! reloadPlugins :js liberator.pluginFiles = {}; liberator.loadPlugins();
