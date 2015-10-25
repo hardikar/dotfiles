@@ -8,6 +8,8 @@ brew install tree
 brew install watch
 brew install wget
 
+brew install htop
+
 # Languages and dev-tools
 brew install scala
 brew install python

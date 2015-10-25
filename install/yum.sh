@@ -39,6 +39,7 @@ yum install -y kernel-devel zfs
 # Install hardware monitoring tools
 yum install -y lm_sensors
 yum install -y hddtemp
+yum install -y htop
 yum install -y iotop
 
 
