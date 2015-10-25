@@ -18,6 +18,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="^"
 ZSH_THEME_GIT_PROMPT_BEHIND="v"
 ZSH_THEME_GIT_PROMPT_EQUAL="="
+ZSH_THEME_GIT_PROMPT_DIVERGED="<>"
 
 # PROMPT="%m %{$fg[green]%}[%2d]%{$reset_color%} %(?..%{$fg[red]%})$ %{$reset_color%} $(git_prompt_info)"
 

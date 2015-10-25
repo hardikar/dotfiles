@@ -36,6 +36,13 @@ parse_git_dirty () {
 
 
 parse_git_upstream () {
+  gitstat=$(git status 2>/dev/null)
+
+  if [[ $(echo ${gitstat} | grep -c "have diverged") > 0 ]]; then
+    echo -n "$ZSH_THEME_GIT_PROMPT_DIVERGED "
+    return
+  fi
+
   # Your branch is ahead of 'origin/master' by 1 commit.
   gitstat=$(git status 2>/dev/null | egrep 'Your branch is (?:ahead|behind|up-to-date) (?:of|to|with)? ?[^ ]+(?: by \d+? commits?)?')
 
