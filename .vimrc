@@ -227,7 +227,6 @@ inoremap <expr><Tab>   pumvisible() ? "\<C-N>" : "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 inoremap <expr><C-J>   pumvisible() ? "\<C-N>" : "\<C-J>"
 inoremap <expr><C-K>   pumvisible() ? "\<C-P>" : "\<C-K>"
-inoremap <expr><Esc>   pumvisible() ? "\<C-E>" : "\<Esc>"
 inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " Insert Mode Completion {{{
@@ -378,10 +377,10 @@ autocmd FileType text setlocal wrap linebreak
 " =============================================================================
 
 " Remap the cursor keys to something else
-" nnoremap <up>       <Nop>
-" nnoremap <down>     <Nop>
-" nnoremap <left>     <Nop>
-" nnoremap <right>    <Nop>
+nnoremap <up>       <Nop>
+nnoremap <down>     <Nop>
+nnoremap <left>     <Nop>
+nnoremap <right>    <Nop>
 
 " }}}
 
