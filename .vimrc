@@ -42,7 +42,7 @@ set cursorline                 " Highlight the screen line of the cursor
 set ttyfast                    " Fast terminal connection
 set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
 set tildeop                    " Change case is now an operator
-set hidden                     " Opening a new file when the current buffer 
+set hidden                     " Opening a new file when the current buffer
                                " has unsaved changes " causes files to be hidden
                                " instead of closed
 
@@ -109,12 +109,15 @@ set statusline+=\ (%P)   " Percent through file
 " =============================================================================
 
 set foldmethod=marker
-" Auto-fold everything above fold level 10
-set foldlevel=10
+" Auto-fold everything above fold level 5
+set foldlevel=5
 
 " Folding key bindings
 nnoremap <Tab> za
 vnoremap <Tab> za
+
+" Focus mode that auto-folds all other folds
+nnoremap <leader>z zMzvzz
 
 " }}}
 
@@ -145,9 +148,6 @@ cnoremap <C-;> <C-C>
 nnoremap : ,
 " While we're at it, define , to redo the previous f,t command
 nnoremap , ;
-
-" Inserting blank lines
-nnoremap <cr> o<esc>
 
 " Select entire buffer
 nnoremap vaa ggvGg_
@@ -203,6 +203,10 @@ nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
 " Quick fix list traversal
 nnoremap <silent> <leader>n :cnext<CR>
 nnoremap <silent> <leader>N :cprevious<CR>
+
+" Search for the word under the cursor in the current file and open a quickfix
+" window
+nnoremap  <leader>* :execute 'vimgrep /'.expand("<cword>").'/g %'<CR>:copen<CR>
 
 function! ToggleQuickFix()
     if exists("g:QuickfixWindowOpen")
@@ -262,6 +266,8 @@ set wildignore+=*.orig                           " Merge resolution files
 
 " }}}
 
+" }}}
+
 " VIM plugins ------------------------------------------------------------- {{{
 " =============================================================================
 
@@ -297,7 +303,12 @@ nnoremap <leader>P :SyntasticReset<CR>
 " NERDTree  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
+
+" Quit Nerd tree on opening a file
+let NERDTreeQuitOnOpen=1
+
 noremap <C-n> :NERDTreeToggle<CR>
+
 " Close vim if NERDTree is the only remaining window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Show current file in NERDTree
@@ -376,6 +387,17 @@ autocmd FileType text setlocal wrap linebreak
 " Break bad habits -------------------------------------------------------- {{{
 " =============================================================================
 
+" Trailing Whitespace {{{
+" Mark trailing white space, except when typing at the end of the line
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Clear trailing whitespace
+nnoremap <leader>w :%s/\s\+$//<CR>
+
+" }}}
+
 " Remap the cursor keys to something else
 nnoremap <up>       <Nop>
 nnoremap <down>     <Nop>
@@ -391,3 +413,5 @@ nnoremap <right>    <Nop>
 if filereadable($HOME."/.local_vimrc")
     source ~/.local_vimrc
 endif
+" }}}
+
