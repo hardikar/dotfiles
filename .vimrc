@@ -1,7 +1,8 @@
 " .vimrc
 " Author : Shreedhar Hardikar (hardikar@cs.wisc.edu)
 "
-" Initialize pathogen ----------------------------------------------------- {{{
+" Initializations --------------------------------------------------------- {{{
+" =============================================================================
 
 " Install the pathogen VIM plugin manager
 "" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
@@ -9,7 +10,9 @@
 execute pathogen#infect()
 
 " }}}
+
 " Basic options ----------------------------------------------------------- {{{
+" =============================================================================
 
 " set term=xterm-256color
 set term=screen-256color " because tmux REALLY likes term=screen
@@ -22,60 +25,30 @@ set modelines=0
 set history=750
 set undolevels=700
 
-" Turn on syntax highlighting
-syntax on
-
 " Tab incantations
-set autoindent " Indent according to the previous line automatically
+set autoindent      " Indent according to the previous line automatically
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
 set shiftwidth=4
 
-" Turn on soft wrapping for text files
-autocmd FileType text setlocal wrap linebreak
-
-" General awesome features
+" Search settings
 set ignorecase " Ignore cases while searching
-set smartcase " /The matches only The but /the matches both The and the
-set incsearch " Show the next matching thing right away
-set gdefault  " Set global by default for substitute. Use g for local
-set report=0  " Always report the number of lines yanked/deleted etc
+set smartcase  " /The matches only The but /the matches both The and the
+set incsearch  " Show the next matching thing right away
 
-set showmode " Show current mode on the last line when in insert/visual etc
-set showcmd " Show's the current command at the bottom right corner
-set hidden " Opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
-set wildmenu " Command mode completion
-set cursorline " Highlight the screen line of the cursor
-set ttyfast " Fast terminal connection
+" General
+set cursorline                 " Highlight the screen line of the cursor
+set ttyfast                    " Fast terminal connection
 set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
-set laststatus=2 " Always have a status line on
-set tildeop " Change case is now an operator
+set tildeop                    " Change case is now an operator
+set hidden                     " Opening a new file when the current buffer 
+                               " has unsaved changes " causes files to be hidden
+                               " instead of closed
 
 " Split settings
 set splitbelow
 set splitright
-
-" Fancy line numbering
-set relativenumber
-set ruler " Show line numbers on the file
-autocmd InsertEnter * :set number " Show the position in the file
-autocmd InsertLeave * :set relativenumber " Shows relative positions to the current line
-
-" Additional "bracket" types
-set matchpairs=(:),{:},[:],<:>
-
-" the cursor will briefly jump to the matching brace when you insert one
-set showmatch
-set matchtime=3
-
-" Folding
-set foldmethod=syntax
-" Auto-fold everything above fold level 10
-set foldlevel=10
-
-" Enable mouse selection whenever possible
-set mouse=a
 
 " Backups and swap files
 " set nobackup
@@ -84,8 +57,42 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" Fancy line numbering
+set relativenumber  " Show line numbers relative to current line
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
+" Brackets while editing
+set matchpairs=(:),{:},[:],<:>   " Additional "bracket" types
+" the cursor will briefly jump to the matching brace when you insert one
+set showmatch
+set matchtime=3
+
+" Enable mouse selection whenever possible
+set mouse=a
+
 " }}}
+
+" Color Theme ------------------------------------------------------------- {{{
+" =============================================================================
+
+" Explicitly tell vim that the terminal supports 256 colors"
+set t_Co=256
+" Vim theme : Enable wambat color
+" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
+color wombat256mod
+
+" }}}
+
 " Status bar -------------------------------------------------------------- {{{
+" =============================================================================
+
+" Verbose status
+set showmode     " Show current mode on the last line when in insert/visual etc
+set showcmd      " Show's the current command at the bottom right corner
+set laststatus=2 " Always have a status line on
+set report=0     " Always report the number of lines yanked/deleted etc
+
 set statusline=          " Empty status bar
 set statusline=%n:       " Buffer number
 set statusline+=%m\      " Modifiable flag
@@ -94,17 +101,23 @@ set statusline+=%=       " left/right separator
 set statusline+=%l,      " Cursor line
 set statusline+=%c\      " Cursor column
 set statusline+=\|\ %L   " Cursor line/total lines
-set statusline+=\ (%P)     " Percent through file
+set statusline+=\ (%P)   " Percent through file
 
 " }}}
-" Color Theme ------------------------------------------------------------- {{{
-" Explicitly tell vim that the terminal supports 256 colors"
-set t_Co=256
-" Vim theme : Enable wambat color
-" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
-color wombat256mod
+
+" Folding ----------------------------------------------------------------- {{{
+" =============================================================================
+
+set foldmethod=marker
+" Auto-fold everything above fold level 10
+set foldlevel=10
+
+" Folding key bindings
+nnoremap <Tab> za
+vnoremap <Tab> za
 
 " }}}
+
 " General Auto-commands --------------------------------------------------- {{{
 " =============================================================================
 
@@ -112,7 +125,8 @@ color wombat256mod
 autocmd VimResized * execute "normal! \<c-w>="
 
 " }}}
-" Major remappings -------------------------------------------------------- {{{
+
+" Major Mappings ---------------------------------------------------------- {{{
 " =============================================================================
 
 let mapleader = " "
@@ -121,15 +135,7 @@ let mapleader = " "
 nnoremap <silent> <leader>s :set spell!<CR>
 
 " Toggle invisibles
-nnoremap <Leader>i :set list!<CR>
-
-" Quick fix list traversal
-nnoremap <silent> <leader>n :cnext<CR>
-nnoremap <silent> <leader>N :cprevious<CR>
-
-" Folding key bindings
-nnoremap <Tab> za
-vnoremap <Tab> za
+nnoremap <silent> <Leader>i :set list!<CR>
 
 " Save a million keystrokes
 nnoremap ; :
@@ -144,19 +150,15 @@ nnoremap , ;
 vnoremap < <gv
 vnoremap > >gv
 
-" Remap tab to % for matching parentheses etc
-" vnoremap <tab> %
-" nnoremap <tab> %
-
 " Ignore F1
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
+" Movement  {{{
 " Map emacs-like keys for moving to beginning/end of line
-noremap <C-a> <Home>
-noremap <C-e> <End>
-
+nnoremap <C-a> <Home>
+nnoremap <C-e> <End>
 
 " Mappings for command mode
 cnoremap <C-A> <Home>
@@ -166,6 +168,12 @@ cnoremap <C-E> <End>
 noremap H ^
 noremap L $
 
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" }}}
+
+" ScrollLock {{{
 " Setup a scroll lock so that j,k stay in the same place relative to the
 " window
 function! ToggleScrollLock()
@@ -180,44 +188,11 @@ function! ToggleScrollLock()
     endif
 endfunction
 nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
-
-
-" Remap the cursor keys to something else
-nnoremap <up>       <Nop>
-nnoremap <down>     <Nop>
-nnoremap <left>     <Nop>
-nnoremap <right>    <Nop>
-
-" Use python/perl regex, why learn another one?
-nnoremap / /\v
-vnoremap / /\v
-
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" Don't move when pressing *
-" nnoremap * *<C-O>
-
-" Better navigating through omnicomplete option list
-set completeopt=longest,menuone
-" Limit the height of the menu
-set pumheight=10
-
-" A most standard IDE like keys
-inoremap <expr><Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
-inoremap <expr><C-J> pumvisible() ? "\<C-N>" : "\<C-J>"
-inoremap <expr><C-K> pumvisible() ? "\<C-P>" : "\<C-K>"
-inoremap <expr><Esc> pumvisible() ? "\<C-E>" : "\<Esc>"
-inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-
-" Easier buffers
-" nnoremap <Leader>b :buffers<CR>:buffer<Space>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-" nnoremap <leader>bq :bp <BAR> bd #<CR>
+" }}}
+" QuickFix list mappings  {{{
+" Quick fix list traversal
+nnoremap <silent> <leader>n :cnext<CR>
+nnoremap <silent> <leader>N :cprevious<CR>
 
 function! ToggleQuickFix()
     if exists("g:QuickfixWindowOpen")
@@ -229,11 +204,29 @@ function! ToggleQuickFix()
     endif
 endfunction
 nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
+" }}}
+" Omnicomplete navigation {{{
+
+" Better navigating through omnicomplete option list
+set completeopt=longest,menuone
+" Limit the height of the menu
+set pumheight=10
+
+" A most standard IDE like keys
+inoremap <expr><Tab>   pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+inoremap <expr><C-J>   pumvisible() ? "\<C-N>" : "\<C-J>"
+inoremap <expr><C-K>   pumvisible() ? "\<C-P>" : "\<C-K>"
+inoremap <expr><Esc>   pumvisible() ? "\<C-E>" : "\<Esc>"
+inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
+" }}}
 
 " }}}
+
 " Wildmenu settings ------------------------------------------------------- {{{
 " =============================================================================
 
+set wildmenu   " Command mode completion
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
@@ -252,10 +245,11 @@ set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 
 " }}}
+
 " VIM plugins ------------------------------------------------------------- {{{
 " =============================================================================
 
-" Python IDE - Jedi VIM
+" Python IDE - Jedi VIM  {{{
 "" cd ~/.vim/bundle/ && git clone --recursive https://github.com/davidhalter/jedi-vim.git
 let g:jedi#usages_command = "<leader>u"
 let g:jedi#rename_command = "<leader>r"
@@ -264,9 +258,8 @@ let g:jedi#goto_assignments_command = "<leader>a"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
-
-
-" syntastic for Pylint support
+" }}}
+" Syntastic  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/syntastic.git
 set statusline+=%#warningmsg#
@@ -284,9 +277,8 @@ let g:syntastic_check_on_wq = 0
 
 nnoremap <leader>p :SyntasticCheck<CR>
 nnoremap <leader>P :SyntasticReset<CR>
-
-
-" Settings for nerdtree plugin
+" }}}
+" NERDTree  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
 noremap <C-n> :NERDTreeToggle<CR>
@@ -294,9 +286,8 @@ noremap <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Show current file in NERDTree
 map <silent> <Leader>m :NERDTreeFind<CR>
-
-
-" Setting for VimOrganizer plugin
+" }}}
+" VimOrganizer  {{{
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au BufEnter *.org            call org#SetOrgFileType()
 let g:org_capture_file = '~/notes/org_files/mycaptures.org'
@@ -315,9 +306,8 @@ function! OrgCustomColors()
 "               \      'WAITING': { 'guifg':'#aa3388',
 "               \                 'ctermfg':'red' } }
 endfunction
-
-
-" ctrl-p plugin
+" }}}
+" CTRL-P  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/kien/ctrlp.vim.git
 let g:ctrlp_map = '<Leader><Space>'
@@ -343,8 +333,8 @@ let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo']
 " 4 - Undo
 let g:ctrlp_cmd = 'exec "CtrlP".get(["LastMode", "Mixed", "Line", "QuickFix", "Undo"], v:count)'
 
-
-" Buffergator plugin
+" }}}
+" Buffergator  {{{
 " git clone https://github.com/jeetsukumaran/vim-buffergator
 let g:buffergator_viewport_split_policy = "B"
 let g:buffergator_hsplit_size = 10
@@ -352,8 +342,32 @@ let g:buffergator_hsplit_size = 10
 " Suppress the standard key maps
 let g:buffergator_suppress_keymaps = 1
 nnoremap <Leader>b :BuffergatorToggle<CR>
+" }}}
 
 " }}}
+
+" Filetype settings ------------------------------------------------------- {{{
+" =============================================================================
+
+" Turn on syntax highlighting
+syntax on
+
+" Turn on soft wrapping for text files
+autocmd FileType text setlocal wrap linebreak
+
+" }}}
+
+" Break bad habits -------------------------------------------------------- {{{
+" =============================================================================
+
+" Remap the cursor keys to something else
+nnoremap <up>       <Nop>
+nnoremap <down>     <Nop>
+nnoremap <left>     <Nop>
+nnoremap <right>    <Nop>
+
+" }}}
+
 " Finally ----------------------------------------------------------------- {{{
 " =============================================================================
 
