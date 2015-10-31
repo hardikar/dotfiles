@@ -16,8 +16,8 @@ if version > 580
 	endif
 endif
 
-let colors_name = "wombat256mod"
 
+let colors_name = "wombat256mod"
 
 " General colors
 hi Normal		ctermfg=252		ctermbg=234		cterm=none		guifg=#e3e0d7	guibg=#242424	gui=none
@@ -41,6 +41,12 @@ hi CursorLine					ctermbg=236		cterm=none						guibg=#32322f
 hi MatchParen	ctermfg=228		ctermbg=101		cterm=bold		guifg=#eae788	guibg=#857b6f	gui=bold
 hi Pmenu		ctermfg=230		ctermbg=238						guifg=#ffffd7	guibg=#444444
 hi PmenuSel		ctermfg=232		ctermbg=192						guifg=#080808	guibg=#cae982
+endif
+
+if version > 700
+    " Change colors when intering INSERT MODE
+    au InsertEnter * hi StatusLine ctermfg=black ctermbg=green
+    au InsertLeave * hi StatusLine ctermfg=230 ctermbg=238
 endif
 
 " Diff highlighting
