@@ -18,7 +18,7 @@ execute pathogen#infect()
 set term=screen-256color " because tmux REALLY likes term=screen
 
 " F*** vi
-set nocompatible
+set nocompatible " Must be the first line
 set modelines=0
 
 " Remember enough
@@ -146,9 +146,19 @@ nnoremap : ,
 " While we're at it, define , to redo the previous f,t command
 nnoremap , ;
 
+" Inserting blank lines
+nnoremap <cr> o<esc>
+
+" Select entire buffer
+nnoremap vaa ggvGg_
+
 " Easier moving of code block
 vnoremap < <gv
 vnoremap > >gv
+
+" Select (charwise) the contents of the current line, excluding indentation.
+" Great for pasting Python lines into REPLs.
+nnoremap <leader>v ^<C-v>g_
 
 " Ignore F1
 inoremap <F1> <ESC>
@@ -219,6 +229,13 @@ inoremap <expr><C-J>   pumvisible() ? "\<C-N>" : "\<C-J>"
 inoremap <expr><C-K>   pumvisible() ? "\<C-P>" : "\<C-K>"
 inoremap <expr><Esc>   pumvisible() ? "\<C-E>" : "\<Esc>"
 inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
+
+" Insert Mode Completion {{{
+" :help ins-completion
+" inoremap <c-f> <c-x><c-f>
+" inoremap <c-]> <c-x><c-]>
+" inoremap <c-l> <c-x><c-l>
+
 " }}}
 
 " }}}
@@ -361,10 +378,10 @@ autocmd FileType text setlocal wrap linebreak
 " =============================================================================
 
 " Remap the cursor keys to something else
-nnoremap <up>       <Nop>
-nnoremap <down>     <Nop>
-nnoremap <left>     <Nop>
-nnoremap <right>    <Nop>
+" nnoremap <up>       <Nop>
+" nnoremap <down>     <Nop>
+" nnoremap <left>     <Nop>
+" nnoremap <right>    <Nop>
 
 " }}}
 
