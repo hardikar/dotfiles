@@ -1,18 +1,18 @@
 " .vimrc
 " Author : Shreedhar Hardikar (hardikar@cs.wisc.edu)
 "
-" ================================================================================
-" Initialize pathogen
-" ================================================================================
+" Initialize pathogen ----------------------------------------------------- {{{
 
 " Install the pathogen VIM plugin manager
 "" mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 "" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 execute pathogen#infect()
 
-" ================================================================================
-" Basic options
-" ================================================================================
+" }}}
+" Basic options ----------------------------------------------------------- {{{
+
+" set term=xterm-256color
+set term=screen-256color " because tmux REALLY likes term=screen
 
 " F*** vi
 set nocompatible
@@ -40,6 +40,7 @@ set ignorecase " Ignore cases while searching
 set smartcase " /The matches only The but /the matches both The and the
 set incsearch " Show the next matching thing right away
 set gdefault  " Set global by default for substitute. Use g for local
+set report=0  " Always report the number of lines yanked/deleted etc
 
 set showmode " Show current mode on the last line when in insert/visual etc
 set showcmd " Show's the current command at the bottom right corner
@@ -83,9 +84,8 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" ================================================================================
-" Status bar
-" ================================================================================
+" }}}
+" Status bar -------------------------------------------------------------- {{{
 set statusline=          " Empty status bar
 set statusline=%n:       " Buffer number
 set statusline+=%m\      " Modifiable flag
@@ -96,27 +96,24 @@ set statusline+=%c\      " Cursor column
 set statusline+=\|\ %L   " Cursor line/total lines
 set statusline+=\ (%P)     " Percent through file
 
-" ================================================================================
+" }}}
+" Color Theme ------------------------------------------------------------- {{{
+" Explicitly tell vim that the terminal supports 256 colors"
+set t_Co=256
 " Vim theme : Enable wambat color
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
-" ================================================================================
-
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-" set term=xterm-256color
-set term=screen-256color " because tmux REALLY likes term=screen
 color wombat256mod
 
-
-" ================================================================================
-" General Auto-commands
-" ================================================================================
+" }}}
+" General Auto-commands --------------------------------------------------- {{{
+" =============================================================================
 
 " resize splits once window is resized
 autocmd VimResized * execute "normal! \<c-w>="
 
-" ================================================================================
-" Major remappings
-" ================================================================================
+" }}}
+" Major remappings -------------------------------------------------------- {{{
+" =============================================================================
 
 let mapleader = " "
 
@@ -233,9 +230,10 @@ function! ToggleQuickFix()
 endfunction
 nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
 
-" ================================================================================
-" Wildmenu settings
-" ================================================================================
+" }}}
+" Wildmenu settings ------------------------------------------------------- {{{
+" =============================================================================
+
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
@@ -253,9 +251,9 @@ set wildignore+=*.pyc                            " Python byte code
 
 set wildignore+=*.orig                           " Merge resolution files
 
-" ================================================================================
-" VIM plugins
-" ================================================================================
+" }}}
+" VIM plugins ------------------------------------------------------------- {{{
+" =============================================================================
 
 " Python IDE - Jedi VIM
 "" cd ~/.vim/bundle/ && git clone --recursive https://github.com/davidhalter/jedi-vim.git
@@ -355,9 +353,9 @@ let g:buffergator_hsplit_size = 10
 let g:buffergator_suppress_keymaps = 1
 nnoremap <Leader>b :BuffergatorToggle<CR>
 
-" ================================================================================
-" Finally
-" ================================================================================
+" }}}
+" Finally ----------------------------------------------------------------- {{{
+" =============================================================================
 
 " Override general settings with system specific ones
 if filereadable($HOME."/.local_vimrc")
