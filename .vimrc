@@ -250,7 +250,10 @@ inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
 " Wildmenu settings ------------------------------------------------------- {{{
 " =============================================================================
 
-set wildmenu   " Command mode completion
+set wildmenu              " Command mode completion
+set wildmode=longest:full " complete till longest common string and start
+                          " wildmenu
+
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
