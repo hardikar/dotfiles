@@ -386,6 +386,15 @@ syntax on
 " Turn on soft wrapping for text files
 autocmd FileType text setlocal wrap linebreak
 
+" Java {{{
+
+augroup ft_java
+    au!
+    au FileType java setlocal foldmethod=marker
+    au FileType java setlocal foldmarker={,}
+augroup END
+" }}}
+
 " }}}
 
 " Break bad habits -------------------------------------------------------- {{{
