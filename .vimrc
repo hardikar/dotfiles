@@ -242,7 +242,11 @@ inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " Insert Mode Completion {{{
 " :help ins-completion
-" inoremap <c-f> <c-x><c-f>
+inoremap <c-f> <c-x><c-f>
+" Because on the terminal, <C-space> becomes <C-@>
+imap <c-@> <c-Space>
+inoremap <c-Space> <c-x><c-o>
+
 " inoremap <c-]> <c-x><c-]>
 " inoremap <c-l> <c-x><c-l>
 
