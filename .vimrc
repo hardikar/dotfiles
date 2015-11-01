@@ -160,6 +160,9 @@ vnoremap > >gv
 " Great for pasting Python lines into REPLs.
 nnoremap <leader>v ^<C-v>g_
 
+" Justify current paragraph with current wrap
+nnoremap Q gqip
+
 " Ignore F1
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
