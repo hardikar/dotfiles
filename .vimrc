@@ -9,6 +9,9 @@
 "" curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 execute pathogen#infect()
 
+" Map leader early on, so that all future mappings succeed
+let mapleader = " "
+
 " }}}
 
 " Basic options ----------------------------------------------------------- {{{
@@ -131,8 +134,6 @@ autocmd VimResized * execute "normal! \<c-w>="
 
 " Major Mappings ---------------------------------------------------------- {{{
 " =============================================================================
-
-let mapleader = " "
 
 " Toggle spelling on/off
 nnoremap <silent> <leader>s :set spell!<CR>
