@@ -164,6 +164,9 @@ nnoremap <leader>v ^<C-v>g_
 " Justify current paragraph with current wrap
 nnoremap Q gqip
 
+" Yank from the cursor to the end of the line, to be consistent with C and D.
+nnoremap Y y$
+
 " Ignore F1
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
