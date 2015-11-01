@@ -210,7 +210,10 @@ nnoremap <silent> <leader>N :cprevious<CR>
 
 " Search for the word under the cursor in the current file and open a quickfix
 " window
-nnoremap  <leader>* :execute 'vimgrep /'.expand("<cword>").'/g %'<CR>:copen<CR>
+nnoremap <leader>* :execute 'noautocmd vimgrep /'.expand("<cword>").'/g %'<CR>:copen<CR>
+
+" Set up a command to search for any word in the directory
+nnoremap <leader>/ :noautocmd vimgrep  **<left><left><left>
 
 function! ToggleQuickFix()
     if exists("g:QuickfixWindowOpen")
