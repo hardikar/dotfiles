@@ -271,6 +271,10 @@ set wildignore+=*.pyc                            " Python byte code
 
 set wildignore+=*.orig                           " Merge resolution files
 
+" Because the default <Tab> doesn't work
+set wildcharm=<C-Z>
+cnoremap <expr><Tab>     wildmenumode() ? "\<C-N>" : "\<C-Z>"
+cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 " }}}
 
 " }}}
