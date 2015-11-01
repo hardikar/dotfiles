@@ -487,6 +487,23 @@ if Plugin_exists('vim-buffergator')
     nnoremap <Leader>b :BuffergatorToggle<CR>
 endif
 " }}}
+" Eclim  {{{
+" Add eclim settings to status line. Note the %( %). If all of the variables
+" inside are unset, the entire group disappears
+function! Eclim_status_line() "{{{
+    " Compute items to be printed on the status line
+    let project = eclim#project#util#GetCurrentProjectName()
+    let workspace = eclim#project#util#GetProjectWorkspace(project)
+    if strlen(project) == 0
+        return ''
+    else
+        return ' | ' . project . ' (' . pathshorten(workspace) . ')'
+    endif
+endfunction "}}}
+set statusline+=%(%{Eclim_status_line()}%)
+
+
+" }}}
 
 " }}}
 
