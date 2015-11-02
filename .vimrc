@@ -225,7 +225,6 @@ noremap L $
 nnoremap n nzzzv
 nnoremap N Nzzzv
 " }}}
-
 " ScrollLock {{{
 " Setup a scroll lock so that j,k stay in the same place relative to the
 " window
@@ -292,7 +291,6 @@ inoremap <c-Space> <c-x><c-o>
 " }}}
 
 " }}}
-
 " Wildmenu settings ------------------------------------------------------- {{{
 " =============================================================================
 
@@ -502,6 +500,27 @@ function! Eclim_status_line() "{{{
 endfunction "}}}
 set statusline+=%(%{Eclim_status_line()}%)
 
+" Let Syntastic do the java validation (tentative)
+" let g:EclimFileTypeValidate = 0
+let g:EclimCompletionMethod = 'omnifunc'
+
+nnoremap <silent> <leader>ji :JavaImport<CR>
+nnoremap <silent> <leader>jI :JavaImportOrganize<CR>
+" Java search in context based on word under cursor
+nnoremap <silent> <leader>js :JavaSearchContext<CR>
+" Java correction suggestions
+nnoremap <silent> <leader>jc :JavaCorrect<CR>
+nnoremap <silent> <f5>    :ProjectRefresh<CR>
+
+" Show type hierarchy
+nnoremap <silent> <leader>jt :JavaHierarchy<CR>
+" Show callers
+nnoremap <leader> jd :JavaCallHierarchy<CR>
+" Show callees
+nnoremap <leader> ju :JavaCallHierarchy!<CR>
+
+" Open class path directory
+nnoremap <leader>jcp :call eclim#common#locate#LocateFile('vsplit', '.classpath', 'project')<CR>
 
 " }}}
 
@@ -509,6 +528,9 @@ set statusline+=%(%{Eclim_status_line()}%)
 
 " Filetype settings ------------------------------------------------------- {{{
 " =============================================================================
+
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 " Turn on syntax highlighting
 syntax on
