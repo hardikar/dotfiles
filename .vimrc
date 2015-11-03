@@ -318,6 +318,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
+" Systastic check for python - maybe set this as an autocmd?
+let g:syntastic_python_checkers = ['python', 'pylint']
+let g:syntastic_python_pylint_quiet_messages = { "level": "warnings" }
+
 nnoremap <leader>p :SyntasticCheck<CR>
 nnoremap <leader>P :SyntasticReset<CR>
 " }}}
