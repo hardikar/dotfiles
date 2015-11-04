@@ -18,7 +18,7 @@ let mapleader = " "
 " =============================================================================
 
 " set term=xterm-256color
-set term=screen-256color " because tmux REALLY likes term=screen
+" set term=screen-256color " because tmux REALLY likes term=screen
 
 " F*** vi
 set nocompatible " Must be the first line
@@ -438,6 +438,13 @@ nnoremap <down>     <Nop>
 nnoremap <left>     <Nop>
 nnoremap <right>    <Nop>
 
+" }}}
+
+" NVIM settings ----------------------------------------------------------- {{{
+" =============================================================================
+if has('nvim')
+        tnoremap <Esc> <C-\><C-n>
+endif
 " }}}
 
 " Finally ----------------------------------------------------------------- {{{
