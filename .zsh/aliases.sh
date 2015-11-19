@@ -44,6 +44,10 @@ alias gsu="git submodule update"
 alias gl="git log"
 alias glog="git log --graph --decorate"
 
+alias gpm="git pull"
+alias gpr="git pull --rebase"
+alias gpu="git push"
+
 ################################################################################
 # Tmux aliases
 ################################################################################
