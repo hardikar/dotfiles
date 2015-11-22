@@ -5,3 +5,6 @@
 # Local to laptop settings
 .vimperator/info/
 .vimperator/plugin/hilltor.js
+
+# Ignore where vim-plug downloads plugins
+.vim/bundle
