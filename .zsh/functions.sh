@@ -36,4 +36,15 @@ vcs-status(){
 zle -N vcs-status
 bindkey '^ ' vcs-status
 
+# Quick notes
+function note(){
+    if [[ $* == 'this' ]]; then
+        ns
+    else
+        vim -c "Note $*"
+    fi
+}
 
+function ns(){
+    vim -c NotesStash
+}

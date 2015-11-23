@@ -369,7 +369,7 @@ if Plugin_exists('nerdtree')
 endif
 " }}}
 " Vim Notes  {{{
-let g:notes_directories = ['~/temp-notes']
+let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
 
 " Automatically change the title to match the filename
@@ -431,6 +431,9 @@ function! NotesSetupCustomHighlighting()
     endif
 endfunction
 autocmd VimEnter,BufEnter,BufNewFile * :call NotesSetupCustomHighlighting()
+
+" Open NotesStash for a quicknote
+command NotesStash :Note Notes Stash
 
 " }}}
 " CTRL-P  {{{
