@@ -12,7 +12,7 @@
 
 " Hacky check to see if a plugin exists using g:plugs which is set up by
 " the vim-plug plugin manager
-function Plugin_exists(name)
+function! Plugin_exists(name)
     return has_key(g:plugs, a:name) && isdirectory(g:plugs[a:name]['dir'])
 endfunction
 
@@ -24,6 +24,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'tpope/vim-fugitive'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -264,6 +265,9 @@ inoremap <expr><C-J>   pumvisible() ? "\<C-N>" : "\<C-J>"
 inoremap <expr><C-K>   pumvisible() ? "\<C-P>" : "\<C-K>"
 inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
 
+" C-C to fast escape from insert mode
+inoremap <C-c> <ESC>
+
 " Insert Mode Completion {{{
 " :help ins-completion
 inoremap <c-f> <c-x><c-f>
@@ -360,28 +364,73 @@ if Plugin_exists('nerdtree')
     " Close vim if NERDTree is the only remaining window
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
     " Show current file in NERDTree
-    map <silent> <Leader>m :NERDTreeFind<CR>
+    noremap <silent> <Leader>m :NERDTreeFind<CR>
 endif
 " }}}
-" VimOrganizer  {{{
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufEnter *.org            call org#SetOrgFileType()
-let g:org_capture_file = '~/notes/org_files/mycaptures.org'
-command! OrgCapture :call org#CaptureBuffer()
-command! OrgCaptureFile :call org#OpenCaptureFile()
+" Vim Notes  {{{
+let g:notes_directories = ['~/temp-notes']
+let g:notes_suffix = '.md'
 
-let g:org_todo_setup='TODO STARTED PENDING | DONE CANCELLED'
-let g:org_agenda_select_dirs=["~/notes/org_files"]
-let g:org_agenda_files = split(glob("~/notes/org_files/org-mod*.org"),"\n")
+" Automatically change the title to match the filename
+let g:notes_title_sync = 'change_title'
 
-" OrgCustomColors() allows a user to set highlighting for particular items
-function! OrgCustomColors()
-"    let g:org_todo_custom_highlights =
-"               \     { 'NEXT': { 'guifg':'#888888', 'guibg':'#222222',
-"               \              'ctermfg':'gray', 'ctermbg':'darkgray'},
-"               \      'WAITING': { 'guifg':'#aa3388',
-"               \                 'ctermfg':'red' } }
+" Don't do fancy substitutions
+let g:notes_smart_quotes = 0
+let g:notes_list_bullets = ['*', '-', '+']
+
+" Tab indents/dedent list items in insert mode
+let g:notes_tab_indents = 1
+
+" Don't conceal anything
+let g:notes_conceal_code = 0
+let g:notes_conceal_italic = 0
+let g:notes_conceal_bold = 0
+let g:notes_conceal_url = 0
+
+" Modify highlighting
+hi link notesListNumber markdownListMarker
+hi link notesListBullet markdownListMarker
+
+hi link notesItalic markdownUrl
+hi link notesBold markdownBold
+hi link notesTextURL markdownListMarker
+hi link notesRealURL markdownListMarker
+hi link notesUnixPath Directory
+hi link notesPathLnum Directory
+
+hi def link notesSingleQuote String
+hi def link notesDoubleQuote String
+
+hi link notesTitle Title
+hi link notesShortHeading markdownId
+hi link notesBlockQuote String
+
+function! NotesHighlightTitleLevels()
+    " TODO Update the regexes in the original plugin
+    syntax match notesAtxHeading1 /^\s*#.*/ contains=notesAtxMarker,@notesInline
+    syntax match notesAtxHeading2 /^\s*##.*/ contains=notesAtxMarker,@notesInline
+    syntax match notesAtxHeading3 /^\s*###.*/ contains=notesAtxMarker,@notesInline
+    syntax match notesAtxHeading4 /^\s*####.*/ contains=notesAtxMarker,@notesInline
+    syntax match notesAtxHeading5 /^\s*#####.*/ contains=notesAtxMarker,@notesInline
+
+    hi def notesAtxHeading1 term=bold cterm=bold ctermfg=192
+    hi def notesAtxHeading2 term=bold cterm=bold ctermfg=222
+    hi def notesAtxHeading3 term=bold cterm=bold ctermfg=173
+    hi def notesAtxHeading4 term=bold cterm=bold ctermfg=35
+    hi def notesAtxHeading5 term=bold cterm=bold ctermfg=184
 endfunction
+function! NotesHighlightStrings()
+    syntax match notesSingleQuoted /\w\@<!'.\{-}'\w\@!/
+    syntax match notesDoubleQuoted /\w\@<!".\{-}"\w\@!/
+endfunction
+function! NotesSetupCustomHighlighting()
+    if &ft == 'notes'
+        call NotesHighlightTitleLevels()
+        call NotesHighlightStrings()
+    endif
+endfunction
+autocmd VimEnter,BufEnter,BufNewFile * :call NotesSetupCustomHighlighting()
+
 " }}}
 " CTRL-P  {{{
 " cd ~/.vim/bundle && \
@@ -470,7 +519,7 @@ nnoremap <right>    <Nop>
 " NVIM settings ----------------------------------------------------------- {{{
 " =============================================================================
 if has('nvim')
-        tnoremap <Esc> <C-\><C-n>
+    tnoremap <Esc> <C-\><C-n>
 endif
 " }}}
 
