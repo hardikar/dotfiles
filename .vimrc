@@ -25,6 +25,7 @@ Plug 'scrooloose/syntastic'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
+Plug 'junegunn/vim-peekaboo'
 
 " Add plugins to &runtimepath
 call plug#end()
