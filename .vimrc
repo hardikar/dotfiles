@@ -26,6 +26,7 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'junegunn/vim-peekaboo'
+Plug 'mtth/scratch.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -318,15 +319,9 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 " VIM plugin settings ----------------------------------------------------- {{{
 " =============================================================================
 
-" Python IDE - Jedi VIM  {{{
-"" cd ~/.vim/bundle/ && git clone --recursive https://github.com/davidhalter/jedi-vim.git
-let g:jedi#usages_command = "<leader>u"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#goto_command = "<leader>g"
-let g:jedi#goto_assignments_command = "<leader>a"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
+" Scratch.vim {{{
+nnoremap <leader>gs :Scratch<CR>
+nnoremap <leader>gS :Scratch!<CR>
 " }}}
 " Syntastic  {{{
 " cd ~/.vim/bundle && \
@@ -433,7 +428,7 @@ endfunction
 autocmd VimEnter,BufEnter,BufNewFile * :call NotesSetupCustomHighlighting()
 
 " Open NotesStash for a quicknote
-command NotesStash :Note Notes Stash
+command! NotesStash :Note Notes Stash
 
 " }}}
 " CTRL-P  {{{
