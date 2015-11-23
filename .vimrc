@@ -9,6 +9,13 @@
 "    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 "    curl -LSso ~/.vim/autoload/pathogen.vim \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+" Hacky check to see if a plugin exists using g:plugs which is set up by
+" the vim-plug plugin manager
+function Plugin_exists(name)
+    return has_key(g:plugs, a:name) && isdirectory(g:plugs[a:name]['dir'])
+endfunction
+
 call plug#begin('~/.vim/bundle')
 
 Plug 'rust-lang/rust.vim'
@@ -22,7 +29,6 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " }}}
-
 
 " Map leader early on, so that all future mappings succeed
 let mapleader = " "
@@ -320,39 +326,42 @@ let g:jedi#popup_select_first = 0
 " Syntastic  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/syntastic.git
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+if Plugin_exists('syntastic')
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
-" Automatically close when no errors, but don't auto-open
-let g:syntastic_auto_loc_list = 2
-" But keep the list ready
-let g:syntastic_always_populate_loc_list = 1
+    " Automatically close when no errors, but don't auto-open
+    let g:syntastic_auto_loc_list = 2
+    " But keep the list ready
+    let g:syntastic_always_populate_loc_list = 1
 
-" When to run Syntastic
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+    " When to run Syntastic
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
 
-" Systastic check for python - maybe set this as an autocmd?
-let g:syntastic_python_checkers = ['python', 'pylint']
-let g:syntastic_python_pylint_quiet_messages = { "level": "warnings" }
+    " Systastic check for python - maybe set this as an autocmd?
+    let g:syntastic_python_checkers = ['python', 'pylint']
+    let g:syntastic_python_pylint_quiet_messages = { "level": "warnings" }
 
-nnoremap <leader>p :SyntasticCheck<CR>
-nnoremap <leader>P :SyntasticReset<CR>
+    nnoremap <leader>p :SyntasticCheck<CR>
+    nnoremap <leader>P :SyntasticReset<CR>
+endif
 " }}}
 " NERDTree  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
+if Plugin_exists('nerdtree')
+    " Quit Nerd tree on opening a file
+    let NERDTreeQuitOnOpen=1
 
-" Quit Nerd tree on opening a file
-let NERDTreeQuitOnOpen=1
+    noremap <C-n> :NERDTreeToggle<CR>
 
-noremap <C-n> :NERDTreeToggle<CR>
-
-" Close vim if NERDTree is the only remaining window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" Show current file in NERDTree
-map <silent> <Leader>m :NERDTreeFind<CR>
+    " Close vim if NERDTree is the only remaining window
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    " Show current file in NERDTree
+    map <silent> <Leader>m :NERDTreeFind<CR>
+endif
 " }}}
 " VimOrganizer  {{{
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
@@ -377,38 +386,41 @@ endfunction
 " CTRL-P  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/kien/ctrlp.vim.git
-let g:ctrlp_map = '<Leader><Space>'
+if Plugin_exists('ctrlp.vim')
+    let g:ctrlp_map = '<Leader><Space>'
 
-" 'r' - the nearest ancestor that contains one of these directories or files:
-" .git .hg .svn .bzr _darcs
-" 'a' - directory of current file, but only if the current working directory outside of CtrlP is
-" not a direct ancestor
-let g:ctrlp_working_path_mode = 'ra'
+    " 'r' - the nearest ancestor that contains one of these directories or files:
+    " .git .hg .svn .bzr _darcs
+    " 'a' - directory of current file, but only if the current working directory outside of CtrlP is
+    " not a direct ancestor
+    let g:ctrlp_working_path_mode = 'ra'
 
-" Enabling various ctrl-p extensions
-" quickfix - searches in the quickfix window
-" undo - searches the undo tree
-" line - searches a line in the open buffers
-" mixed - Default+Buffer+MRU combo
-let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo']
+    " Enabling various ctrl-p extensions
+    " quickfix - searches in the quickfix window
+    " undo - searches the undo tree
+    " line - searches a line in the open buffers
+    " mixed - Default+Buffer+MRU combo
+    let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo']
 
-" Use prefixed count to determine the mode for ctrl-p
-" 0 - Last Mode
-" 1 - Mixed mode
-" 2 - Line mode
-" 3 - Quickfix
-" 4 - Undo
-let g:ctrlp_cmd = 'exec "CtrlP".get(["LastMode", "Mixed", "Line", "QuickFix", "Undo"], v:count)'
-
+    " Use prefixed count to determine the mode for ctrl-p
+    " 0 - Last Mode
+    " 1 - Mixed mode
+    " 2 - Line mode
+    " 3 - Quickfix
+    " 4 - Undo
+    let g:ctrlp_cmd = 'exec "CtrlP".get(["LastMode", "Mixed", "Line", "QuickFix", "Undo"], v:count)'
+endif
 " }}}
 " Buffergator  {{{
 " git clone https://github.com/jeetsukumaran/vim-buffergator
-let g:buffergator_viewport_split_policy = "B"
-let g:buffergator_hsplit_size = 10
+if Plugin_exists('vim-buffergator')
+    let g:buffergator_viewport_split_policy = "B"
+    let g:buffergator_hsplit_size = 10
 
-" Suppress the standard key maps
-let g:buffergator_suppress_keymaps = 1
-nnoremap <Leader>b :BuffergatorToggle<CR>
+    " Suppress the standard key maps
+    let g:buffergator_suppress_keymaps = 1
+    nnoremap <Leader>b :BuffergatorToggle<CR>
+endif
 " }}}
 
 " }}}
