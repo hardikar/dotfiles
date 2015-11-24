@@ -14,6 +14,7 @@ brew install htop
 brew install scala
 brew install python
 brew install git
+brew install maven
 
 # Databases
 brew install sqlite

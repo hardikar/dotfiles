@@ -17,6 +17,7 @@ yum groupinstall -y "Development Tools"
 yum install -y java-1.7.0-openjdk.x86_64
 yum install -y java-1.8.0-openjdk.x86_64
 yum install -y python-pip
+yum install -y maven # And other Apache common dependencies
 
 # Install other useful tools
 yum install -y ffmpeg ffprobe
