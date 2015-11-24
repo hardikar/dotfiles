@@ -320,8 +320,10 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 " =============================================================================
 
 " Scratch.vim {{{
-nnoremap <leader>gs :Scratch<CR>
-nnoremap <leader>gS :Scratch!<CR>
+if Plugin_exists('scratch.vim')
+    nnoremap <leader>gs :Scratch<CR>
+    nnoremap <leader>gS :Scratch!<CR>
+endif
 " }}}
 " Syntastic  {{{
 " cd ~/.vim/bundle && \
