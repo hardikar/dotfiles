@@ -99,6 +99,9 @@ set matchtime=3
 " Enable mouse selection whenever possible
 set mouse=a
 
+" Don't allow mappings that start with <Esc>
+set noesckeys
+
 " }}}
 
 " Color Theme ------------------------------------------------------------- {{{
@@ -267,9 +270,6 @@ inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 inoremap <expr><C-J>   pumvisible() ? "\<C-N>" : "\<C-J>"
 inoremap <expr><C-K>   pumvisible() ? "\<C-P>" : "\<C-K>"
 inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
-
-" C-C to fast escape from insert mode
-inoremap <C-c> <ESC>
 
 " Insert Mode Completion {{{
 " :help ins-completion
