@@ -27,6 +27,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'junegunn/vim-peekaboo'
 Plug 'mtth/scratch.vim'
+Plug 'derekwyatt/vim-scala'
 
 " Add plugins to &runtimepath
 call plug#end()
