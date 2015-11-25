@@ -494,6 +494,14 @@ augroup ft_java
 augroup END
 " }}}
 
+" Notes {{{
+augroup ft_notes
+    au!
+    au FileType notes setlocal textwidth=120
+    au FileType notes setlocal spell
+augroup END
+" }}}
+
 " }}}
 
 " Break bad habits -------------------------------------------------------- {{{
