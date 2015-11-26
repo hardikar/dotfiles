@@ -19,7 +19,6 @@ unsetopt flowcontrol # ^S doesn't block input
 
 setopt AUTO_MENU
 
-bindkey -e
 autoload -U select-word-style
 select-word-style bash
 
@@ -33,6 +32,16 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Enable vi-mode
+function zle-line-init zle-keymap-select {
+    export _VI_MODE=$KEYMAP
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+bindkey -v
+
+
 export PATH=
 path=(
     /usr/local/bin
@@ -41,7 +50,7 @@ path=(
     /usr/sbin
     /sbin
     /usr/texbin
-    ) 
+    )
 
 # check for custom bin directory and add to path
 if [[ -d ~/bin ]]; then
@@ -75,11 +84,21 @@ export EDITOR='vim'
 
 bindkey '^U' undo
 
+# useful emacs bindings in vi-mode
+bindkey -M vicmd -M viins '^R' history-incremental-search-backward
+bindkey -M vicmd -M viins '^S' history-incremental-search-forward
+bindkey -M vicmd -M viins '^A' beginning-of-line
+bindkey -M vicmd -M viins '^E' end-of-line
+bindkey -M vicmd -M viins '^W' backward-kill-word
+
+bindkey -M vicmd 'H' beginning-of-line
+bindkey -M vicmd 'L' end-of-line
+
 # ctrl + f/b/w move at word level
 # bindkey '^f' forward-word
 # bindkey '^W' backward-word
 # bindkey '^B' backward-word
-# 
+
 # # Alt + f/w/b delete at word level
 # bindkey '^[f' kill-word
 # bindkey '^[w' backward-kill-word
