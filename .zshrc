@@ -111,6 +111,6 @@ if [[ $ZSH_VERSION > 4.3 ]]; then
 fi
 
 # Load local overrides
-if [[ -a ~/.local_zshrc ]]; then
-    source ~/.local_zshrc 
+if [[ -a ~/.local/.zshrc ]]; then
+    source ~/.local/.zshrc
 fi

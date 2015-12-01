@@ -537,8 +537,8 @@ endif
 " =============================================================================
 
 " Override general settings with system specific ones
-if filereadable($HOME."/.local_vimrc")
-    source ~/.local_vimrc
+if filereadable($HOME."/.local/.vimrc")
+    source ~/.local/.vimrc
 endif
 " }}}
 
