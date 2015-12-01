@@ -44,6 +44,7 @@ function note(){
         vim -c "Note $*"
     fi
 }
+alias notes="ls ~/notes"
 
 function ns(){
     vim -c NotesStash
