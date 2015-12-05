@@ -209,6 +209,10 @@ nnoremap <C-e> <End>
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 
+" Mappings for insert mode
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+
 " Mappings home row keys
 noremap H ^
 noremap L $
