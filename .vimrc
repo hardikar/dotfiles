@@ -158,6 +158,10 @@ nnoremap <leader>z zMzvzz
 " resize splits once window is resized
 autocmd VimResized * execute "normal! \<c-w>="
 
+" Silence output to prevent displaying "Press a Key to continue"
+command! -nargs=1 SilentExec execute ':silent !'.<q-args> | execute ':redraw!'
+
+
 " }}}
 
 " Major Mappings ---------------------------------------------------------- {{{
