@@ -28,6 +28,8 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'junegunn/vim-peekaboo'
 Plug 'mtth/scratch.vim'
 Plug 'derekwyatt/vim-scala'
+Plug 'tfnico/vim-gradle'
+Plug 'tpope/vim-dispatch'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -480,6 +482,7 @@ if Plugin_exists('vim-buffergator')
     let g:buffergator_viewport_split_policy = "B"
     let g:buffergator_hsplit_size = 10
 
+
     " Suppress the standard key maps
     let g:buffergator_suppress_keymaps = 1
     nnoremap <Leader>b :BuffergatorToggle<CR>
@@ -489,6 +492,11 @@ endif
 " Add eclim settings to status line. Note the %( %). If all of the variables
 " inside are unset, the entire group disappears
 function! Eclim_status_line() "{{{
+    " if we can't reach Eclim, do nothing else.
+    " 0 -> don't echo to user
+    if ! eclim#PingEclim(0)
+        return ''
+    endif
     " Compute items to be printed on the status line
     let project = eclim#project#util#GetCurrentProjectName()
     let workspace = eclim#project#util#GetProjectWorkspace(project)
@@ -503,6 +511,11 @@ set statusline+=%(%{Eclim_status_line()}%)
 " Let Syntastic do the java validation (tentative)
 " let g:EclimFileTypeValidate = 0
 let g:EclimCompletionMethod = 'omnifunc'
+
+let g:EclimDefaultFileOpenAction = 'vsplit'
+
+" Only show error highlights
+let g:EclimSignLevel = 'error'
 
 nnoremap <silent> <leader>ji :JavaImport<CR>
 nnoremap <silent> <leader>jI :JavaImportOrganize<CR>
@@ -544,6 +557,7 @@ augroup ft_java
     au!
     au FileType java setlocal foldmethod=marker
     au FileType java setlocal foldmarker={,}
+"    au FileType java call SetupEclimSettings()
 augroup END
 " }}}
 
