@@ -37,8 +37,10 @@ function zle-line-init zle-keymap-select {
     export _VI_MODE=$KEYMAP
     zle reset-prompt
 }
-zle -N zle-line-init
 zle -N zle-keymap-select
+zle -N zle-line-init
+
+export KEYTIMEOUT=1
 bindkey -v
 
 
@@ -93,6 +95,11 @@ bindkey -M vicmd -M viins '^W' backward-kill-word
 
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
+
+# Sane backspace in insert-mode
+bindkey -M viins "^?" backward-delete-char
+# This used to delete the last couple of lines since the timeout on <esc> is low
+bindkey -M vicmd -M viins "^[i" vi-cmd-mode
 
 # ctrl + f/b/w move at word level
 # bindkey '^f' forward-word
