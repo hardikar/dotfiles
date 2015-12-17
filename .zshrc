@@ -33,12 +33,14 @@ compinit
 # End of lines added by compinstall
 
 # Enable vi-mode
-function zle-line-init zle-keymap-select {
+function zle-keymap-select {
     export _VI_MODE=$KEYMAP
     zle reset-prompt
+    # Reset it to the "default vi-mode". This avoids deleting the last few
+    # lines because zle-line-init because of zle reset-prompt
+    export _VI_MODE="main"
 }
 zle -N zle-keymap-select
-zle -N zle-line-init
 
 export KEYTIMEOUT=1
 bindkey -v
