@@ -21,6 +21,7 @@ function extract() {
         echo "'$1' is not a valid file"
     fi
 }
+alias x="extract"
 
 # New zsh widget to print workspace status on ctrl+space
 vcs-status(){
