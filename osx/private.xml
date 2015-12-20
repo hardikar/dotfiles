@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Look for implementations on the Karabiner github page https://github.com/tekezo/Karabiner -->
 <root>
 <item>
     <name>Vi arrows</name>
@@ -22,4 +23,16 @@
         KeyCode::COMMAND_L | ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L 
     </autogen>
 </item>
+<item>
+      <name>F18 to ` (Tmux prefix) and Command</name>
+      <appendix>Tap F18 for `, Hold F19 for Command</appendix>
+      <appendix>Works well with using Seil to remap COMMAND_R to F18(code 79).</appendix>
+      <identifier>private.remap.f18_backquote_command</identifier>
+      <autogen>
+        __KeyOverlaidModifier__
+        KeyCode::F18,
+        KeyCode::COMMAND_R,
+        KeyCode::BACKQUOTE
+      </autogen>
+    </item>
 </root>
