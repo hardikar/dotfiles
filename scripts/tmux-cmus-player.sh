@@ -4,7 +4,7 @@
 # This script, will query cmus using cmus-remote, and parse the title, album, tracknumber, artist.
 # Add tm_music="#(~/scripts/tmux-cmus-player.sh)" in .tmux.conf to add it to the status line.
 #
-if cmus-remote -Q 2>&1 >/dev/null; then
+if cmus-remote -Q >/dev/null; then
     cmus_output=$(cmus-remote -Q)
     status=$(echo "$cmus_output" | grep "^status")
 
