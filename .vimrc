@@ -468,6 +468,10 @@ if Plugin_exists('ctrlp.vim')
     " 3 - Quickfix
     " 4 - Undo
     let g:ctrlp_cmd = 'exec "CtrlP".get(["LastMode", "Mixed", "Line", "QuickFix", "Undo"], v:count)'
+
+    " Increase the number of files indexed
+    let g:ctrlp_max_files = 25000
+    let g:ctrlp_max_depth = 40
 endif
 " }}}
 " Buffergator  {{{
