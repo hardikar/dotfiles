@@ -316,6 +316,8 @@ set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
 
 set wildignore+=*.orig                           " Merge resolution files
+set wildignore+=*.class,*.jar,.gradle            " Java garbage
+set wildignore+=*/build/*,*/build-eclipse/*      " Build directories
 
 " Because the default <Tab> doesn't work
 set wildcharm=<C-Z>
