@@ -532,79 +532,87 @@ nnoremap <leader> jd :JavaCallHierarchy<CR>
 " Show callees
 nnoremap <leader> ju :JavaCallHierarchy!<CR>
 
-" Open class path directory
-nnoremap <leader>jcp :call eclim#common#locate#LocateFile('vsplit', '.classpath', 'project')<CR>
+" TODO Shorcut to search for method in same file
+" TODO Shorcut to search for constructor of current class
+" TODO "Go to definition" <f3>
+" TODO "Show all references"
+" TODO "Show implementors (for methods I think)"
+
+" http://eclim.org/vim/java/search.html
+
+" open class path directory
+nnoremap <leader>jcp :call eclim#common#locate#locatefile('vsplit', '.classpath', 'project')<cr>
 
 " }}}
 
 " }}}
 
-" Filetype settings ------------------------------------------------------- {{{
+" filetype settings ------------------------------------------------------- {{{
 " =============================================================================
 
 filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#complete
 
-" Turn on syntax highlighting
+" turn on syntax highlighting
 syntax on
 
-" Turn on soft wrapping for text files
-autocmd FileType text setlocal wrap linebreak
+" turn on soft wrapping for text files
+autocmd filetype text setlocal wrap linebreak
 
-" Java {{{
+" java {{{
 
 augroup ft_java
     au!
-    au FileType java setlocal foldmethod=marker
-    au FileType java setlocal foldmarker={,}
-"    au FileType java call SetupEclimSettings()
-augroup END
+    au filetype java setlocal foldmethod=marker
+    au filetype java setlocal foldmarker={,}
+"    au filetype java call setupeclimsettings()
+augroup end
 " }}}
 
-" Notes {{{
+" notes {{{
 augroup ft_notes
     au!
-    au FileType notes setlocal textwidth=120
-    au FileType notes setlocal spell
-augroup END
+    au filetype notes setlocal textwidth=120
+    au filetype notes setlocal spell
+augroup end
 " }}}
 
 " }}}
 
-" Break bad habits -------------------------------------------------------- {{{
+" break bad habits -------------------------------------------------------- {{{
 " =============================================================================
 
-" Trailing Whitespace {{{
-" Mark trailing white space, except when typing at the end of the line
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" trailing whitespace {{{
+" mark trailing white space, except when typing at the end of the line
+highlight extrawhitespace ctermbg=red guibg=red
+autocmd insertenter * match extrawhitespace /\s\+\%#\@<!$/
+autocmd insertleave * match extrawhitespace /\s\+$/
 
-" Clear trailing whitespace
-nnoremap <leader>w :%s/\s\+$//<CR>
-
-" }}}
-
-" Remap the cursor keys to something else
-nnoremap <up>       <Nop>
-nnoremap <down>     <Nop>
-nnoremap <left>     <Nop>
-nnoremap <right>    <Nop>
+" clear trailing whitespace
+nnoremap <leader>w :%s/\s\+$//<cr>
 
 " }}}
 
-" NVIM settings ----------------------------------------------------------- {{{
+" remap the cursor keys to something else
+nnoremap <up>       <nop>
+nnoremap <down>     <nop>
+nnoremap <left>     <nop>
+nnoremap <right>    <nop>
+
+" }}}
+
+" nvim settings ----------------------------------------------------------- {{{
 " =============================================================================
 if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
+    tnoremap <esc> <c-\><c-n>
 endif
 " }}}
 
-" Finally ----------------------------------------------------------------- {{{
+" finally ----------------------------------------------------------------- {{{
 " =============================================================================
 
-" Override general settings with system specific ones
-if filereadable($HOME."/.local/.vimrc")
+" override general settings with system specific ones
+if filereadable($home."/.local/.vimrc")
     source ~/.local/.vimrc
 endif
 " }}}
