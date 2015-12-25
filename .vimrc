@@ -563,9 +563,8 @@ autocmd filetype text setlocal wrap linebreak
 
 augroup ft_java
     au!
-    au filetype java setlocal foldmethod=marker
-    au filetype java setlocal foldmarker={,}
-"    au filetype java call setupeclimsettings()
+    au filetype java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
+    au filetype java setlocal foldmethod=syntax
 augroup end
 " }}}
 
