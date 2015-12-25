@@ -494,7 +494,7 @@ endif
 function! Eclim_status_line() "{{{
     " if we can't reach Eclim, do nothing else.
     " 0 -> don't echo to user
-    if ! eclim#PingEclim(0)
+    if ! exists(":PingEclim") || ! eclim#PingEclim(0)
         return ''
     endif
     " Compute items to be printed on the status line
