@@ -521,7 +521,7 @@ let g:EclimSignLevel = 'error'
 nnoremap <silent> <leader>ji :JavaImport<CR>
 nnoremap <silent> <leader>jI :JavaImportOrganize<CR>
 " Java search in context based on word under cursor
-nnoremap <silent> <leader>js :JavaSearchContext<CR>
+nnoremap <silent> <f3> :JavaSearchContext<CR>
 " Java correction suggestions
 nnoremap <silent> <leader>jc :JavaCorrect<CR>
 nnoremap <silent> <f5>    :ProjectRefresh<CR>
@@ -529,9 +529,9 @@ nnoremap <silent> <f5>    :ProjectRefresh<CR>
 " Show type hierarchy
 nnoremap <silent> <leader>jt :JavaHierarchy<CR>
 " Show callers
-nnoremap <leader> jd :JavaCallHierarchy<CR>
+nnoremap <leader>jd :JavaCallHierarchy<CR>
 " Show callees
-nnoremap <leader> ju :JavaCallHierarchy!<CR>
+nnoremap <leader>ju :JavaCallHierarchy!<CR>
 
 " TODO Shorcut to search for method in same file
 " TODO Shorcut to search for constructor of current class
