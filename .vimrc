@@ -30,6 +30,7 @@ Plug 'mtth/scratch.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
+Plug 'SirVer/ultisnips'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -545,6 +546,16 @@ nnoremap <leader>jcp :call eclim#common#locate#locatefile('vsplit', '.classpath'
 
 " }}}
 
+" UltiSnips  {{{
+if Plugin_exists('ultisnips')
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-n>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+endif
+" }}}
 " }}}
 
 " filetype settings ------------------------------------------------------- {{{
