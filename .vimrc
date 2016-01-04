@@ -31,6 +31,8 @@ Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -113,8 +115,13 @@ set noesckeys
 " Explicitly tell vim that the terminal supports 256 colors"
 set t_Co=256
 " Vim theme : Enable wambat color
+" TODO: Look for a light/dark color scheme combo
+" TODO: Change the colors on highlight.vim plugin appropriately
+" TODO: Change the colors on <Esc> correctly
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
-color wombat256mod
+" color wombat256mod
+color lucius
+LuciusWhiteLowContrast
 
 " }}}
 
@@ -535,7 +542,6 @@ nnoremap <leader>ju :JavaCallHierarchy!<CR>
 
 " TODO Shorcut to search for method in same file
 " TODO Shorcut to search for constructor of current class
-" TODO "Go to definition" <f3>
 " TODO "Show all references"
 " TODO "Show implementors (for methods I think)"
 
@@ -547,6 +553,7 @@ nnoremap <leader>jcp :call eclim#common#locate#locatefile('vsplit', '.classpath'
 " }}}
 
 " UltiSnips  {{{
+" TODO: Go through and learn the java snippets.
 if Plugin_exists('ultisnips')
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<c-n>"
