@@ -367,12 +367,16 @@ snippet pa "package" b
 package $0
 endsnippet
 
-snippet p "print" b
-System.out.print($1);$0
+# snippet p "print" b
+# System.out.print($1);$0
+# endsnippet
+
+snippet syso "println"  b
+System.out.println($1);$0
 endsnippet
 
-snippet pl "println"  b
-System.out.println($1);$0
+snippet syse "println"  b
+System.err.println($1);$0
 endsnippet
 
 snippet pr "private" b
