@@ -33,6 +33,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'flazz/vim-colorschemes'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -120,8 +121,7 @@ set t_Co=256
 " TODO: Change the colors on <Esc> correctly
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
 " color wombat256mod
-color lucius
-LuciusWhiteLowContrast
+color PaperColor
 
 " }}}
 
