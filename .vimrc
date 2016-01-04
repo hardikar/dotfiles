@@ -121,6 +121,7 @@ set t_Co=256
 " TODO: Change the colors on <Esc> correctly
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
 " color wombat256mod
+set background=light
 color PaperColor
 
 " }}}
