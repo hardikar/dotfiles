@@ -136,12 +136,6 @@ nnoremap k 5k
 " Tab navigation
 " ================================================================================
 
-" Easier tab movements
-nnoremap <Up>  :tabfirst<CR>
-nnoremap <Down>  :tablast<CR>
-nnoremap <Right>  :tabnext<CR>
-nnoremap <Left>  :tabprev<CR>
-
 nnoremap b :buffer<Space>
 nnoremap m :tabmove<Space>
 
