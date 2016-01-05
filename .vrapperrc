@@ -1,6 +1,62 @@
-map L $
-map H ^
+" Eclipse plugins
+" OS X Eclipse Launcher (https://marketplace.eclipse.org/content/os-x-eclipse-launcher)
+" Vrapper (http://vrapper.sourceforge.net/home/)
+"
+" Some vrapper inspriration: " https://github.com/justinmk/config/blob/master/.vrapperrc
+
+set leader=<Space>
+
 set autoindent
 set ignorecase
 set smartcase
 
+" When enabled, always start in NormalMode after changing tabs.
+set startnormalmode
+
+" Save a million keystrokes
+nnoremap ; :
+cnoremap <C-;> <C-C>
+
+" We just lost the power of ; so bring it back in another way
+nnoremap : ,
+" While we're at it, define , to redo the previous f,t command
+nnoremap , ;
+
+nnoremap L $
+nnoremap H ^
+
+nnoremap <Tab> za
+vnoremap <Tab> za
+
+" Map emacs-like keys for moving to beginning/end of line
+nnoremap <C-a> <Home>
+nnoremap <C-e> <End>
+
+" Mappings for command mode
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+
+" Mappings for insert mode
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Setup a scroll lock so that j,k stay in the same place relative to the
+" window
+function! ToggleScrollLock()
+    if exists("g:ScrollLock")
+        unlet g:ScrollLock
+        nnoremap j j
+        nnoremap k k
+    else
+        let g:ScrollLock = 1
+        nnoremap j <C-E>j
+        nnoremap k <C-Y>k
+    endif
+endfunction
+nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
+
+" vim: ft=vim
