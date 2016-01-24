@@ -7,7 +7,7 @@
 # and sends and email out to $MAILTO using $(mail) as configured with $HOME/.mailrc or otherwise.
 # Also add this to CRON using:
 #    crontab -e
-#    */30 * * * * $HOME/scripts/checkip.sh
+#    */30 * * * * $HOME/bin/checkip.sh
 # for running this script every 30mins.
 
 # Configuration

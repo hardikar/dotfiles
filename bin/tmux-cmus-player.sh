@@ -2,7 +2,7 @@
 
 # If cmus is installed, show "current playing" track in the Tmux status bar
 # This script, will query cmus using cmus-remote, and parse the title, album, tracknumber, artist.
-# Add tm_music="#(~/scripts/tmux-cmus-player.sh)" in .tmux.conf to add it to the status line.
+# Add tm_music="#(~/bin/tmux-cmus-player.sh)" in .tmux.conf to add it to the status line.
 #
 if cmus-remote -Q >/dev/null; then
     cmus_output=$(cmus-remote -Q)
