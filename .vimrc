@@ -120,8 +120,7 @@ set t_Co=256
 " Vim theme : Enable wambat color
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
 
-let g:colors = ["wombat256mod", "PaperColor", "hybrid"]
-nnoremap <F11> :ColorsPrev<CR>:echo g:colors_name<CR>
+let g:colors = ["hybrid", "wombat256mod", "PaperColor"]
 nnoremap <F12> :ColorsNext<CR>:echo g:colors_name<CR>
 
 " Status line changes on mode changes
@@ -145,13 +144,14 @@ set laststatus=2 " Always have a status line on
 set report=0     " Always report the number of lines yanked/deleted etc
 
 set statusline=          " Empty status bar
-set statusline=%n:       " Buffer number
+set statusline+=%n:      " Buffer number
 set statusline+=%m\      " Modifiable flag
 set statusline+=%F       " Full path of the file
 set statusline+=%=       " left/right separator
 set statusline+=%l,      " Cursor line
 set statusline+=%c\      " Cursor column
-set statusline+=\|\ %L   " Cursor line/total lines
+set statusline+=\|\      " Seperator
+set statusline+=%L       " Cursor line/total lines
 set statusline+=\ (%P)   " Percent through file
 
 " }}}
@@ -352,13 +352,22 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 if Plugin_exists('vim-fugitive')
     " Toggles Git blame window and shortens the window to name length
     nnoremap <leader>gb :Gblame!<CR>
-    nnoremap <leader>gs :Gstatus<CR>
+    nnoremap <leader>gs :ToggleGStatus<CR>
+
+	function! ToggleGStatus()
+        if buflisted('.git/index')
+            bd .git/index
+        else
+            Gstatus
+		endif
+	endfunction
+	command! ToggleGStatus :call ToggleGStatus()
 endif
 "}}}
 " Scratch.vim {{{
 if Plugin_exists('scratch.vim')
-"    nnoremap <leader>gs :Scratch<CR>
-"    nnoremap <leader>gS :Scratch!<CR>
+    nnoremap <leader>ts :Scratch<CR>
+    nnoremap <leader>tS :Scratch!<CR>
 endif
 " }}}
 " Syntastic  {{{
