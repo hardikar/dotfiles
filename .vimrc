@@ -18,20 +18,27 @@ endfunction
 
 call plug#begin('~/.vim/bundle')
 
-Plug 'rust-lang/rust.vim'
+" Navigation plugins
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
-Plug 'scrooloose/syntastic'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'tpope/vim-fugitive'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'junegunn/vim-peekaboo'
+
+" Productivity plugins
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'mtth/scratch.vim'
-Plug 'derekwyatt/vim-scala'
-Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
+Plug 'jszakmeister/vim-togglecursor'
 
+" Language plugins
+Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
+Plug 'derekwyatt/vim-scala'
+Plug 'tfnico/vim-gradle'
+
+" Color scheme plugins
 Plug 'jonathanfilip/vim-lucius'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'flazz/vim-colorschemes'
