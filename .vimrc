@@ -31,9 +31,11 @@ Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
+
 Plug 'jonathanfilip/vim-lucius'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'flazz/vim-colorschemes'
+Plug 'w0ng/vim-hybrid'
 
 " Add plugins to &runtimepath
 call plug#end()

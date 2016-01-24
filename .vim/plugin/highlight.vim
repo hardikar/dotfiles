@@ -48,10 +48,15 @@ nnoremap <silent> <Leader>u6 :call HiInterestingWord(6, '-')<cr>
 " }}}
 " Default Highlights {{{
 
-hi def InterestingWord1 guifg=#000000 ctermfg=0 guibg=#ffa724 ctermbg=154
-hi def InterestingWord2 guifg=#000000 ctermfg=0 guibg=#aeee00 ctermbg=229
-hi def InterestingWord3 guifg=#000000 ctermfg=0 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=0 guibg=#b88853 ctermbg=211
-hi def InterestingWord5 guifg=#000000 ctermfg=0 guibg=#ff9eb8 ctermbg=195
-hi def InterestingWord6 guifg=#000000 ctermfg=0 guibg=#ff9eb8 ctermbg=137
+function! SetHighlightColors()
+    hi def InterestingWord1 guifg=#000000 ctermfg=0 guibg=#ffa724 ctermbg=154
+    hi def InterestingWord2 guifg=#000000 ctermfg=0 guibg=#aeee00 ctermbg=229
+    hi def InterestingWord3 guifg=#000000 ctermfg=0 guibg=#8cffba ctermbg=121
+    hi def InterestingWord4 guifg=#000000 ctermfg=0 guibg=#b88853 ctermbg=211
+    hi def InterestingWord5 guifg=#000000 ctermfg=0 guibg=#ff9eb8 ctermbg=195
+    hi def InterestingWord6 guifg=#000000 ctermfg=0 guibg=#ff9eb8 ctermbg=137
+endfunction
+
+autocmd ColorScheme * call SetHighlightColors()
+call SetHighlightColors()
 
