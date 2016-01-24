@@ -121,6 +121,8 @@ set t_Co=256
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
 
 let g:colors = ["wombat256mod", "PaperColor", "hybrid"]
+nnoremap <F11> :ColorsPrev<CR>:echo g:colors_name<CR>
+nnoremap <F12> :ColorsNext<CR>:echo g:colors_name<CR>
 
 " Status line changes on mode changes
 if version > 700
