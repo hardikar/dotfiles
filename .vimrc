@@ -117,6 +117,9 @@ set mouse=a
 " Don't allow mappings that start with <Esc>
 set noesckeys
 
+" Easy toggling insert modes
+set pastetoggle=<F6>
+
 " }}}
 
 " Color Theme ------------------------------------------------------------- {{{
