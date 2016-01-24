@@ -116,13 +116,18 @@ set noesckeys
 " Explicitly tell vim that the terminal supports 256 colors"
 set t_Co=256
 " Vim theme : Enable wambat color
-" TODO: Look for a light/dark color scheme combo
-" TODO: Change the colors on highlight.vim plugin appropriately
-" TODO: Change the colors on <Esc> correctly
 " curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
-" color wombat256mod
-set background=light
-color PaperColor
+
+let g:colors = ["wombat256mod", "PaperColor", "hybrid"]
+
+" Status line changes on mode changes
+if version > 700
+    hi link StatusLineInsert PMenuSel
+    hi link StatusLineNormal StatusLine
+    " Change colors when intering INSERT MODE
+    autocmd InsertEnter * hi! link StatusLine StatusLineInsert
+    autocmd InsertLeave * hi! link StatusLine StatusLineNormal
+endif
 
 " }}}
 

@@ -7,7 +7,7 @@
 " based on version by
 "   Danila Bespalov (danila.bespalov@gmail.com)
 
-set background=dark
+" set background=dark
 
 if version > 580
 	hi clear
@@ -43,11 +43,6 @@ hi Pmenu		ctermfg=230		ctermbg=238						guifg=#ffffd7	guibg=#444444
 hi PmenuSel		ctermfg=232		ctermbg=192						guifg=#080808	guibg=#cae982
 endif
 
-if version > 700
-    " Change colors when intering INSERT MODE
-    au InsertEnter * hi StatusLine ctermfg=black ctermbg=green
-    au InsertLeave * hi StatusLine ctermfg=230 ctermbg=238
-endif
 
 " Diff highlighting
 hi DiffAdd		ctermfg=232		ctermbg=72										guibg=#2a0d6a
