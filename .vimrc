@@ -339,10 +339,17 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 " VIM plugin settings ----------------------------------------------------- {{{
 " =============================================================================
 
+" Fugitive settings  {{{
+if Plugin_exists('vim-fugitive')
+    " Toggles Git blame window and shortens the window to name length
+    nnoremap <leader>gb :Gblame!<CR>
+    nnoremap <leader>gs :Gstatus<CR>
+endif
+"}}}
 " Scratch.vim {{{
 if Plugin_exists('scratch.vim')
-    nnoremap <leader>gs :Scratch<CR>
-    nnoremap <leader>gS :Scratch!<CR>
+"    nnoremap <leader>gs :Scratch<CR>
+"    nnoremap <leader>gS :Scratch!<CR>
 endif
 " }}}
 " Syntastic  {{{
