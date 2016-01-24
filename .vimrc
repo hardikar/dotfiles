@@ -30,6 +30,7 @@ Plug 'mtth/scratch.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'jszakmeister/vim-togglecursor'
+Plug 'jaxbot/semantic-highlight.vim'
 
 " Language plugins
 Plug 'rust-lang/rust.vim'
@@ -619,6 +620,14 @@ augroup ft_java
     au!
     au filetype java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
     au filetype java setlocal foldmethod=syntax
+augroup end
+" }}}
+
+" java {{{
+
+augroup ft_sh
+    au!
+    au filetype sh setlocal iskeyword+=$ 
 augroup end
 " }}}
 
