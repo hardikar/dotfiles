@@ -39,6 +39,9 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
+Plug 'Valloric/YouCompleteMe', {
+  \ 'do': './install.py --clang-completer --racer-completer'
+  \ }
 
 " Color scheme plugins
 Plug 'jonathanfilip/vim-lucius'
@@ -360,6 +363,20 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 " VIM plugin settings ----------------------------------------------------- {{{
 " =============================================================================
 
+" YouCompleteMe settings  {{{
+if Plugin_exists('YouCompleteMe')
+    let g:ycm_min_num_of_chars_for_completion = 2
+    let g:ycm_auto_trigger = 1
+    let g:ycm_error_symbol = '>>'
+    let g:ycm_warning_symbol = '!'
+
+    let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+    let g:ycm_key_invoke_completion = '<C-Space>'
+
+    let g:ycm_use_ultisnips_completer = 1
+endif
+"}}}
 " Fugitive settings  {{{
 if Plugin_exists('vim-fugitive')
     " Toggles Git blame window and shortens the window to name length
