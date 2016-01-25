@@ -31,6 +31,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'jaxbot/semantic-highlight.vim'
+Plug 'airblade/vim-gitgutter'
 
 " Language plugins
 Plug 'rust-lang/rust.vim'
@@ -373,6 +374,11 @@ if Plugin_exists('vim-fugitive')
 		endif
 	endfunction
 	command! ToggleGStatus :call ToggleGStatus()
+endif
+"}}}
+" Gitgutter settings  {{{
+if Plugin_exists('vim-gitgutter')
+    nnoremap <F10> :GitGutterToggle<CR>
 endif
 "}}}
 " Scratch.vim {{{
