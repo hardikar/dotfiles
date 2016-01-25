@@ -39,6 +39,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Valloric/YouCompleteMe', {
   \ 'do': './install.py --clang-completer --racer-completer'
   \ }
@@ -375,6 +376,14 @@ if Plugin_exists('YouCompleteMe')
     let g:ycm_key_invoke_completion = '<C-Space>'
 
     let g:ycm_use_ultisnips_completer = 1
+
+    " Fall back to a ycm in the current directory (for when access files in
+    " include directories)
+    let g:ycm_global_ycm_extra_conf = getcwd().'/.ycm_extra_conf.py'
+
+    nnoremap <F1> :YcmCompleter GetDoc<CR>
+    nnoremap <F2> :YcmCompleter GoType<CR>
+    nnoremap <F3> :YcmCompleter GoTo<CR>
 endif
 "}}}
 " Fugitive settings  {{{
@@ -585,20 +594,22 @@ let g:EclimDefaultFileOpenAction = 'vsplit'
 " Only show error highlights
 let g:EclimSignLevel = 'error'
 
-nnoremap <silent> <leader>ji :JavaImport<CR>
-nnoremap <silent> <leader>jI :JavaImportOrganize<CR>
-" Java search in context based on word under cursor
-nnoremap <silent> <f3> :JavaSearchContext<CR>
-" Java correction suggestions
-nnoremap <silent> <leader>jc :JavaCorrect<CR>
-nnoremap <silent> <f5>    :ProjectRefresh<CR>
+function! SetupEclimJavaMappings()
+    nnoremap <buffer><silent> <leader>ji :JavaImport<CR>
+    nnoremap <buffer><silent> <leader>jI :JavaImportOrganize<CR>
+    " Java search in context based on word under cursor
+    nnoremap <buffer><silent> <f3> :JavaSearchContext<CR>
+    " Java correction suggestions
+    nnoremap <buffer><silent> <leader>jc :JavaCorrect<CR>
+    nnoremap <buffer><silent> <f5>    :ProjectRefresh<CR>
 
-" Show type hierarchy
-nnoremap <silent> <leader>jt :JavaHierarchy<CR>
-" Show callers
-nnoremap <leader>jd :JavaCallHierarchy<CR>
-" Show callees
-nnoremap <leader>ju :JavaCallHierarchy!<CR>
+    " Show type hierarchy
+    nnoremap <buffer><silent> <leader>jt :JavaHierarchy<CR>
+    " Show callers
+    nnoremap <buffer><leader>jd :JavaCallHierarchy<CR>
+    " Show callees
+    nnoremap <buffer><leader>ju :JavaCallHierarchy!<CR>
+endfunction
 
 " TODO Shorcut to search for method in same file
 " TODO Shorcut to search for constructor of current class
@@ -641,8 +652,9 @@ autocmd filetype text setlocal wrap linebreak
 
 augroup ft_java
     au!
-    au filetype java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
-    au filetype java setlocal foldmethod=syntax
+    autocmd filetype java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
+    autocmd filetype java setlocal foldmethod=syntax
+    autocmd FileType java call SetupEclimJavaMappings()
 augroup end
 " }}}
 
