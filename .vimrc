@@ -683,14 +683,14 @@ set omnifunc=syntaxcomplete#complete
 syntax on
 
 " turn on soft wrapping for text files
-autocmd filetype text setlocal wrap linebreak
+autocmd FileType text setlocal wrap linebreak
 
 " java {{{
 
 augroup ft_java
     au!
-    autocmd filetype java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
-    autocmd filetype java setlocal foldmethod=syntax
+    autocmd FileType java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
+    autocmd FileType java setlocal foldmethod=syntax
     autocmd FileType java call SetupEclimJavaMappings()
 augroup end
 " }}}
@@ -699,16 +699,16 @@ augroup end
 
 augroup ft_cpp
     au!
-    autocmd filetype c setlocal foldmethod=syntax
-    autocmd filetype cpp setlocal foldmethod=syntax
+    autocmd FileType c setlocal foldmethod=syntax
+    autocmd FileType cpp setlocal foldmethod=syntax
 augroup end
 " }}}
 
 " notes {{{
 augroup ft_notes
     au!
-    au filetype notes setlocal textwidth=120
-    au filetype notes setlocal spell
+    au FileType notes setlocal textwidth=120
+    au FileType notes setlocal spell
 augroup end
 " }}}
 
