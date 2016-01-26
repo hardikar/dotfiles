@@ -379,7 +379,8 @@ if Plugin_exists('YouCompleteMe')
 
     " Fall back to a ycm in the current directory (for when access files in
     " include directories)
-    let g:ycm_global_ycm_extra_conf = getcwd().'/.ycm_extra_conf.py'
+    let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/ycm_extra_conf.py'
+    let g:ycm_extra_conf_vim_data = ['&filetype', 'getcwd()']
 
     nnoremap <F1> :YcmCompleter GetDoc<CR>
     nnoremap <F2> :YcmCompleter GoType<CR>
