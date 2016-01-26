@@ -364,6 +364,31 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 " VIM plugin settings ----------------------------------------------------- {{{
 " =============================================================================
 
+" Scope settings  {{{
+if has("cscope")
+    " Pick up any cscope database in current directory
+    if filereadable("cscope.out")
+        cscope add cscope.out
+    elseif $CSCOPE_DB != ""
+        cscope add $CSCOPE_DB
+    endif
+
+    " Show a nice message when cscope is added
+    set cscopeverbose
+
+	" The following maps all invoke one of the following cscope search types:
+    "
+    "   's'   symbol: find all references to the token under cursor
+    "   'g'   global: find global definition(s) of the token under cursor
+    "   'c'   calls:  find all calls to the function name under cursor
+    "   't'   text:   find all instances of the text under cursor
+    "   'e'   egrep:  egrep search for the word under cursor
+    "   'f'   file:   open the filename under cursor
+    "   'i'   includes: find files that include the filename under cursor
+    "   'd'   called: find functions that function under cursor calls
+endif
+
+" }}}
 " YouCompleteMe settings  {{{
 if Plugin_exists('YouCompleteMe')
     let g:ycm_min_num_of_chars_for_completion = 2
