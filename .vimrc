@@ -376,6 +376,9 @@ if has("cscope")
     " Show a nice message when cscope is added
     set cscopeverbose
 
+    " Use quickfix for showing results
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+
 	" The following maps all invoke one of the following cscope search types:
     "
     "   's'   symbol: find all references to the token under cursor
@@ -692,11 +695,12 @@ augroup ft_java
 augroup end
 " }}}
 
-" java {{{
+" c/c++ {{{
 
-augroup ft_sh
+augroup ft_cpp
     au!
-    au filetype sh setlocal iskeyword+=$ 
+    autocmd filetype c setlocal foldmethod=syntax
+    autocmd filetype cpp setlocal foldmethod=syntax
 augroup end
 " }}}
 
