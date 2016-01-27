@@ -419,7 +419,7 @@ if Plugin_exists('YouCompleteMe')
     let g:ycm_extra_conf_vim_data = ['&filetype', 'getcwd()']
 
     nnoremap <F1> :YcmCompleter GetDoc<CR>
-    nnoremap <F2> :YcmCompleter GoType<CR>
+    nnoremap <F2> :YcmCompleter GetType<CR>
     nnoremap <F3> :YcmCompleter GoTo<CR>
 endif
 "}}}
