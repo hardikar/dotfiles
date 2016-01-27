@@ -51,3 +51,12 @@ alias notes="ls ~/notes"
 function ns(){
     vim -c NotesStash
 }
+
+# Use robots.thoughtbot.com's readability engine to convert webpages to markdown
+function rdd() {
+    if [[ ! $1 ]]; then
+        echo "Usage: rdd <url>"
+        return 1
+    fi
+    curl --data "read=1&u=$1" "http://heckyesmarkdown.com/go/"
+}
