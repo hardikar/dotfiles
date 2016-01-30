@@ -66,7 +66,7 @@ fi
 
 # Load up shell theme
 # Credits to https://github.com/chriskempson/base16
-source ~/.zsh/themes/base16-chalk.dark.sh
+source ~/.zsh/themes/base16-solarized.dark.sh
 
 # Load up common aliases
 source ~/.zsh/aliases.sh
