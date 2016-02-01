@@ -74,8 +74,13 @@ def FlagsForFile( filename, **kwargs ):
 
     cwd = os.path.abspath(data['getcwd()'])
 
-    # Add flags from include paths in current workspace
-    flags.extend(['-I' + path for path in glob.glob(cwd + "/**/include")])
+    include_dirs = ['include', 'src', 'test', 'tests']
+    # Add flags from include dirs in current workspace
+    for dir_ in include_dirs:
+        flags.extend(['-I' + path for path in glob.glob(
+            cwd + "/{}".format(dir_))])
+        flags.extend(['-I' + path for path in glob.glob(
+            cwd + "/**/{}".format(dir_))])
     flags = MakeRelativePathsInFlagsAbsolute( flags, cwd )
   except KeyError:
       pass
