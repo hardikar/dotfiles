@@ -54,7 +54,7 @@ function ns(){
 
 # Use robots.thoughtbot.com's readability engine to convert webpages to markdown
 function rdd() {
-    if [[ ! $1 ]]; then
+    if ! [ "$1" ]; then
         echo "Usage: rdd <url>"
         return 1
     fi
