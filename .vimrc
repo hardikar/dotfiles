@@ -704,6 +704,12 @@ augroup ft_cpp
 augroup end
 " }}}
 
+" llvm {{{
+augroup ft_llvm
+    au!
+    au FileType llvm setlocal iskeyword=@,48-57,_,192-255,%
+augroup end
+
 " notes {{{
 augroup ft_notes
     au!
