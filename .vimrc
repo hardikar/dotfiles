@@ -42,7 +42,7 @@ Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Valloric/YouCompleteMe', {
-  \ 'do': './install.py --clang-completer --racer-completer'
+  \ 'do': './install.py --clang-completer --system-libclang'
   \ }
 
 " Color scheme plugins
