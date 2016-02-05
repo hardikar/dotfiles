@@ -35,6 +35,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Language plugins
 Plug 'rust-lang/rust.vim'
+Plug 'Superbil/llvm.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'derekwyatt/vim-scala'
