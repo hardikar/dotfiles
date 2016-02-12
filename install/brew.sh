@@ -29,6 +29,7 @@ brew install xvid
 # Random stuff
 brew install boost --with-python
 brew install ledger
+brew install ssh-copy-id
 
 # Casks
 brew install caskroom/cask/brew-cask
