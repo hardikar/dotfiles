@@ -6,10 +6,9 @@ import ycm_core
 flags = [
 "-g", # Generate debug information
 "-O0", # No optimization for fast builds + good debug
-"-I/usr/local/include",
-"-I/usr/include",
+#"-I/usr/local/include",
+#"-I/usr/include",
 "-Wall",
-"-Werror",
 "-Wextra",
 "-Wno-long-long",
 "-Wno-tautological-undefined-compare",
@@ -21,7 +20,7 @@ extra_includes = [
 "-I/opt/gp_xerces/include",
 ]
 cpp_includes = [
-"-I/usr/include/c++/4.2.1",
+#"-I/usr/include/c++/4.2.1",
 ]
 
 def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
@@ -66,7 +65,7 @@ def FlagsForFile( filename, **kwargs ):
     if filetype == 'c':
       flags += ['-xc']
     elif filetype == 'cpp':
-      flags += ['-xc++']
+      flags += ['-x', 'c++']
       flags += ['-std=c++11']
       flags += cpp_includes
     elif filetype == 'objc':
