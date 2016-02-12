@@ -700,8 +700,10 @@ augroup end
 
 augroup ft_cpp
     au!
-    autocmd FileType c setlocal foldmethod=syntax
-    autocmd FileType cpp setlocal foldmethod=syntax
+    autocmd FileType c,cpp setlocal foldmethod=syntax
+    autocmd FileType c,cpp set tabstop=2
+    autocmd FileType c,cpp set softtabstop=2
+    autocmd FileType c,cpp set shiftwidth=2
 augroup end
 " }}}
 
