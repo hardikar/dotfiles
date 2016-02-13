@@ -377,6 +377,9 @@ if has("cscope")
     " Show a nice message when cscope is added
     set cscopeverbose
 
+    " Use cscope database for tags when available
+    set cscopetag
+
     " Use quickfix for showing results
     set cscopequickfix=s-,c-,d-,i-,t-,e-
 
