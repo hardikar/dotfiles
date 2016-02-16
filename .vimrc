@@ -149,6 +149,17 @@ if version > 700
     autocmd InsertLeave * hi! link StatusLine StatusLineNormal
 endif
 
+" Setup fonts
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+  elseif has("gui_macvim")
+    set guifont=Inconsolata:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
+
 " }}}
 
 " Status bar -------------------------------------------------------------- {{{
