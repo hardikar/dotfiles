@@ -35,12 +35,13 @@ Plug 'airblade/vim-gitgutter'
 
 " Language plugins
 Plug 'rust-lang/rust.vim'
-Plug 'Superbil/llvm.vim'
+"Plug 'Superbil/llvm.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'hari-rangarajan/CCTree'
 Plug 'Valloric/YouCompleteMe', {
   \ 'do': './install.py --clang-completer --system-libclang'
   \ }
@@ -438,6 +439,42 @@ if Plugin_exists('YouCompleteMe')
     nnoremap <F3> :YcmCompleter GoTo<CR>
 endif
 "}}}
+" CCTree  {{{
+if has("cscope")
+    " Ask user if he wants to load the XRef database
+    function! CCTreeConfirmLoad(cctree_out)
+        if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 1) == 1
+            exec("CCTreeLoadXRefDB " . a:cctree_out)
+        endif
+    endfunction
+
+    " Ask user if he wants to create and load the XRef database
+    function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
+        if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 1) == 1
+            exec("CCTreeLoadDB " . a:cscope_out)
+            exec("CCTreeSaveXRefDB " . a:cctree_out)
+        endif
+    endfunction
+
+    " Pick up any cctree database in current directory
+    if filereadable("cctree.out")
+        autocmd! VimEnter * call CCTreeConfirmLoad("cctree.out")
+    elseif $CCTREE_DB != ""
+        autocmd! VimEnter * call CCTreeConfirmLoad($CCTREE_DB)
+    " or create one if cscope.out is found
+    elseif filereadable("cscope.out")
+        autocmd! VimEnter * call CCTreeConfirmLoadCreate("cscope.out", "cctree.out")
+    elseif $CSCOPE_DB != ""
+        autocmd! VimEnter * call CCTreeConfirmLoadCreate($CSCOPE_DB, "cctree.out")
+    endif
+
+    let g:CCTreeRecursiveDepth = 5
+    let g:CCTreeMinVisibleDepth = 2
+
+    let g:CCTreeKeyTraceReverseTree = '<f4>'
+    let g:CCTreeKeyTraceForwardTree = '<f5>'
+endif
+" }}}
 " Fugitive settings  {{{
 if Plugin_exists('vim-fugitive')
     " Toggles Git blame window and shortens the window to name length
