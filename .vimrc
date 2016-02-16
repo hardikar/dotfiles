@@ -748,13 +748,12 @@ augroup end
 " }}}
 
 " c/c++ {{{
-
 augroup ft_cpp
     au!
     autocmd FileType c,cpp setlocal foldmethod=syntax
-    autocmd FileType c,cpp set tabstop=2
-    autocmd FileType c,cpp set softtabstop=2
-    autocmd FileType c,cpp set shiftwidth=2
+    autocmd FileType c,cpp setlocal tabstop=2
+    autocmd FileType c,cpp setlocal softtabstop=2
+    autocmd FileType c,cpp setlocal shiftwidth=2
 augroup end
 " }}}
 
