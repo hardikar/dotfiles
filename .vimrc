@@ -627,7 +627,7 @@ if Plugin_exists('ctrlp.vim')
     " undo - searches the undo tree
     " line - searches a line in the open buffers
     " mixed - Default+Buffer+MRU combo
-    let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo']
+    let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo', 'cscope']
 
     " Use prefixed count to determine the mode for ctrl-p
     " 0 - Last Mode
