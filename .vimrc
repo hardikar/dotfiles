@@ -20,7 +20,7 @@ call plug#begin('~/.vim/bundle')
 
 " Navigation plugins
 Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
+Plug 'hardikar/ctrlp.vim', {'branch': 'cscope'}
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'junegunn/vim-peekaboo'
 
@@ -443,14 +443,14 @@ endif
 if has("cscope")
     " Ask user if he wants to load the XRef database
     function! CCTreeConfirmLoad(cctree_out)
-        if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 1) == 1
+        if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 2) == 1
             exec("CCTreeLoadXRefDB " . a:cctree_out)
         endif
     endfunction
 
     " Ask user if he wants to create and load the XRef database
     function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
-        if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 1) == 1
+        if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 2) == 1
             exec("CCTreeLoadDB " . a:cscope_out)
             exec("CCTreeSaveXRefDB " . a:cctree_out)
         endif
@@ -640,6 +640,8 @@ if Plugin_exists('ctrlp.vim')
     " Increase the number of files indexed
     let g:ctrlp_max_files = 25000
     let g:ctrlp_max_depth = 40
+
+    nnoremap <C-t> :CtrlPCscope<CR>
 endif
 " }}}
 " Buffergator  {{{
