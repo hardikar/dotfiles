@@ -185,6 +185,61 @@ set statusline+=\ (%P)   " Percent through file
 
 " }}}
 
+" MakeIDE ----------------------------------------------------------------- {{{
+" =============================================================================
+
+function! MakeIDE()
+if has("cscope")
+    " Ask user if he wants to make a cscope database
+    function! CscopeConfirmCreateLoad(cscope_out)
+        if confirm(a:cscope_out . " not found. Create and load now?", "y\nN", 1) == 1
+            call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' > cscope.files")
+            call system("cscope -bq")
+            exec("cscope add " . a:cscope_out)
+        endif
+    endfunction
+
+    " Pick up any cscope database in current directory
+    if filereadable("cscope.out")
+        cscope add cscope.out
+    elseif $CSCOPE_DB != "" && filereadable($CSCOPE_DB)
+        cscope add $CSCOPE_DB
+    else
+        call CscopeConfirmCreateLoad("cscope.out")
+    endif
+
+    " Ask user if he wants to load the XRef database
+    function! CCTreeConfirmLoad(cctree_out)
+        if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 1) == 1
+            exec("CCTreeLoadXRefDB " . a:cctree_out)
+        endif
+    endfunction
+
+    " Ask user if he wants to create and load the XRef database
+    function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
+        if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 2) == 1
+            exec("CCTreeLoadDB " . a:cscope_out)
+            exec("CCTreeSaveXRefDB " . a:cctree_out)
+        endif
+    endfunction
+
+    " Pick up any cctree database in current directory
+    if filereadable("cctree.out")
+        call CCTreeConfirmLoad("cctree.out")
+    elseif $CCTREE_DB != ""
+        call CCTreeConfirmLoad($CCTREE_DB)
+    " or create one if cscope.out is found
+    elseif filereadable("cscope.out")
+        call CCTreeConfirmLoadCreate("cscope.out", "cctree.out")
+    elseif $CSCOPE_DB != ""
+        call CCTreeConfirmLoadCreate($CSCOPE_DB, "cctree.out")
+    endif
+endif
+endfunction
+
+command! IDE call MakeIDE()
+
+" }}}
 " Folding ----------------------------------------------------------------- {{{
 " =============================================================================
 
@@ -379,13 +434,6 @@ cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 
 " Scope settings  {{{
 if has("cscope")
-    " Pick up any cscope database in current directory
-    if filereadable("cscope.out")
-        cscope add cscope.out
-    elseif $CSCOPE_DB != ""
-        cscope add $CSCOPE_DB
-    endif
-
     " Show a nice message when cscope is added
     set cscopeverbose
 
@@ -440,40 +488,11 @@ if Plugin_exists('YouCompleteMe')
 endif
 "}}}
 " CCTree  {{{
-if has("cscope")
-    " Ask user if he wants to load the XRef database
-    function! CCTreeConfirmLoad(cctree_out)
-        if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 2) == 1
-            exec("CCTreeLoadXRefDB " . a:cctree_out)
-        endif
-    endfunction
+let g:CCTreeRecursiveDepth = 5
+let g:CCTreeMinVisibleDepth = 2
 
-    " Ask user if he wants to create and load the XRef database
-    function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
-        if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 2) == 1
-            exec("CCTreeLoadDB " . a:cscope_out)
-            exec("CCTreeSaveXRefDB " . a:cctree_out)
-        endif
-    endfunction
-
-    " Pick up any cctree database in current directory
-    if filereadable("cctree.out")
-        autocmd! VimEnter * call CCTreeConfirmLoad("cctree.out")
-    elseif $CCTREE_DB != ""
-        autocmd! VimEnter * call CCTreeConfirmLoad($CCTREE_DB)
-    " or create one if cscope.out is found
-    elseif filereadable("cscope.out")
-        autocmd! VimEnter * call CCTreeConfirmLoadCreate("cscope.out", "cctree.out")
-    elseif $CSCOPE_DB != ""
-        autocmd! VimEnter * call CCTreeConfirmLoadCreate($CSCOPE_DB, "cctree.out")
-    endif
-
-    let g:CCTreeRecursiveDepth = 5
-    let g:CCTreeMinVisibleDepth = 2
-
-    let g:CCTreeKeyTraceReverseTree = '<f4>'
-    let g:CCTreeKeyTraceForwardTree = '<f5>'
-endif
+let g:CCTreeKeyTraceReverseTree = '<f4>'
+let g:CCTreeKeyTraceForwardTree = '<f5>'
 " }}}
 " Fugitive settings  {{{
 if Plugin_exists('vim-fugitive')
