@@ -23,6 +23,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'hardikar/ctrlp.vim', {'branch': 'cscope'}
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'junegunn/vim-peekaboo'
+Plug 'yssl/QFEnter'
 
 " Productivity plugins
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
@@ -500,6 +501,13 @@ let g:CCTreeMinVisibleDepth = 2
 let g:CCTreeKeyTraceReverseTree = '<f4>'
 let g:CCTreeKeyTraceForwardTree = '<f5>'
 " }}}
+" QFEnter settings  {{{
+if Plugin_exists('QFEnter')
+    let g:qfenter_vopen_map = ['<C-v>']
+    let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
+    let g:qfenter_topen_map = ['<C-t>']
+endif
+"}}}
 " Fugitive settings  {{{
 if Plugin_exists('vim-fugitive')
     " Toggles Git blame window and shortens the window to name length
