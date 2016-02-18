@@ -446,7 +446,7 @@ if has("cscope")
     "   't'   text:   find all instances of the text under cursor
     "   'e'   egrep:  egrep search for the word under cursor
     "   'f'   file:   open the filename under cursor
-    "   'i'   includes: find files that include the filename under cursor
+    "   'i'   includes: find files that include the current file
     "   'd'   called: find functions that function under cursor calls
 	nnoremap \s :cs find s <C-R>=expand("<cword>")<CR><CR>
     nnoremap \g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -454,7 +454,7 @@ if has("cscope")
     nnoremap \t :cs find t <C-R>=expand("<cword>")<CR><CR>
     nnoremap \e :cs find e <C-R>=expand("<cword>")<CR><CR>
     nnoremap \f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nnoremap \i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap \i :cs find i <C-R>=expand("%:t")<CR><CR>
     nnoremap \d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
