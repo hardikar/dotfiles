@@ -303,11 +303,6 @@ nnoremap Q gqip
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
-" Ignore F1
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
 " Movement  {{{
 " Map emacs-like keys for moving to beginning/end of line
 nnoremap <C-a> <Home>
@@ -482,9 +477,9 @@ if Plugin_exists('YouCompleteMe')
     let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/ycm_extra_conf.py'
     let g:ycm_extra_conf_vim_data = ['&filetype', 'getcwd()']
 
-    nnoremap <F1> :YcmCompleter GetDoc<CR>
-    nnoremap <F2> :YcmCompleter GetType<CR>
-    nnoremap <F3> :YcmCompleter GoTo<CR>
+    nnoremap <F1> :YcmCompleter GetType<CR>
+    nnoremap <F2> :YcmCompleter Goto<CR>
+    nnoremap <F3> :YcmCompleter GoToDefinition<CR>
 endif
 "}}}
 " CCTree  {{{
