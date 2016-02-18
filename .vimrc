@@ -449,13 +449,21 @@ if has("cscope")
     "   'i'   includes: find files that include the current file
     "   'd'   called: find functions that function under cursor calls
 	nnoremap \s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	nnoremap \S :cs find s 
     nnoremap \g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nnoremap \G :cs find g 
     nnoremap \c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	nnoremap \C :cs find c 
     nnoremap \t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	nnoremap \T :cs find t 
     nnoremap \e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	nnoremap \E :cs find e 
     nnoremap \f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nnoremap \F :cs find f 
     nnoremap \i :cs find i <C-R>=expand("%:t")<CR><CR>
+	nnoremap \I :cs find i 
     nnoremap \d :cs find d <C-R>=expand("<cword>")<CR><CR>
+	nnoremap \D :cs find d 
 endif
 
 " }}}
