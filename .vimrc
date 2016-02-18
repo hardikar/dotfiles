@@ -480,6 +480,9 @@ if Plugin_exists('YouCompleteMe')
     nnoremap <F1> :YcmCompleter GetType<CR>
     nnoremap <F2> :YcmCompleter GoTo<CR>
     nnoremap <F3> :YcmCompleter GoToDefinition<CR>
+
+    nnoremap <C-w><F2> :vsplit<CR>:YcmCompleter GoTo<CR>
+    nnoremap <C-w><F3> :vsplit<CR>:YcmCompleter GoToDefinition<CR>
 endif
 "}}}
 " CCTree  {{{
