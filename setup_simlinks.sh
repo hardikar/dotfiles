@@ -9,7 +9,6 @@ ln -s $INDIR/.vimrc $OUTDIR
 ln -s $INDIR/.vim $OUTDIR
 
 ln -s $INDIR/.tmux.conf $OUTDIR
-ln -s $INDIR/.config $OUTDIR
 
 ln -s $INDIR/.zshrc $OUTDIR
 ln -s $INDIR/.zsh $OUTDIR
