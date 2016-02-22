@@ -41,7 +41,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'hari-rangarajan/CCTree'
 
 " Color scheme plugins
@@ -480,7 +480,7 @@ endif
 
 " }}}
 " YouCompleteMe settings  {{{
-function YouCompleteMeSettings()
+function! YouCompleteMeSettings()
 if Plugin_exists('YouCompleteMe')
     let g:ycm_min_num_of_chars_for_completion = 2
     let g:ycm_auto_trigger = 1
