@@ -43,9 +43,6 @@ Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'hari-rangarajan/CCTree'
-Plug 'Valloric/YouCompleteMe', {
-  \ 'do': './install.py --clang-completer --system-libclang'
-  \ }
 
 " Color scheme plugins
 Plug 'jonathanfilip/vim-lucius'
@@ -190,6 +187,20 @@ set statusline+=\ (%P)   " Percent through file
 " =============================================================================
 
 function! MakeIDE()
+
+" Manually load the YCM plugin {{{
+Plug 'Valloric/YouCompleteMe', {
+  \ 'do': './install.py --clang-completer --system-libclang',
+  \ 'on': [],
+  \ 'frozen': 1
+  \ }
+call plug#end()
+
+call YouCompleteMeSettings()
+call plug#load('YouCompleteMe')
+call youcompleteme#Enable()
+"}}}
+
 if has("cscope")
     " Ask user if he wants to make a cscope database
     function! CscopeConfirmCreateLoad(cscope_out)
@@ -469,6 +480,7 @@ endif
 
 " }}}
 " YouCompleteMe settings  {{{
+function YouCompleteMeSettings()
 if Plugin_exists('YouCompleteMe')
     let g:ycm_min_num_of_chars_for_completion = 2
     let g:ycm_auto_trigger = 1
@@ -493,6 +505,7 @@ if Plugin_exists('YouCompleteMe')
     nnoremap <C-w><F2> :vsplit<CR>:YcmCompleter GoTo<CR>
     nnoremap <C-w><F3> :vsplit<CR>:YcmCompleter GoToDefinition<CR>
 endif
+endfunction
 "}}}
 " CCTree  {{{
 let g:CCTreeRecursiveDepth = 5
