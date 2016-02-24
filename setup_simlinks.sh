@@ -1,21 +1,39 @@
-if [ -e "$1" ]; then
-    echo "Enter the path to setup the simlinks"
+#! /usr/bin/env bash
+USAGE="
+USAGE:
+      ./setup_simlinks.sh [options] <from-dir> <to-dir>
+[options]:
+      The same options as from \"man ln\". 
+      Do not include -s, it is automatically added"
+
+if [[ "$#" == "2" ]]; then
+    OPTIONS="-s"
+    SRCDIR="$(pwd)/$1"
+    DESTDIR="$(pwd)/$2"
+elif [[ "$#" == "3" ]]; then
+    OPTIONS="-s $1"
+    SRCDIR="$(pwd)/$2"
+    DESTDIR="$(pwd)/$3"
+else
+    echo "$USAGE"
+    exit 1
 fi
 
-OUTDIR="$1"
-INDIR="$(pwd)"
+# verbose output
+set -x
 
-ln -s $INDIR/.vimrc $OUTDIR
-ln -s $INDIR/.vim $OUTDIR
+ln $OPTIONS $SRCDIR/.vimrc $DESTDIR
+ln $OPTIONS $SRCDIR/.vim $DESTDIR
 
-ln -s $INDIR/.tmux.conf $OUTDIR
+ln $OPTIONS $SRCDIR/.tmux.conf $DESTDIR
 
-ln -s $INDIR/.zshrc $OUTDIR
-ln -s $INDIR/.zsh $OUTDIR
-ln -s $INDIR/.bashrc $OUTDIR
+ln $OPTIONS $SRCDIR/.zshrc $DESTDIR
+ln $OPTIONS $SRCDIR/.zsh $DESTDIR
+ln $OPTIONS $SRCDIR/.bashrc $DESTDIR
 
-ln -s $INDIR/.vimperator $OUTDIR
-ln -s $INDIR/.vimperatorrc $OUTDIR
+ln $OPTIONS $SRCDIR/.vimperator $DESTDIR
+ln $OPTIONS $SRCDIR/.vimperatorrc $DESTDIR
 
-ln -s $INDIR/bin $OUTDIR
+ln $OPTIONS $SRCDIR/bin $DESTDIR
 
+set +x
