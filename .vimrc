@@ -107,10 +107,12 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Fancy line numbering
-if has('relativenumber')
+if version >= 703
     set relativenumber  " Show line numbers relative to current line
     autocmd InsertEnter * :set number
     autocmd InsertLeave * :set relativenumber
+else
+    set number
 endif
 
 " Brackets while editing
@@ -431,7 +433,7 @@ set wildignore+=*.class,*.jar,.gradle            " Java garbage
 set wildignore+=*/build/*,*/build-eclipse/*      " Build directories
 
 " Because the default <Tab> doesn't work
-if version > 730
+if version >= 703
     set wildcharm=<C-Z>
     cnoremap <expr><Tab>     wildmenumode() ? "\<C-N>" : "\<C-Z>"
     cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
