@@ -1,9 +1,5 @@
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-    colorflag="--color"
-else # OS X `ls`
-    colorflag="-G"
-fi
+#! /usr/bin/env bash
+host_os=$(uname -s)
 
 ################################################################################
 # Filesystem aliases
@@ -13,6 +9,14 @@ alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+case $host_os in
+    Darwin|FreeBSD)
+        colorflag="-G"
+        ;;
+    Linux)
+        colorflag="--color"
+        ;;
+esac
 
 alias ls="ls ${colorflag}"
 alias l="ls -lah ${colorflag}"
