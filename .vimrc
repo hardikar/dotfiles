@@ -107,9 +107,11 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Fancy line numbering
-set relativenumber  " Show line numbers relative to current line
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+if has('relativenumber')
+    set relativenumber  " Show line numbers relative to current line
+    autocmd InsertEnter * :set number
+    autocmd InsertLeave * :set relativenumber
+endif
 
 " Brackets while editing
 set matchpairs=(:),{:},[:],<:>   " Additional "bracket" types
