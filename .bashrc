@@ -1,9 +1,6 @@
 # source the zshrc aliases to get zsh-like environment
 source $HOME/.zsh/aliases.sh
 
-# Prompt for BASH
-export PROMPT_COMMAND=__prompt_command
-
 function __prompt_command() {
 local EXIT="$?"
 local PWD="$(pwd)"
@@ -27,4 +24,7 @@ PROMPT+="
 $ "
 export PS1=$PROMPT
 }
+
+# Prompt for BASH
+PROMPT_COMMAND=__prompt_command
 
