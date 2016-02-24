@@ -8,12 +8,12 @@ USAGE:
 
 if [[ "$#" == "2" ]]; then
     OPTIONS="-s"
-    SRCDIR="$(pwd)/$1"
-    DESTDIR="$(pwd)/$2"
+    SRCDIR="$(dirname $1)/$(basename $1)"
+    DESTDIR="$(dirname $2)/$(basename $2)"
 elif [[ "$#" == "3" ]]; then
     OPTIONS="-s $1"
-    SRCDIR="$(pwd)/$2"
-    DESTDIR="$(pwd)/$3"
+    SRCDIR="$(dirname $2)/$(basename $2)"
+    DESTDIR="$(dirname $3)/$(basename $3)"
 else
     echo "$USAGE"
     exit 1
