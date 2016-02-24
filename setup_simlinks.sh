@@ -1,4 +1,14 @@
 #! /usr/bin/env bash
+
+function abspath(){
+    if [[ ! -d "$1" ]]; then
+        DIRNAME=$(dirname "$1")
+    else
+        DIRNAME="$1"
+    fi
+    echo $(cd $DIRNAME; pwd)
+}
+
 USAGE="
 USAGE:
       ./setup_simlinks.sh [options] <from-dir> <to-dir>
@@ -8,12 +18,12 @@ USAGE:
 
 if [[ "$#" == "2" ]]; then
     OPTIONS="-s"
-    SRCDIR="$(dirname $1)/$(basename $1)"
-    DESTDIR="$(dirname $2)/$(basename $2)"
+    SRCDIR="$(abspath $1)"
+    DESTDIR="$(abspath $2)"
 elif [[ "$#" == "3" ]]; then
     OPTIONS="-s $1"
-    SRCDIR="$(dirname $2)/$(basename $2)"
-    DESTDIR="$(dirname $3)/$(basename $3)"
+    SRCDIR="$(abspath $2)"
+    DESTDIR="$(abspath $3)"
 else
     echo "$USAGE"
     exit 1
