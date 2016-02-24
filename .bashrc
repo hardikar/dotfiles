@@ -3,7 +3,6 @@ source $HOME/.zsh/aliases.sh
 
 function __prompt_command() {
 local EXIT="$?"
-local PWD="$(pwd)"
 
 local RCol='\[\e[0m\]'
 local Red='\[\e[0;31m\]'
@@ -12,7 +11,7 @@ local BYel='\[\e[1;33m\]'
 local Blu='\[\e[1;34m\]'
 
 PROMPT="
-[$Gre$PWD$RCol] [$Blu\t$RCol] \H "
+[$Gre\w$RCol] [$Blu\t$RCol] \H "
 
 if [ $EXIT != 0 ]; then
     PROMPT+="$Red($EXIT)$RCol"
