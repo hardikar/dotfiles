@@ -293,17 +293,8 @@ nnoremap <silent> <leader>s :set spell!<CR>
 " Toggle invisibles
 nnoremap <silent> <Leader>i :set list!<CR>
 
-" Save a million keystrokes
-"nnoremap ; :
-"cnoremap <C-;> <C-C>
-"
-"" We just lost the power of ; so bring it back in another way
-"nnoremap : ,
-"" While we're at it, define , to redo the previous f,t command
-"nnoremap , ;
-
-" Select entire buffer
-"nnoremap vaa ggvGg_
+" Since <C-I> is <TAB> some times
+nnoremap <C-P> <C-I>
 
 " Easier moving of code block
 vnoremap < <gv
