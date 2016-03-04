@@ -123,3 +123,8 @@ fi
 if [[ -a ~/.local/.zshrc ]]; then
     source ~/.local/.zshrc
 fi
+
+# Load local overrides
+if [[ -a ~/bin/epigrams ]]; then
+    ~/bin/epigrams
+fi
