@@ -300,7 +300,7 @@ nnoremap <silent> <Leader>l :set list!<CR>
 nnoremap <C-P> <C-I>
 
 " Vertical splits a tad bit better
-nnoremap <C-W>g] :vertical stag <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-W>] :vertical stag <C-R>=expand("<cword>")<CR><CR>
 
 
 " Easier moving of code block
@@ -376,6 +376,7 @@ function! ToggleQuickFix()
     endif
 endfunction
 nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
+autocmd BufWinEnter quickfix :nnoremap <buffer> <silent> q :call ToggleQuickFix()<CR>
 " }}}
 " Omnicomplete navigation {{{
 
@@ -514,6 +515,8 @@ if has("cscope")
 	nnoremap <C-X>\I :scs find i 
     nnoremap <C-X>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
 	nnoremap <C-X>\D :scs find d 
+
+    nnoremap <leader>? :ptag <C-R>=expand("<cword>")<CR><CR>
 endif
 
 " }}}
@@ -530,6 +533,7 @@ if Plugin_exists('YouCompleteMe')
     let g:ycm_key_invoke_completion = '<C-Space>'
 
     let g:ycm_use_ultisnips_completer = 1
+    let g:ycm_add_preview_to_completeopt = 1
 
     " Fall back to a ycm in the current directory (for when access files in
     " include directories)
