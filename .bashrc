@@ -27,3 +27,6 @@ export PS1=$PROMPT
 # Prompt for BASH
 PROMPT_COMMAND=__prompt_command
 
+# CDPATH magic
+export CDPATH=.:$HOME/projects:$HOME/workplace:$HOME/workspace:$HOME/hacks
+

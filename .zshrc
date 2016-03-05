@@ -45,6 +45,13 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=1
 bindkey -v
 
+setopt auto_cd
+cdpath=(
+    $HOME/projects
+    $HOME/workplace
+    $HOME/workspace
+    $HOME/hacks
+    )
 
 export PATH=
 path=(
