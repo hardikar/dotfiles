@@ -612,15 +612,15 @@ endif
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/nerdtree.git
 if Plugin_exists('nerdtree')
+
     " Quit Nerd tree on opening a file
-    let NERDTreeQuitOnOpen=1
+    let g:NERDTreeQuitOnOpen = 1
     let g:NERDTreeDirArrowExpandable = '>'
     let g:NERDTreeDirArrowCollapsible = '-'
+    let g:NERDTreeShowHidden = 1
+    let g:NERDTreeMinimalUI = 1
 
-    noremap <C-n> :NERDTreeToggle<CR>
 
-    " Close vim if NERDTree is the only remaining window
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
     " Show current file in NERDTree
     noremap <silent> <Leader>m :NERDTreeFind<CR>
 endif
