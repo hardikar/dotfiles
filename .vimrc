@@ -614,6 +614,8 @@ endif
 if Plugin_exists('nerdtree')
     " Quit Nerd tree on opening a file
     let NERDTreeQuitOnOpen=1
+    let g:NERDTreeDirArrowExpandable = '>'
+    let g:NERDTreeDirArrowCollapsible = '-'
 
     noremap <C-n> :NERDTreeToggle<CR>
 
