@@ -291,10 +291,14 @@ command! -nargs=1 SilentExec execute ':silent !'.<q-args> | execute ':redraw!'
 nnoremap <silent> <leader>s :set spell!<CR>
 
 " Toggle invisibles
-nnoremap <silent> <Leader>i :set list!<CR>
+nnoremap <silent> <Leader>l :set list!<CR>
 
 " Since <C-I> is <TAB> some times
 nnoremap <C-P> <C-I>
+
+" Vertical splits a tad bit better
+nnoremap <C-W>g] :vertical stag <C-R>=expand("<cword>")<CR><CR>
+
 
 " Easier moving of code block
 vnoremap < <gv
