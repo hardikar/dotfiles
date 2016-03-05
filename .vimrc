@@ -477,6 +477,40 @@ if has("cscope")
 	nnoremap \I :cs find i 
     nnoremap \d :cs find d <C-R>=expand("<cword>")<CR><CR>
 	nnoremap \D :cs find d 
+
+	nnoremap <C-W>\s :vertical scs find s <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-W>\S :vertical scs find s 
+    nnoremap <C-W>\g :vertical scs find g <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-W>\G :vertical scs find g 
+    nnoremap <C-W>\c :vertical scs find c <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-W>\C :vertical scs find c 
+    nnoremap <C-W>\t :vertical scs find t <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-W>\T :vertical scs find t 
+    nnoremap <C-W>\e :vertical scs find e <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-W>\E :vertical scs find e 
+    nnoremap <C-W>\f :vertical scs find f <C-R>=expand("<cfile>")<CR><CR>
+	nnoremap <C-W>\F :vertical scs find f 
+    nnoremap <C-W>\i :vertical scs find i <C-R>=expand("%:t")<CR><CR>
+	nnoremap <C-W>\I :vertical scs find i 
+    nnoremap <C-W>\d :vertical scs find d <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-W>\D :vertical scs find d 
+
+	nnoremap <C-X>\s :scs find s <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-X>\S :scs find s 
+    nnoremap <C-X>\g :scs find g <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-X>\G :scs find g 
+    nnoremap <C-X>\c :scs find c <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-X>\C :scs find c 
+    nnoremap <C-X>\t :scs find t <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-X>\T :scs find t 
+    nnoremap <C-X>\e :scs find e <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-X>\E :scs find e 
+    nnoremap <C-X>\f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+	nnoremap <C-X>\F :scs find f 
+    nnoremap <C-X>\i :scs find i <C-R>=expand("%:t")<CR><CR>
+	nnoremap <C-X>\I :scs find i 
+    nnoremap <C-X>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
+	nnoremap <C-X>\D :scs find d 
 endif
 
 " }}}
