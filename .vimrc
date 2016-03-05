@@ -19,9 +19,9 @@ endfunction
 call plug#begin('~/.vim/bundle')
 
 " Navigation plugins
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 Plug 'hardikar/ctrlp.vim', {'branch': 'cscope'}
-Plug 'jeetsukumaran/vim-buffergator'
+"Plug 'jeetsukumaran/vim-buffergator'
 Plug 'junegunn/vim-peekaboo'
 Plug 'yssl/QFEnter'
 
@@ -129,6 +129,9 @@ set noesckeys
 
 " Easy toggling insert modes
 set pastetoggle=<F6>
+
+" NetRW settings
+let g:netrw_liststyle = 1  " long listing
 
 " }}}
 
