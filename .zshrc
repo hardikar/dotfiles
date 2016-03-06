@@ -32,6 +32,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # Enable vi-mode
 function zle-keymap-select {
     export _VI_MODE=$KEYMAP
