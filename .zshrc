@@ -63,6 +63,20 @@ path=(
     /usr/texbin
     )
 
+# New zsh widget to print workspace status on ctrl+space
+vcs-status(){
+    \print; zle push-line; # push the current command on the buffer stack
+    if [ -d .git ]; then
+        git status 
+    else
+        ls -l
+    fi
+    zle accept-line;
+}
+
+zle -N vcs-status
+bindkey '^ ' vcs-status
+
 # check for custom bin directory and add to path
 if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
@@ -71,18 +85,26 @@ if [[ -d ~/scripts ]]; then
     export PATH=~/scripts:$PATH
 fi
 
+INCLUDES=(
 # Load up shell theme
 # Credits to https://github.com/chriskempson/base16
-source ~/.zsh/themes/base16-solarized.dark.sh
+~/.zsh/themes/base16-solarized.dark.sh
 
 # Load up common aliases
-source ~/.zsh/aliases.sh
+~/.sh/aliases.sh
 
 # Load up useful functions
-source ~/.zsh/functions.sh
+~/.sh/functions.sh
 
 # Load up prompt settings
-source ~/.zsh/prompt.sh
+~/.zsh/prompt.sh
+)
+for file in ${INCLUDES}; do
+    if [[ -f ${file} ]]; then
+        source ${file}
+    fi
+done
+
 
 export EDITOR='vim'
 
@@ -127,11 +149,11 @@ if [[ $ZSH_VERSION > 4.3 ]]; then
 fi
 
 # Load local overrides
-if [[ -a ~/.local/.zshrc ]]; then
+if [[ -f ~/.local/.zshrc ]]; then
     source ~/.local/.zshrc
 fi
 
 # Load local overrides
-if [[ -a ~/bin/epigrams ]]; then
+if [[ -f ~/bin/epigrams ]]; then
     ~/bin/epigrams
 fi

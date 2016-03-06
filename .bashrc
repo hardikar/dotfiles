@@ -1,6 +1,23 @@
-# source the zshrc aliases to get zsh-like environment
-source $HOME/.zsh/aliases.sh
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=20000
 
+# Bash completion
+source /usr/local/etc/profile.d/bash_completion.sh
+
+
+INCLUDES=(
+    $HOME/.sh/aliases.sh
+    $HOME/.sh/functions.sh
+)
+
+for file in ${INCLUDES}; do
+    if [[ -f ${file} ]]; then
+        source ${file}
+    fi
+done
+
+# BASH prompt settings
 function __prompt_command() {
 local EXIT="$?"
 
