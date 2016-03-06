@@ -11,7 +11,7 @@ INCLUDES=(
     $HOME/.sh/functions.sh
 )
 
-for file in ${INCLUDES}; do
+for file in ${INCLUDES[@]}; do
     if [[ -f ${file} ]]; then
         source ${file}
     fi
