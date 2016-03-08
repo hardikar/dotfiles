@@ -111,6 +111,8 @@ done
 
 
 export EDITOR='vim'
+export PAGER='less'
+export MANPAGER='less'
 
 # Useful key bindings
 # Vim-like CTRL movement keys

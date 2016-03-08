@@ -47,3 +47,8 @@ PROMPT_COMMAND=__prompt_command
 # CDPATH magic
 export CDPATH=.:$HOME/projects:$HOME/workplace:$HOME/workspace:$HOME/hacks
 
+# export other environment variables
+export PAGER='less'
+export MANPAGER='less'
+export EDITOR='vim'
+
