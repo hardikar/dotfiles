@@ -880,10 +880,10 @@ nnoremap <leader>w :%s/\s\+$//<cr>
 " }}}
 
 " remap the cursor keys to something else
-nnoremap <up>       <nop>
-nnoremap <down>     <nop>
-nnoremap <left>     <nop>
-nnoremap <right>    <nop>
+"nnoremap <up>       <nop>
+"nnoremap <down>     <nop>
+"nnoremap <left>     <nop>
+"nnoremap <right>    <nop>
 
 " }}}
 
