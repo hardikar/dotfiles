@@ -55,6 +55,7 @@ cdpath=(
     $HOME/workplace
     $HOME/workspace
     $HOME/hacks
+    $HOME/vagrant
     )
 
 export PATH=

@@ -45,7 +45,7 @@ export PS1=$PROMPT
 PROMPT_COMMAND=__prompt_command
 
 # CDPATH magic
-export CDPATH=.:$HOME/projects:$HOME/workplace:$HOME/workspace:$HOME/hacks
+export CDPATH=.:$HOME/projects:$HOME/workplace:$HOME/workspace:$HOME/hacks:$HOME/vagrant
 
 # export other environment variables
 export PAGER='less'
