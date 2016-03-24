@@ -190,72 +190,80 @@ set statusline+=\ (%P)   " Percent through file
 " MakeIDE ----------------------------------------------------------------- {{{
 " =============================================================================
 
-function! MakeIDE()
-
-" Manually load the YCM plugin {{{
-Plug 'Valloric/YouCompleteMe', {
-  \ 'do': './install.py --clang-completer --system-libclang',
-  \ 'on': [],
-  \ 'frozen': 1
-  \ }
-call plug#end()
-
-call YouCompleteMeSettings()
-call plug#load('YouCompleteMe')
-call youcompleteme#Enable()
-"}}}
-
-if has("cscope")
-    " Ask user if he wants to make a cscope database
-    function! CscopeConfirmCreateLoad(cscope_out)
-        if confirm(a:cscope_out . " not found. Create and load now?", "y\nN", 1) == 1
-            call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' > cscope.files")
-            call system("cscope -bq")
-            exec("cscope add " . a:cscope_out)
-        endif
-    endfunction
-
-    " Pick up any cscope database in current directory
-    if filereadable("cscope.out")
-        cscope add cscope.out
-    elseif $CSCOPE_DB != "" && filereadable($CSCOPE_DB)
-        cscope add $CSCOPE_DB
-    else
-        call CscopeConfirmCreateLoad("cscope.out")
-    endif
-
-    " Ask user if he wants to load the XRef database
-    function! CCTreeConfirmLoad(cctree_out)
-        if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 1) == 1
-            exec("CCTreeLoadXRefDB " . a:cctree_out)
-        endif
-    endfunction
-
-    " Ask user if he wants to create and load the XRef database
-    function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
-        if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 2) == 1
-            exec("CCTreeLoadDB " . a:cscope_out)
-            exec("CCTreeSaveXRefDB " . a:cctree_out)
-        endif
-    endfunction
-
-    " Pick up any cctree database in current directory
-    if filereadable("cctree.out")
-        call CCTreeConfirmLoad("cctree.out")
-    elseif $CCTREE_DB != ""
-        call CCTreeConfirmLoad($CCTREE_DB)
-    " or create one if cscope.out is found
-    elseif filereadable("cscope.out")
-        call CCTreeConfirmLoadCreate("cscope.out", "cctree.out")
-    elseif $CSCOPE_DB != ""
-        call CCTreeConfirmLoadCreate($CSCOPE_DB, "cctree.out")
-    endif
-endif
+" Helper functions  {{{
+" Create a cscope database
+function! CscopeCreateDB()
+    call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' -o -name '*.hpp' > cscope.files")
+    call system("cscope -bq")
 endfunction
 
-command! IDE call MakeIDE()
+" Ask user if he wants to make a cscope database
+function! CscopeConfirmCreateLoad(cscope_out)
+    if confirm(a:cscope_out . " not found. Create and load now?", "y\nN", 1) == 1
+        call CscopeCreateDB()
+        exec("cscope add " . a:cscope_out)
+    endif
+endfunction
+
+" Ask user if he wants to load the XRef database
+function! CCTreeConfirmLoad(cctree_out)
+    if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 1) == 1
+        exec("CCTreeLoadXRefDB " . a:cctree_out)
+    endif
+endfunction
+
+" Ask user if he wants to create and load the XRef database
+function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
+    if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 2) == 1
+        exec("CCTreeLoadDB " . a:cscope_out)
+        exec("CCTreeSaveXRefDB " . a:cctree_out)
+    endif
+endfunction
+" }}}
+
+function! MakeIDE(with_ycm, with_cscope, with_cctree)
+    " Manually load the YCM plugin {{{
+    if a:with_ycm
+        Plug 'Valloric/YouCompleteMe', {
+          \ 'do': './install.py --clang-completer',
+          \ 'on': [],
+          \ 'frozen': 1
+          \ }
+        call plug#end()
+
+        call YouCompleteMeSettings()
+        call plug#load('YouCompleteMe')
+        call youcompleteme#Enable()
+    endif
+    "}}}
+
+    if has("cscope")
+        if a:with_cscope
+            " Pick up any cscope database in current directory
+            if filereadable("cscope.out")
+                cscope add cscope.out
+            else
+                call CscopeConfirmCreateLoad("cscope.out")
+            endif
+        endif
+
+        if a:with_cctree
+            " Pick up any cctree database in current directory
+            if filereadable("cctree.out")
+                call CCTreeConfirmLoad("cctree.out")
+            elseif filereadable("cscope.out")
+                call CCTreeConfirmLoadCreate("cscope.out", "cctree.out")
+            endif
+        endif
+    endif
+endfunction
+
+" MakeIDE(with_ycm, with_cscope, with_cctree)
+command! IDE      call MakeIDE(1, 1, 0)
+command! IDEFull  call MakeIDE(1, 1, 1)
 
 " }}}
+
 " Folding ----------------------------------------------------------------- {{{
 " =============================================================================
 
