@@ -19,7 +19,6 @@ endfunction
 call plug#begin('~/.vim/bundle')
 
 " Navigation plugins
-"Plug 'scrooloose/nerdtree'
 Plug 'hardikar/ctrlp.vim', {'branch': 'cscope'}
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'junegunn/vim-peekaboo'
@@ -27,7 +26,6 @@ Plug 'yssl/QFEnter'
 
 " Productivity plugins
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
-Plug 'mtth/scratch.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'SirVer/ultisnips'
 Plug 'jszakmeister/vim-togglecursor'
@@ -41,7 +39,6 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'derekwyatt/vim-scala'
 Plug 'tfnico/vim-gradle'
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'hari-rangarajan/CCTree'
 
 " Color scheme plugins
@@ -584,12 +581,6 @@ if Plugin_exists('vim-gitgutter')
     nnoremap <F10> :GitGutterToggle<CR>
 endif
 "}}}
-" Scratch.vim {{{
-if Plugin_exists('scratch.vim')
-    nnoremap <leader>ts :Scratch<CR>
-    nnoremap <leader>tS :Scratch!<CR>
-endif
-" }}}
 " Syntastic  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/scrooloose/syntastic.git
