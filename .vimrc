@@ -42,10 +42,10 @@ Plug 'tfnico/vim-gradle'
 Plug 'hari-rangarajan/CCTree'
 
 " Color scheme plugins
-Plug 'jonathanfilip/vim-lucius'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'flazz/vim-colorschemes'
-Plug 'w0ng/vim-hybrid'
+"Plug 'jonathanfilip/vim-lucius'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'w0ng/vim-hybrid'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -137,10 +137,8 @@ let g:netrw_liststyle = 1  " long listing
 
 " Explicitly tell vim that the terminal supports 256 colors"
 set t_Co=256
-" Vim theme : Enable wambat color
-" curl -O http://www.vim.org/scripts/download_script.php?src_id=13400
 
-let g:colors = ["hybrid", "wombat256mod", "PaperColor"]
+let g:colors = ["hybrid", "wombat256mod"]
 nnoremap <F12> :ColorsNext<CR>:echo g:colors_name<CR>
 
 " Status line changes on mode changes
