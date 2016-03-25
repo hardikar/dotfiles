@@ -822,7 +822,7 @@ nnoremap <leader>jcp :call eclim#common#locate#locatefile('vsplit', '.classpath'
 " UltiSnips  {{{
 " TODO: Go through and learn the java snippets.
 if Plugin_exists('ultisnips')
-    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsExpandTrigger="<C-e>"
     let g:UltiSnipsJumpForwardTrigger="<c-n>"
     let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
