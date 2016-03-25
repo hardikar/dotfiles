@@ -219,9 +219,16 @@ function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
 endfunction
 " }}}
 
-function! MakeIDE(with_ycm, with_cscope, with_cctree)
+function! MakeIDE(config)
+    if !exists('g:IDEModeConfig')
+        let g:IDEModeConfig=a:config
+    else
+        echom "IDE is alread configured with config=" . string(g:IDEModeConfig)
+        return
+    endif
+
     " Manually load the YCM plugin {{{
-    if a:with_ycm
+    if a:config.with_ycm
         Plug 'Valloric/YouCompleteMe', {
           \ 'do': './install.py --clang-completer',
           \ 'on': [],
@@ -236,7 +243,7 @@ function! MakeIDE(with_ycm, with_cscope, with_cctree)
     "}}}
 
     if has("cscope")
-        if a:with_cscope
+        if a:config.with_cscope
             " Pick up any cscope database in current directory
             if filereadable("cscope.out")
                 cscope add cscope.out
@@ -245,7 +252,7 @@ function! MakeIDE(with_ycm, with_cscope, with_cctree)
             endif
         endif
 
-        if a:with_cctree
+        if a:config.with_cctree
             " Pick up any cctree database in current directory
             if filereadable("cctree.out")
                 call CCTreeConfirmLoad("cctree.out")
@@ -257,8 +264,8 @@ function! MakeIDE(with_ycm, with_cscope, with_cctree)
 endfunction
 
 " MakeIDE(with_ycm, with_cscope, with_cctree)
-command! IDE      call MakeIDE(1, 1, 0)
-command! IDEFull  call MakeIDE(1, 1, 1)
+command! IDE      call MakeIDE({'with_ycm':1, 'with_cscope':1, 'with_cctree':0})
+command! IDEFull  call MakeIDE({'with_ycm':1, 'with_cscope':1, 'with_cctree':1})
 
 " }}}
 
