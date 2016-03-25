@@ -6,14 +6,12 @@ import ycm_core
 flags = [
 "-g", # Generate debug information
 "-O0", # No optimization for fast builds + good debug
-#"-I/usr/local/include",
-#"-I/usr/include",
-"-Wall",
-"-Wextra",
-"-Wno-long-long",
-"-Wno-tautological-undefined-compare",
-"-Wno-variadic-macros",
-"-pedantic",
+"-Wall", # Essential
+"-Wextra", # Essential
+"-Wswitch-enum", # Warn when switch is missing a case on enum
+"-Wunreachable-code", # Warn on unreachable code
+"-Wshadow", # Warn if a local variable shadows a global variable
+"-Wfloat-equal", # Warn if testing equality of floats
 ]
 
 extra_includes = [
