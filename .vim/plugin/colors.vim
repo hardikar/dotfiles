@@ -7,6 +7,9 @@
 if !exists('g:colors')
     let g:colors = ['default']
 endif
+if !exists('g:colors_default_background')
+    let g:colors_default_background = 'dark'
+endif
 if !exists('g:colors_default_color_index')
     let g:colors_default_color_index = 0
 endif
@@ -64,3 +67,4 @@ command! ColorsPrev call colors#prev_color()
 command! ColorsPrint call colors#print_colors()
 
 call colors#set_color(g:colors_default_color_index)
+execute('set background=' . g:colors_default_background)
