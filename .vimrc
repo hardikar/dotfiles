@@ -125,7 +125,7 @@ set mouse=a
 set noesckeys
 
 " Easy toggling insert modes
-set pastetoggle=<F11>
+set pastetoggle=<F6>
 
 " NetRW settings
 let g:netrw_liststyle = 1  " long listing
@@ -574,8 +574,8 @@ endfunction
 let g:CCTreeRecursiveDepth = 5
 let g:CCTreeMinVisibleDepth = 2
 
-let g:CCTreeKeyTraceReverseTree = '<f6>'
-let g:CCTreeKeyTraceForwardTree = '<f7>'
+let g:CCTreeKeyTraceReverseTree = '<f7>'
+let g:CCTreeKeyTraceForwardTree = '<f8>'
 " }}}
 " QFEnter settings  {{{
 if Plugin_exists('QFEnter')
