@@ -263,9 +263,20 @@ function! MakeIDE(config)
     endif
 endfunction
 
+function! Refresh()
+    redraw!
+    if has("cscope") && filereadable("cscope.out")
+        call CscopeCreateDB()
+        cscope add cscope.out
+    endif
+endfunction
+
 " MakeIDE(with_ycm, with_cscope, with_cctree)
 command! IDE      call MakeIDE({'with_ycm':1, 'with_cscope':1, 'with_cctree':0})
 command! IDEFull  call MakeIDE({'with_ycm':1, 'with_cscope':1, 'with_cctree':1})
+command! Refresh  call Refresh()
+
+nnoremap <f5>  :Refresh<CR>
 
 " }}}
 
