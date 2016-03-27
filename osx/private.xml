@@ -12,6 +12,16 @@
     <autogen>__KeyToKey__ KeyCode::J, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_DOWN</autogen>
     <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_UP</autogen>
     <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::CONTROL_L | ModifierFlag::NONE, KeyCode::CURSOR_RIGHT</autogen>
+    <!-- This is the mapping with CMD modifier. -->
+    <autogen>__KeyToKey__ KeyCode::H, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L, KeyCode::CURSOR_LEFT  | ModifierFlag::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::J, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L, KeyCode::CURSOR_DOWN  | ModifierFlag::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L, KeyCode::CURSOR_UP    | ModifierFlag::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L, KeyCode::CURSOR_RIGHT | ModifierFlag::COMMAND_L</autogen>
+
+    <autogen>__KeyToKey__ KeyCode::H, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_R, KeyCode::CURSOR_LEFT  | ModifierFlag::COMMAND_R</autogen>
+    <autogen>__KeyToKey__ KeyCode::J, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_R, KeyCode::CURSOR_DOWN  | ModifierFlag::COMMAND_R</autogen>
+    <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_R, KeyCode::CURSOR_UP    | ModifierFlag::COMMAND_R</autogen>
+    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_R, KeyCode::CURSOR_RIGHT | ModifierFlag::COMMAND_R</autogen>
 </item>
 <item>
     <name>Ctrl to Hyper</name>
