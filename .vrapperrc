@@ -13,15 +13,6 @@ set smartcase
 " When enabled, always start in NormalMode after changing tabs.
 set startnormalmode
 
-" Save a million keystrokes
-nnoremap ; :
-cnoremap <C-;> <C-C>
-
-" We just lost the power of ; so bring it back in another way
-nnoremap : ,
-" While we're at it, define , to redo the previous f,t command
-nnoremap , ;
-
 nnoremap L $
 nnoremap H ^
 
@@ -58,5 +49,7 @@ function! ToggleScrollLock()
     endif
 endfunction
 nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
+
+nnoremap <C-P> <C-I>
 
 " vim: ft=vim
