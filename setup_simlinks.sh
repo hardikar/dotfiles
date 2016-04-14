@@ -47,4 +47,6 @@ ln $OPTIONS $SRCDIR/.vimperatorrc $DESTDIR
 
 ln $OPTIONS $SRCDIR/bin $DESTDIR
 
+ln $OPTIONS $SRCDIR/.gdbinit $DESTDIR
+
 set +x
