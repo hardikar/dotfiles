@@ -5,6 +5,9 @@ HISTFILESIZE=20000
 # Bash completion
 source /usr/local/etc/profile.d/bash_completion.sh
 
+# color scheme
+source $HOME/.zsh/themes/base16-solarized.dark.sh
+
 
 INCLUDES=(
     $HOME/.sh/aliases.sh
