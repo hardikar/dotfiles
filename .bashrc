@@ -2,11 +2,8 @@
 HISTSIZE=10000
 HISTFILESIZE=20000
 
-# Bash completion
-source /usr/local/etc/profile.d/bash_completion.sh
-
 # color scheme
-source $HOME/.zsh/themes/base16-solarized.dark.sh
+#source $HOME/.zsh/themes/base16-solarized.dark.sh
 
 
 INCLUDES=(
