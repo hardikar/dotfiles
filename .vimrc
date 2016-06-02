@@ -21,31 +21,22 @@ call plug#begin('~/.vim/bundle')
 " Navigation plugins
 Plug 'hardikar/ctrlp.vim', {'branch': 'cscope'}
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'junegunn/vim-peekaboo'
 Plug 'yssl/QFEnter'
 
 " Productivity plugins
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
-Plug 'tpope/vim-dispatch'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'airblade/vim-gitgutter'
 
 " Language plugins
 Plug 'rust-lang/rust.vim'
-"Plug 'Superbil/llvm.vim'
+Plug 'Superbil/llvm.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-Plug 'derekwyatt/vim-scala'
-Plug 'tfnico/vim-gradle'
-Plug 'hari-rangarajan/CCTree'
-
-" Color scheme plugins
-"Plug 'jonathanfilip/vim-lucius'
-"Plug 'NLKNguyen/papercolor-theme'
-"Plug 'flazz/vim-colorschemes'
-"Plug 'w0ng/vim-hybrid'
+"Plug 'derekwyatt/vim-scala'
+"Plug 'tfnico/vim-gradle'
+"Plug 'hari-rangarajan/CCTree'
 
 " Add plugins to &runtimepath
 call plug#end()
