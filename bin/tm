@@ -8,7 +8,7 @@ fi
 
 # present menu for user to choose which workspace to open
 PS3="Please choose your session: "
-options=("(new session)" "zsh" $(tmux list-sessions -F "#S"))
+options=("(new session)" "(new project)" $(tmux list-sessions -F "#S"))
 echo "Available sessions"
 echo "------------------"
 echo " "
@@ -20,8 +20,20 @@ do
             tmux new -s "$SESSION_NAME"
             break
             ;;
-        "zsh")
-            zsh --login
+        "(new project)")
+            read -p "Enter new project name: " PROJECT_NAME
+            WORKSPACE="$HOME/workspace"
+            PROJECT_DIR="$WORKSPACE/$PROJECT_NAME"
+            if [ ! -d "$WORKSPACE" ]; then
+                echo "Creating workspace directory ($WORKSPACE) ..."
+                mkdir $WORKSPACE
+            fi
+            if [ ! -d "$PROJECT_DIR" ]; then
+                echo "Creating project directory ($PROJECT_DIR) ... "
+                mkdir $PROJECT_DIR
+            fi
+            cd $PROJECT_DIR
+            tmux new -s "$PROJECT_NAME"
             break;;
         *)
             tmux attach-session -t $opt
