@@ -7,6 +7,7 @@ brew install tmux
 brew install tree
 brew install watch
 brew install wget
+brew install pstree
 
 brew install htop
 
