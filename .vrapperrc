@@ -13,23 +13,19 @@ set smartcase
 " When enabled, always start in NormalMode after changing tabs.
 set startnormalmode
 
+" Highlight search results
+set hlsearch
+set incsearch
+
 nnoremap L $
 nnoremap H ^
 
 nnoremap <Tab> za
 vnoremap <Tab> za
 
-" Map emacs-like keys for moving to beginning/end of line
-nnoremap <C-a> <Home>
-nnoremap <C-e> <End>
-
 " Mappings for command mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
-
-" Mappings for insert mode
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -50,6 +46,5 @@ function! ToggleScrollLock()
 endfunction
 nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
 
-nnoremap <C-P> <C-I>
 
 " vim: ft=vim
