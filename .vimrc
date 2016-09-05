@@ -64,10 +64,10 @@ set undolevels=700
 
 " Tab incantations
 set autoindent      " Indent according to the previous line automatically
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
 set expandtab       " tabs are spaces
-set shiftwidth=4
+set shiftwidth=2
 
 " Search settings
 set ignorecase " Ignore cases while searching
