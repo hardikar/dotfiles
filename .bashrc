@@ -9,6 +9,7 @@ HISTFILESIZE=20000
 INCLUDES=(
     $HOME/.sh/aliases.sh
     $HOME/.sh/functions.sh
+    $HOME/.sh/git.sh
 )
 
 for file in ${INCLUDES[@]}; do
@@ -28,13 +29,24 @@ local BYel='\[\e[1;33m\]'
 local Blu='\[\e[1;34m\]'
 
 PROMPT="
-[$Gre\w$RCol] [$Blu\t$RCol] \H "
+[$Gre\w$RCol"
+
+if [ -d '.git' ]; then
+    PROMPT+=":$BYel$(git_branch)$RCol"
+  if [ -n "$(git_is_dirty)" ]; then
+    PROMPT+='*'
+  fi
+fi
+PROMPT+="]"
+
+PROMPT+=" [$Blu\t$RCol] \H "
 
 if [ $EXIT != 0 ]; then
     PROMPT+="$Red($EXIT)$RCol"
 else
     PROMPT+="($EXIT)"
 fi
+
 
 PROMPT+="
 $ "
