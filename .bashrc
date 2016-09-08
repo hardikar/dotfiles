@@ -10,6 +10,7 @@ INCLUDES=(
     $HOME/.sh/aliases.sh
     $HOME/.sh/functions.sh
     $HOME/.sh/git.sh
+    $HOME/.sh/git-completion.bash
 )
 
 for file in ${INCLUDES[@]}; do
