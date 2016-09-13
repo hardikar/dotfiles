@@ -2,16 +2,16 @@
 # Git utility functions for shell prompt
 #
 
-ON_BRANCH_REGEX='On branch (.*)'
-DETACHED_REGEX='HEAD detached at (.*)'
+ON_BRANCH_REGEX='ref: refs/heads/(.*)'
+DETACHED_REGEX='(.*)'
 DIRTY_REGEX='Changed but not updated|Changes not staged for commit'
 
 function git_branch() {
-  local line="$(git status | head -1)"
+  local line="$(cat .git/HEAD)"
   if [[ $line =~ ${ON_BRANCH_REGEX} ]]; then
     echo -n "${BASH_REMATCH[1]}"
   elif [[ $line =~ ${DETACHED_REGEX} ]]; then
-    echo -n "${BASH_REMATCH[1]}"
+    echo -n "${BASH_REMATCH[1]:0:7}"
   else
     echo -n "Broken"
   fi
