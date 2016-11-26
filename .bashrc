@@ -9,7 +9,7 @@ HISTFILESIZE=20000
 INCLUDES=(
     $HOME/.sh/aliases.sh
     $HOME/.sh/functions.sh
-    $HOME/.sh/git.sh
+    $HOME/.sh/git-prompt.sh
     $HOME/.sh/git-completion.bash
 )
 
@@ -32,12 +32,7 @@ local Blu='\[\e[1;34m\]'
 PROMPT="
 [$Gre\w$RCol"
 
-if [ -d '.git' ]; then
-    PROMPT+=":$BYel$(git_branch)$RCol"
-  if [ -n "$(git_is_dirty)" ]; then
-    PROMPT+='*'
-  fi
-fi
+PROMPT+='$(__git_ps1 ":(%s)")'
 PROMPT+="]"
 
 PROMPT+=" [$Blu\t$RCol] \H "
