@@ -21,8 +21,6 @@ done
 
 # BASH prompt settings
 function __prompt_command() {
-local EXIT="$?"
-
 local RCol='\[\e[0m\]'
 local Red='\[\e[0;31m\]'
 local Gre='\[\e[0;32m\]'
@@ -32,21 +30,14 @@ local Blu='\[\e[1;34m\]'
 PROMPT="
 [$Gre\w$RCol"
 
-PROMPT+='$(__git_ps1 ":(%s)")'
+PROMPT+="$BYel$(__git_ps1 ':(%s)')$RCol"
 PROMPT+="]"
 
 PROMPT+=" [$Blu\t$RCol] \H "
-
-if [ $EXIT != 0 ]; then
-    PROMPT+="$Red($EXIT)$RCol"
-else
-    PROMPT+="($EXIT)"
-fi
-
-
 PROMPT+="
 $ "
 export PS1=$PROMPT
+export GIT_PS1_SHOWDIRTYSTATE=1
 }
 
 # Prompt for BASH
