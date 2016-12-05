@@ -24,19 +24,14 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'yssl/QFEnter'
 
 " Productivity plugins
-"Plug 'SirVer/ultisnips'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'airblade/vim-gitgutter'
 
 " Language plugins
-Plug 'rust-lang/rust.vim'
 Plug 'Superbil/llvm.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-"Plug 'derekwyatt/vim-scala'
-"Plug 'tfnico/vim-gradle'
-"Plug 'hari-rangarajan/CCTree'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -532,42 +527,6 @@ if has("cscope")
 endif
 
 " }}}
-" YouCompleteMe settings  {{{
-function! YouCompleteMeSettings()
-if Plugin_exists('YouCompleteMe')
-    let g:ycm_min_num_of_chars_for_completion = 2
-    let g:ycm_auto_trigger = 1
-    let g:ycm_error_symbol = '>>'
-    let g:ycm_warning_symbol = '!'
-
-    let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-    let g:ycm_key_invoke_completion = '<C-Space>'
-
-    let g:ycm_use_ultisnips_completer = 1
-    let g:ycm_add_preview_to_completeopt = 1
-
-    " Fall back to a ycm in the current directory (for when access files in
-    " include directories)
-    let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/ycm_extra_conf.py'
-    let g:ycm_extra_conf_vim_data = ['&filetype', 'getcwd()']
-
-    nnoremap <F1> :YcmCompleter GetType<CR>
-    nnoremap <F2> :YcmCompleter GoTo<CR>
-    nnoremap <F3> :YcmCompleter GoToDefinition<CR>
-
-    nnoremap <C-w><F2> :vsplit<CR>:YcmCompleter GoTo<CR>
-    nnoremap <C-w><F3> :vsplit<CR>:YcmCompleter GoToDefinition<CR>
-endif
-endfunction
-"}}}
-" CCTree  {{{
-let g:CCTreeRecursiveDepth = 5
-let g:CCTreeMinVisibleDepth = 2
-
-let g:CCTreeKeyTraceReverseTree = '<f7>'
-let g:CCTreeKeyTraceForwardTree = '<f8>'
-" }}}
 " QFEnter settings  {{{
 if Plugin_exists('QFEnter')
     let g:qfenter_vopen_map = ['<C-v>']
@@ -621,91 +580,6 @@ if Plugin_exists('syntastic')
     nnoremap <leader>P :SyntasticReset<CR>
 endif
 " }}}
-" NERDTree  {{{
-" cd ~/.vim/bundle && \
-" git clone https://github.com/scrooloose/nerdtree.git
-if Plugin_exists('nerdtree')
-
-    " Quit Nerd tree on opening a file
-    let g:NERDTreeQuitOnOpen = 1
-    let g:NERDTreeDirArrowExpandable = '>'
-    let g:NERDTreeDirArrowCollapsible = '-'
-    let g:NERDTreeShowHidden = 1
-    let g:NERDTreeMinimalUI = 1
-
-
-    " Show current file in NERDTree
-    noremap <silent> <Leader>m :NERDTreeFind<CR>
-endif
-" }}}
-" Vim Notes  {{{
-let g:notes_directories = ['~/notes']
-let g:notes_suffix = '.md'
-
-" Automatically change the title to match the filename
-let g:notes_title_sync = 'change_title'
-
-" Don't do fancy substitutions
-let g:notes_smart_quotes = 0
-let g:notes_list_bullets = ['*', '-', '+']
-
-" Tab indents/dedent list items in insert mode
-let g:notes_tab_indents = 1
-
-" Don't conceal anything
-let g:notes_conceal_code = 0
-let g:notes_conceal_italic = 0
-let g:notes_conceal_bold = 0
-let g:notes_conceal_url = 0
-
-" Modify highlighting
-hi link notesListNumber markdownListMarker
-hi link notesListBullet markdownListMarker
-
-hi link notesItalic markdownUrl
-hi link notesBold markdownBold
-hi link notesTextURL markdownListMarker
-hi link notesRealURL markdownListMarker
-hi link notesUnixPath Directory
-hi link notesPathLnum Directory
-
-hi def link notesSingleQuote String
-hi def link notesDoubleQuote String
-
-hi link notesTitle Title
-hi link notesShortHeading markdownId
-hi link notesBlockQuote String
-
-function! NotesHighlightTitleLevels()
-    " TODO Update the regexes in the original plugin
-    syntax match notesAtxHeading1 /^\s*#.*/ contains=notesAtxMarker,@notesInline
-    syntax match notesAtxHeading2 /^\s*##.*/ contains=notesAtxMarker,@notesInline
-    syntax match notesAtxHeading3 /^\s*###.*/ contains=notesAtxMarker,@notesInline
-    syntax match notesAtxHeading4 /^\s*####.*/ contains=notesAtxMarker,@notesInline
-    syntax match notesAtxHeading5 /^\s*#####.*/ contains=notesAtxMarker,@notesInline
-
-    hi def notesAtxHeading1 term=bold cterm=bold ctermfg=192
-    hi def notesAtxHeading2 term=bold cterm=bold ctermfg=222
-    hi def notesAtxHeading3 term=bold cterm=bold ctermfg=173
-    hi def notesAtxHeading4 term=bold cterm=bold ctermfg=35
-    hi def notesAtxHeading5 term=bold cterm=bold ctermfg=184
-endfunction
-function! NotesHighlightStrings()
-    syntax match notesSingleQuoted /\w\@<!'.\{-}'\w\@!/
-    syntax match notesDoubleQuoted /\w\@<!".\{-}"\w\@!/
-endfunction
-function! NotesSetupCustomHighlighting()
-    if &ft == 'notes'
-        call NotesHighlightTitleLevels()
-        call NotesHighlightStrings()
-    endif
-endfunction
-autocmd VimEnter,BufEnter,BufNewFile * :call NotesSetupCustomHighlighting()
-
-" Open NotesStash for a quicknote
-command! NotesStash :Note Notes Stash
-
-" }}}
 " CTRL-P  {{{
 " cd ~/.vim/bundle && \
 " git clone https://github.com/kien/ctrlp.vim.git
@@ -752,75 +626,7 @@ if Plugin_exists('vim-buffergator')
     nnoremap <Leader>b :BuffergatorToggle<CR>
 endif
 " }}}
-" Eclim  {{{
-" Add eclim settings to status line. Note the %( %). If all of the variables
-" inside are unset, the entire group disappears
-function! Eclim_status_line() "{{{
-    " if we can't reach Eclim, do nothing else.
-    " 0 -> don't echo to user
-    if ! exists(":PingEclim") || ! eclim#PingEclim(0)
-        return ''
-    endif
-    " Compute items to be printed on the status line
-    let project = eclim#project#util#GetCurrentProjectName()
-    let workspace = eclim#project#util#GetProjectWorkspace(project)
-    if strlen(project) == 0
-        return ''
-    else
-        return ' | ' . project . ' (' . pathshorten(workspace) . ')'
-    endif
-endfunction "}}}
-set statusline+=%(%{Eclim_status_line()}%)
 
-" Let Syntastic do the java validation (tentative)
-" let g:EclimFileTypeValidate = 0
-let g:EclimCompletionMethod = 'omnifunc'
-
-let g:EclimDefaultFileOpenAction = 'vsplit'
-
-" Only show error highlights
-let g:EclimSignLevel = 'error'
-
-function! SetupEclimJavaMappings()
-    nnoremap <buffer><silent> <leader>ji :JavaImport<CR>
-    nnoremap <buffer><silent> <leader>jI :JavaImportOrganize<CR>
-    " Java search in context based on word under cursor
-    nnoremap <buffer><silent> <f3> :JavaSearchContext<CR>
-    " Java correction suggestions
-    nnoremap <buffer><silent> <leader>jc :JavaCorrect<CR>
-    nnoremap <buffer><silent> <f5>    :ProjectRefresh<CR>
-
-    " Show type hierarchy
-    nnoremap <buffer><silent> <leader>jt :JavaHierarchy<CR>
-    " Show callers
-    nnoremap <buffer><leader>jd :JavaCallHierarchy<CR>
-    " Show callees
-    nnoremap <buffer><leader>ju :JavaCallHierarchy!<CR>
-endfunction
-
-" TODO Shorcut to search for method in same file
-" TODO Shorcut to search for constructor of current class
-" TODO "Show all references"
-" TODO "Show implementors (for methods I think)"
-
-" http://eclim.org/vim/java/search.html
-
-" open class path directory
-nnoremap <leader>jcp :call eclim#common#locate#locatefile('vsplit', '.classpath', 'project')<cr>
-
-" }}}
-
-" UltiSnips  {{{
-" TODO: Go through and learn the java snippets.
-if Plugin_exists('ultisnips')
-    let g:UltiSnipsExpandTrigger="<C-e>"
-    let g:UltiSnipsJumpForwardTrigger="<c-n>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
-endif
-" }}}
 " }}}
 
 " filetype settings ------------------------------------------------------- {{{
