@@ -1,6 +1,8 @@
 " .vimrc
 " Author : Shreedhar Hardikar (hardikar@cs.wisc.edu)
 "
+" TODO Add ctags support
+"
 " Initializations --------------------------------------------------------- {{{
 " =============================================================================
 
@@ -113,11 +115,22 @@ set noesckeys
 set pastetoggle=<F6>
 
 " NetRW settings
-let g:netrw_liststyle = 1  " long listing
+" Quick help for me:
+" <cr>,o,v,t Open window in this window/horz split/vert split/new tab
+" p          Preview
+" P          Open in previous window
+" s          Change sort key
+" d          Create directory
+" D          Delete file/directory
+" %          New file in current directory
+
+let g:netrw_banner = 0     " Remove hideous banner
+let g:netrw_liststyle = 3  " tree listing
+let g:netrw_preview   = 1  " Split vertically for preview windows
+let g:netrw_alto = 0       " Split on right for preview windows
 
 " VIM's own fuzzy finding
 set path+=**
-
 
 " }}}
 
