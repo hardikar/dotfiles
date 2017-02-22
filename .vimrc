@@ -19,7 +19,6 @@ endfunction
 call plug#begin('~/.vim/bundle')
 
 " Navigation plugins
-Plug 'hardikar/ctrlp.vim', {'branch': 'cscope'}
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'yssl/QFEnter'
 
@@ -586,40 +585,6 @@ if Plugin_exists('syntastic')
 
     nnoremap <leader>p :SyntasticCheck<CR>
     nnoremap <leader>P :SyntasticReset<CR>
-endif
-" }}}
-" CTRL-P  {{{
-" cd ~/.vim/bundle && \
-" git clone https://github.com/kien/ctrlp.vim.git
-if Plugin_exists('ctrlp.vim')
-    let g:ctrlp_map = '<Leader><Space>'
-
-    " 'r' - the nearest ancestor that contains one of these directories or files:
-    " .git .hg .svn .bzr _darcs
-    " 'a' - directory of current file, but only if the current working directory outside of CtrlP is
-    " not a direct ancestor
-    let g:ctrlp_working_path_mode = 'ra'
-
-    " Enabling various ctrl-p extensions
-    " quickfix - searches in the quickfix window
-    " undo - searches the undo tree
-    " line - searches a line in the open buffers
-    " mixed - Default+Buffer+MRU combo
-    let g:ctrlp_extensions = ['mixed', 'line', 'quickfix', 'undo', 'cscope']
-
-    " Use prefixed count to determine the mode for ctrl-p
-    " 0 - Last Mode
-    " 1 - Mixed mode
-    " 2 - Line mode
-    " 3 - Quickfix
-    " 4 - Undo
-    let g:ctrlp_cmd = 'exec "CtrlP".get(["LastMode", "Mixed", "Line", "QuickFix", "Undo"], v:count)'
-
-    " Increase the number of files indexed
-    let g:ctrlp_max_files = 25000
-    let g:ctrlp_max_depth = 40
-
-    nnoremap <C-t> :CtrlPCscope<CR>
 endif
 " }}}
 " Buffergator  {{{
