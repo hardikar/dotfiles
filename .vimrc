@@ -27,7 +27,6 @@ Plug 'yssl/QFEnter'
 " Productivity plugins
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'jaxbot/semantic-highlight.vim'
-Plug 'airblade/vim-gitgutter'
 
 " Language plugins
 Plug 'Superbil/llvm.vim'
