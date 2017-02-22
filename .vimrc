@@ -195,9 +195,14 @@ function! MakeCscope()
     call system("cscope -bq")
 endfunction
 
-function! MakeCtags(config)
+" Create ctags database (sample), you're better of running this on a command
+" line
+function! MakeCtags()
     call system("ctags -R .")
 endfunction
+
+command! MakeCscope :call MakeCscope()<CR>
+command! MakeCtags :call MakeCtags()<CR>
 
 " }}}
 
