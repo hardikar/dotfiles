@@ -204,20 +204,6 @@ function! CscopeConfirmCreateLoad(cscope_out)
     endif
 endfunction
 
-" Ask user if he wants to load the XRef database
-function! CCTreeConfirmLoad(cctree_out)
-    if confirm("Found " . a:cctree_out . ". Load now?", "y\nN", 1) == 1
-        exec("CCTreeLoadXRefDB " . a:cctree_out)
-    endif
-endfunction
-
-" Ask user if he wants to create and load the XRef database
-function! CCTreeConfirmLoadCreate(cscope_out, cctree_out)
-    if confirm("Found " . a:cscope_out . ", but no cctree.out. Create and load now?", "y\nN", 2) == 1
-        exec("CCTreeLoadDB " . a:cscope_out)
-        exec("CCTreeSaveXRefDB " . a:cctree_out)
-    endif
-endfunction
 " }}}
 
 function! MakeIDE(config)
@@ -228,21 +214,6 @@ function! MakeIDE(config)
         return
     endif
 
-    " Manually load the YCM plugin {{{
-    if a:config.with_ycm
-        Plug 'Valloric/YouCompleteMe', {
-          \ 'do': './install.py --clang-completer',
-          \ 'on': [],
-          \ 'frozen': 1
-          \ }
-        call plug#end()
-
-        call YouCompleteMeSettings()
-        call plug#load('YouCompleteMe')
-        call youcompleteme#Enable()
-    endif
-    "}}}
-
     if has("cscope")
         if a:config.with_cscope
             " Pick up any cscope database in current directory
@@ -250,15 +221,6 @@ function! MakeIDE(config)
                 cscope add cscope.out
             else
                 call CscopeConfirmCreateLoad("cscope.out")
-            endif
-        endif
-
-        if a:config.with_cctree
-            " Pick up any cctree database in current directory
-            if filereadable("cctree.out")
-                call CCTreeConfirmLoad("cctree.out")
-            elseif filereadable("cscope.out")
-                call CCTreeConfirmLoadCreate("cscope.out", "cctree.out")
             endif
         endif
     endif
@@ -272,9 +234,7 @@ function! Refresh()
     endif
 endfunction
 
-" MakeIDE(with_ycm, with_cscope, with_cctree)
-command! IDE      call MakeIDE({'with_ycm':1, 'with_cscope':1, 'with_cctree':0})
-command! IDEFull  call MakeIDE({'with_ycm':1, 'with_cscope':1, 'with_cctree':1})
+command! IDE      call MakeIDE({'with_cscope':1, 'with_tags':0})
 command! Refresh  call Refresh()
 
 nnoremap <f5>  :Refresh<CR>
