@@ -189,55 +189,15 @@ set statusline+=\ (%P)   " Percent through file
 " MakeIDE ----------------------------------------------------------------- {{{
 " =============================================================================
 
-" Helper functions  {{{
 " Create a cscope database
-function! CscopeCreateDB()
+function! MakeCscope()
     call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' -o -name '*.hpp' > cscope.files")
     call system("cscope -bq")
 endfunction
 
-" Ask user if he wants to make a cscope database
-function! CscopeConfirmCreateLoad(cscope_out)
-    if confirm(a:cscope_out . " not found. Create and load now?", "y\nN", 1) == 1
-        call CscopeCreateDB()
-        exec("cscope add " . a:cscope_out)
-    endif
+function! MakeCtags(config)
+    call system("ctags -R .")
 endfunction
-
-" }}}
-
-function! MakeIDE(config)
-    if !exists('g:IDEModeConfig')
-        let g:IDEModeConfig=a:config
-    else
-        echom "IDE is alread configured with config=" . string(g:IDEModeConfig)
-        return
-    endif
-
-    if has("cscope")
-        if a:config.with_cscope
-            " Pick up any cscope database in current directory
-            if filereadable("cscope.out")
-                cscope add cscope.out
-            else
-                call CscopeConfirmCreateLoad("cscope.out")
-            endif
-        endif
-    endif
-endfunction
-
-function! Refresh()
-    redraw!
-    if has("cscope") && filereadable("cscope.out")
-        call CscopeCreateDB()
-        cscope add cscope.out
-    endif
-endfunction
-
-command! IDE      call MakeIDE({'with_cscope':1, 'with_tags':0})
-command! Refresh  call Refresh()
-
-nnoremap <f5>  :Refresh<CR>
 
 " }}}
 
