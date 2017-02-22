@@ -592,13 +592,18 @@ if Plugin_exists('syntastic')
     let g:syntastic_python_checkers = ['python']
     let g:syntastic_python_pylint_quiet_messages = { "level": "warnings" }
 
+    " Limit include files to 3 levels
+    let includedirs = split(globpath('.','include'), '\n') + 
+                      \ split(globpath('.','*/include'), '\n') +
+                      \ split(globpath('.','*/*/include'), '\n')
+
     " Systastic check for c
-    let g:syntastic_c_include_dirs = split(globpath('.','**/include'), '\n')
+    let g:syntastic_c_include_dirs = includedirs
     let g:syntastic_c_compilter_options = ' -std=c11 -Wall -pedantic -Wextra'
 
-    let g:syntastic_cpp_include_dirs = split(globpath('.','**/include'), '\n')
+    " Systastic check for c++
+    let g:syntastic_cpp_include_dirs = includedirs
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
-
 
     nnoremap <leader>p :SyntasticCheck<CR>
     nnoremap <leader>P :SyntasticReset<CR>
