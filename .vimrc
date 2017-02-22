@@ -98,7 +98,7 @@ else
 endif
 
 " Brackets while editing
-set matchpairs=(:),{:},[:],<:>   " Additional "bracket" types
+set matchpairs=(:),{:},[:]   " Additional "bracket" types
 " the cursor will briefly jump to the matching brace when you insert one
 set showmatch
 set matchtime=3
@@ -620,7 +620,7 @@ augroup ft_java
     au!
     autocmd FileType java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
     autocmd FileType java setlocal foldmethod=syntax
-    autocmd FileType java call SetupEclimJavaMappings()
+    autocmd FileType cpp setlocal matchpairs+=<:>   " Additional 'bracket' types for C++
 augroup end
 " }}}
 
@@ -631,6 +631,7 @@ augroup ft_cpp
     autocmd FileType c,cpp setlocal tabstop=2
     autocmd FileType c,cpp setlocal softtabstop=2
     autocmd FileType c,cpp setlocal shiftwidth=2
+    autocmd FileType cpp setlocal matchpairs+=<:>   " Additional 'bracket' types for C++
 augroup end
 " }}}
 
@@ -638,13 +639,6 @@ augroup end
 augroup ft_llvm
     au!
     au FileType llvm setlocal iskeyword=@,48-57,_,192-255,%
-augroup end
-
-" notes {{{
-augroup ft_notes
-    au!
-    au FileType notes setlocal textwidth=120
-    au FileType notes setlocal spell
 augroup end
 " }}}
 
