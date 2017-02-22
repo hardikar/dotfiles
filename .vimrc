@@ -115,6 +115,10 @@ set pastetoggle=<F6>
 " NetRW settings
 let g:netrw_liststyle = 1  " long listing
 
+" VIM's own fuzzy finding
+set path+=**
+
+
 " }}}
 
 " Color Theme ------------------------------------------------------------- {{{
