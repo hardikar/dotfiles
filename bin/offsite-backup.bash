@@ -34,6 +34,7 @@ datasets=(
   zroot/ROOT/default
   zroot/usr/home
   tank/frodo
+  tank/sam
 )
 
 # ================================================================================
