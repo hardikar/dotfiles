@@ -10,12 +10,11 @@
 
 # if L exists remotely :
 #   E : most recent snapshot on local
-#   Destroy all earlier snapshots to save space on offsite
 #   zfs send -I L E | zfs recv
 # else:
-#   Destroy all snapshots on offsite - we're setting the world
 #   zfs send L | zfs recv
 #   zfs send -I L E | ifs recv
+# Destroy all old snapshots
 
 set -e
 
@@ -24,7 +23,7 @@ set -e
 # ================================================================================
 
 # Time to live on the remote backup
-ttl='3m' 
+ttl='3m'
 
 # Mounting directory for remote backup
 altroot="/media/offsite"
@@ -114,13 +113,19 @@ select_pool() {
   fi
 }
   
+detach_device_and_pool() {
+  printf "Exporting pool $pool ... "
+  zpool export $pool ; report
+
+  printf "Unmounting drive $dev ... "
+  geli detach ${dev} ; report
+}
+
 
 backup() {
   printf "\n\nCommencing backups ... \n"
 
   cutoff=$(date -v "-$ttl" '+%s')
-
-  echo $cutoff
 
   _datasets=()
   for dataset in ${datasets[@]}; do
@@ -143,13 +148,10 @@ backup() {
     #  -t list only snapshots
     prev_local_snapshot=$(
       zfs list -H -p -o name,creation -S creation -d 1 -t snapshot -r ${dataset} |
-      # Select most recent (daily/monthly) local snapshot before $cutoff or earliest snapshot otherwise
-      awk -v cutoff="$cutoff" '/daily|monthly/ \
-        { \
-          done=0; chosen=$1; \
-          if (!done && $2 <= cutoff) { chosen=$1; done=1} \
-        } \
-        END {print chosen}' |
+      # Select the earliest local snapshot (daily/monthly) at or after $cutoff
+      awk -v cutoff="$cutoff" ' \
+        /daily|monthly/ { if ( $2 >= cutoff ) { chosen = $1 } } \
+        END { print chosen }' |
       head -1 | cut -d'@' -f 2
     )
 
@@ -181,6 +183,7 @@ backup() {
 
     printf "\n"
 
+
     if [ -z "${latest_remote_snapshot}" ]; then
       # Latest remote snapshot doesn't exist - we need to do backup
 
@@ -188,24 +191,28 @@ backup() {
         printf " > No remote snapshot counterpart of ${prev_local_snapshot} found.\n"
         printf " > Performing FULL backup.\n\n"
 
-        # TODO Destroy all snapshots on remote
+        # Destroy all snapshots on remote
+        # zfs list -H -o name -t snapshot -d 1 -r ${destdataset} |
+        #   while read snap; do
+        #     zfs destroy -v $snap
+        #   done
 
+        # Send the first full stream
         zfs send -P "${dataset}@${prev_local_snapshot}" | zfs recv -uvdF "${pool}"
 
+        # Send the remaining incremental streams
         zfs send -P -I "${dataset}@${prev_local_snapshot}" "${dataset}@${latest_local_snapshot}" | zfs recv -uvdF "${pool}"
       else
         printf " > Remote snapshot counterpart of ${prev_local_snapshot} found.\n"
         printf " > Performing INCREMENTAL backup.\n\n"
 
-        # TODO Destroy all snapshots on remote before $cutoff to save space
-
+        # Send the incremental streams
         zfs send -P -I "${dataset}@${prev_local_snapshot}" "${dataset}@${latest_local_snapshot}" | zfs recv -uvdF "${pool}"
       fi
     else
         printf " > Latest local snapshot exists remotely. No backup necessary.\n"
         continue
     fi
-
   done
 }
 
@@ -214,12 +221,35 @@ cleanup() {
   printf "================================================================================\n"
   printf "Cleaning up ... \n"
   printf "================================================================================\n"
-  
-  printf "Exporting pool $pool ... "
-  zpool export $pool ; report
-  
-  printf "Unmounting drive $dev ... "
-  geli detach ${dev} ; report
+
+  # Destroy all snapshots on remote before $cutoff to save space
+  # We could do this automatically but I don't want to destroy snapshots willy nilly
+  printf "" > ${zfslist}
+  for dataset in ${_datasets[@]}; do
+    destdataset=$(echo $dataset | sed -e 's+^[^/]*/+'$pool'/+')
+    zfs list -H -p -o name,creation -t snapshot -d 1 -r ${destdataset} |
+      awk -v cutoff="$cutoff" '{ if ( $2 < cutoff ) print $1 }' >> ${zfslist}
+  done
+
+  if [ -s ${zfslist} ]; then
+    # ${zfslist} is not empty
+    printf "Found datasets on $pool that are old and may be deleted:\n"
+    cat ${zfslist}
+    printf "\n"
+
+    if confirm "Delete these snapshots ? (y/n)"; then
+      printf "\n"
+      cat ${zfslist} |
+        while read snap; do
+          zfs destroy -v "$snap"
+        done
+    else
+      printf "Old datasets not deleted. You can find the list at ${zfslist}.\n"
+    fi
+  fi
+  printf "\n"
+
+  confirm "Detach and unmount pool: $pool? (y/n)" && detach_device_and_pool || true
 }
 
 main() {
@@ -229,10 +259,10 @@ main() {
   printf "\n"
   pool=offsite
   dev="/dev/da0.eli"
-  confirm "Continue with pool: $pool & device: $dev? (y/n) : " && backup
+  confirm "Continue with pool: $pool & device: $dev? (y/n)" && backup
   printf "\n\nBackups complete!\n"
   printf "\n"
-  confirm "Detach and unmount pool: $pool? (y/n)" && cleanup
+  cleanup
   printf 'Done.\n'
 }
 
