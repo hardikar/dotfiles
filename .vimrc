@@ -187,20 +187,47 @@ set statusline+=\ (%P)   " Percent through file
 " MakeIDE ----------------------------------------------------------------- {{{
 " =============================================================================
 
-" Create a cscope database
-function! MakeCscope()
-    call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' -o -name '*.hpp' > cscope.files")
-    call system("cscope -bq")
-endfunction
+if has('cscope')
+  " Create a cscope database
+  function! MakeCscope()
+    call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' -o -name '*.hpp' > cscope.files && cscope -bq")
+    if v:shell_error
+      echoerr "Cscope database update failed."
+    else
+      echo "Cscope database updated."
+    endif
+
+    " Load cscope database
+    if filereadable("cscope.out")
+      cscope add cscope.out
+    endif
+  endfunction
+
+  command! MakeCscope :call MakeCscope()
+
+  " Load cscope database
+  if filereadable("cscope.out")
+    cscope add cscope.out
+  endif
+endif
 
 " Create ctags database (sample), you're better of running this on a command
 " line
-function! MakeCtags()
-    call system("ctags -R .")
+function! MakeTags()
+  " Node that the command line options do matter: Keep -R at the end for fast
+  " speed
+  call system("ctags --exclude=build --exclude=.git --languages=c,c++ --fields=+iaS --extra=+q -R .")
+  if v:shell_error
+    echoerr "C/C++ tags update failed."
+  else
+    echo "C/C++ tags updated."
+  endif
 endfunction
 
-command! MakeCscope :call MakeCscope()
-command! MakeCtags :call MakeCtags()
+command! MakeTags :call MakeTags()
+
+" This will look in the current directory for "tags", and work up the tree towards root until one is found. 
+set tags=./tags;/
 
 " }}}
 
@@ -327,13 +354,13 @@ autocmd BufWinEnter quickfix :nnoremap <buffer> <silent> q :call ToggleQuickFix(
 
 " Change the default auto-complete changes.
 " The default is ".,w,b,u,t,i", which means to scan:
-" 	   1. the current buffer
-" 	   2. buffers in other windows
-" 	   3. other loaded buffers
-" 	   4. unloaded buffers
-" 	   5. tags
-" 	   6. included files
-set complete=.,w,b,u,t
+" 	   1. . the current buffer
+" 	   2. w buffers in other windows
+" 	   3. b other loaded buffers
+" 	   4. u unloaded buffers
+" 	   5. t tags
+" 	   6. i included files
+set complete=.,w,b,u
 
 " Better navigating through omnicomplete option list
 set completeopt=longest,menuone
