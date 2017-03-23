@@ -201,8 +201,8 @@ function! MakeCtags()
     call system("ctags -R .")
 endfunction
 
-command! MakeCscope :call MakeCscope()<CR>
-command! MakeCtags :call MakeCtags()<CR>
+command! MakeCscope :call MakeCscope()
+command! MakeCtags :call MakeCtags()
 
 " }}}
 
