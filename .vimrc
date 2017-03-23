@@ -396,9 +396,6 @@ if has("cscope")
     " Show a nice message when cscope is added
     set cscopeverbose
 
-    " Use cscope database for tags when available
-    set cscopetag
-
     " Use quickfix for showing results
     set cscopequickfix=s-,c-,d-,i-,t-,e-
 
@@ -463,7 +460,7 @@ if has("cscope")
     nnoremap <C-X>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
 	nnoremap <C-X>\D :scs find d 
 
-    nnoremap <leader>? :ptag <C-R>=expand("<cword>")<CR><CR>
+  nnoremap <leader>? :ptag <C-R>=expand("<cword>")<CR><CR>
 endif
 
 " }}}
