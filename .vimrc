@@ -1,8 +1,6 @@
 " .vimrc
 " Author : Shreedhar Hardikar (hardikar@cs.wisc.edu)
 "
-" TODO Add ctags support
-"
 " Initializations --------------------------------------------------------- {{{
 " =============================================================================
 
@@ -326,6 +324,16 @@ nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
 autocmd BufWinEnter quickfix :nnoremap <buffer> <silent> q :call ToggleQuickFix()<CR>
 " }}}
 " Omnicomplete navigation {{{
+
+" Change the default auto-complete changes.
+" The default is ".,w,b,u,t,i", which means to scan:
+" 	   1. the current buffer
+" 	   2. buffers in other windows
+" 	   3. other loaded buffers
+" 	   4. unloaded buffers
+" 	   5. tags
+" 	   6. included files
+set complete=.,w,b,u,t
 
 " Better navigating through omnicomplete option list
 set completeopt=longest,menuone
