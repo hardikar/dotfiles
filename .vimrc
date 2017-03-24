@@ -27,9 +27,9 @@ Plug 'jszakmeister/vim-togglecursor'
 Plug 'jaxbot/semantic-highlight.vim'
 
 " Language plugins
-Plug 'Superbil/llvm.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'justmao945/vim-clang'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -564,6 +564,28 @@ if Plugin_exists('syntastic')
     nnoremap <leader>p :SyntasticCheck<CR>
     nnoremap <leader>P :SyntasticReset<CR>
 endif
+" vim-clang  {{{
+" cd ~/.vim/bundle && \
+" git clone https://github.com/justmao945/vim-clang
+if Plugin_exists('vim-clang')
+    let g:clang_auto = 1
+
+    " Limit include files to 3 levels
+    let includedirs = split(globpath('.','include'), '\n') + 
+                      \ split(globpath('.','*/include'), '\n') +
+                      \ split(globpath('.','*/*/include'), '\n')
+
+    " TODO remove repetition from syntastic settings
+    let g:clang_c_options = join(map(g:includedirs, '"-I " . getcwd() . "/" . v:val'), ' ') .
+                            \ ' -std=c11 -Wall -pedantic -Wextra' 
+
+    let g:clang_cpp_options = join(map(g:includedirs, '"-I " . getcwd() . v:val'), ' ') .
+                            \ ' -std=c++11' 
+
+    " disable diagnostics window
+    let g:clang_diagsopt = ''
+endif
+" }}}
 " }}}
 " Buffergator  {{{
 " git clone https://github.com/jeetsukumaran/vim-buffergator
@@ -610,6 +632,7 @@ augroup ft_cpp
     autocmd FileType c,cpp setlocal softtabstop=2
     autocmd FileType c,cpp setlocal shiftwidth=2
     autocmd FileType cpp setlocal matchpairs+=<:>   " Additional 'bracket' types for C++
+
 augroup end
 " }}}
 
