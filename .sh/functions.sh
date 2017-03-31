@@ -46,3 +46,18 @@ function rdd() {
     fi
     curl --data "read=1&u=$1" "http://heckyesmarkdown.com/go/"
 }
+
+function gpr() {
+  case "$#" in
+    1)
+      remote=origin
+      pr="$1"
+      ;;
+    2)
+      remote="$1"
+      pr="$2"
+      ;;
+  esac
+
+  git fetch ${remote} pull/"$pr"/head:"pr-$pr"
+}
