@@ -1,0 +1,20 @@
+#! /bin/bash
+
+if [ x"$(id -u)" != x0 ]; then
+    echo "ERROR! Need to run this as root."
+    exit 1
+fi
+
+smartctl="/usr/local/sbin/smartctl"
+devices="$($smartctl --scan | awk '{ print $1 }')"
+
+for dev in $devices; do
+    temp="$($smartctl -a $dev | awk ' /194/ { print $10 }')"
+
+    # > 100 C is too much I'm afraid
+    if [[ -n "$temp" && "$temp" -lt "100" ]]; then
+      echo $dev $temp
+    fi
+done
+
+    
