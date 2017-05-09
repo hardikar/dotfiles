@@ -30,7 +30,11 @@ exclude_file="/tmp/rsync_excludes"
 snapshot_tag="rsync_backup"
 
 datasets=(
-  "tank/frodo/documents"
+  zroot/warden
+  zroot/ROOT/default
+  zroot/usr/home
+  tank/frodo
+  tank/sam
 )
 
 dataset_latest_snapshot() {
@@ -49,6 +53,8 @@ setup_excludes() {
 .TemporaryItems/
 .DS_Store
 ._*
+Plex Media Server/Cache
+Plex Media Server/Media
 EOF
    
 }
@@ -87,7 +93,7 @@ main() {
   for dataset in "${datasets[@]}"; do
     src=$(dataset_mountpoint "$dataset")
     latest_snapshot=$(dataset_latest_snapshot "$dataset")
-    src_snapshot="${src}/.zfs/snapshot/${latest_snapshot}"
+    src_snapshot="${src}/.zfs/snapshot/${latest_snapshot}/"
     dest="${repo}/${src}"
 
     printf "[%d/%d] Backing up ${src} to ${dest}\n" $iter $ndatasets
@@ -107,6 +113,8 @@ main() {
     # --relative         Remember paths on local
     # --one-file-system  Don't cross file system boundary
     # --info=progress2   Aggregate stats
+    # Note the ./ in $src_snapshot path below. That is to ensure that the
+    # remote path doesn't have the snapshot directory
     rsync -aH \
       --delete \
       --numeric-ids \
@@ -115,13 +123,14 @@ main() {
       --relative \
       --one-file-system \
       --info=progress2 \
-      "${src_snapshot}/" \
+      "${src_snapshot}/./" \
       "${dest}/"
 
     rc=$?
     
     printf "rsync returned with code $rc\n"
-    if [[ $rc == 0 || $rc == 3 ]]; then
+    if [[ $rc == 0 || $rc == 3 || $rc = 23 ]]; then
+      # Snapshots are free - so we want to take as many as we can
       printf "Success : taking a snapshot.\n"
       snapshot_name="${repo_dataset}@${snapshot_tag}_$(date +%Y-%m-%d_%H.%M.%S)"
       if zfs snapshot "${snapshot_name}"; then
