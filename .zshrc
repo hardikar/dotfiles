@@ -60,11 +60,12 @@ cdpath=(
 
 export PATH=
 path=(
-    /usr/local/bin
-    /usr/bin
     /bin
-    /usr/sbin
     /sbin
+    /usr/bin
+    /usr/sbin
+    /usr/local/bin
+    /usr/local/sbin
     /usr/texbin
     )
 
