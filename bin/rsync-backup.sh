@@ -35,6 +35,7 @@ datasets=(
   zroot/usr/home
   tank/frodo
   tank/sam
+  tank/usr/home
 )
 
 dataset_latest_snapshot() {
