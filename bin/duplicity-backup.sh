@@ -10,8 +10,6 @@
 # correct in ~/.aws home directory of the user running this script.
 # See http://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html.
 #
-# TODO Implement recursive dataset discovery
-# TODO Implement exclude files (--exclude-filelist <(echo "${duplicity_backup_excludes}") didn't work)
 
 
 set -u
@@ -24,16 +22,22 @@ set -o pipefail
 duplicity_backup_fs="
   tank/usr/hosting/wiki
 "
-duplicity_backup_recursive_fs=""
+duplicity_backup_recursive_fs="
+  tank/usr/hosting
+  tank/usr/home
+"
 duplicity_backup_backend="s3+http://remington-backups"
-duplicity_backup_options=""
-duplcity_backup_full_if_older_than="1M"
+duplicity_backup_options="--s3-use-multiprocessing"
+duplicity_backup_gpg_options="--cipher-algo AES256"
+duplicity_backup_full_if_older_than="1M"
 duplicity_backup_excludes="
-.TemporaryItems/
-.DS_Store
-._*
-Plex Media Server/Cache
-Plex Media Server/Media
+**/.TemporaryItems/
+**/.DS_Store
+**/._*
+**/Plex Media Server/Cache
+**/Plex Media Server/Media
+**/*.core
+**/.cache
 "
 
 #
@@ -56,7 +60,7 @@ main() {
   #
   # Determine datasets to backup first
   #
-  datasets=""
+  datasets=()
   # Iterate non-recursive datasets
   for ds in ${duplicity_backup_fs[@]}; do
     mountpt=$(dataset_mountpoint "${ds}") || continue
@@ -67,11 +71,24 @@ main() {
     # OK valid dataset
     datasets+=("${ds}")
   done
-  # Iterate over non-recursive datasets TODO
+
+  # Recurse into recursive datasets
+  for recursive_ds in ${duplicity_backup_recursive_fs[@]}; do
+    for ds in $(zfs list -H -o name -r ${recursive_ds}); do
+      mountpt=$(dataset_mountpoint "${ds}") || continue
+      if [[ "${mountpt}" == "none" ]]; then
+        printf "Warning : Skipping ${ds} : not mounted\n" >&2
+        continue
+      fi
+      # OK valid dataset
+      datasets+=("${ds}")
+    done
+  done
   
   # Done!
 
   printf "================================================================================\n"
+  datasets=($(printf "%s\n" "${datasets[@]}" | sort -u))
   ndatasets=${#datasets[@]}
   printf "%d valid datasets found; commencing backups for :\n" $ndatasets
   for dataset in ${datasets[@]}; do
@@ -90,13 +107,14 @@ main() {
     mountpoint=$(dataset_mountpoint "$ds")
     latest_snapshot=$(dataset_latest_snapshot "$ds") && printf "${latest_snapshot}\n" \
       || print "No shapshot found; skipping" >&2
-    src="${mountpoint}/.zfs/snapshot/${latest_snapshot}"
+    src="${mountpoint}/.zfs/snapshot/${latest_snapshot}/./"
 
     run_duplicity "${ds}" "${src}"
 
     printf "================================================================================\n"
     iter=$(($iter + 1 ))
   done
+  printf "DONE\n"
 }
 
 #
@@ -109,13 +127,19 @@ run_duplicity() {
   src="$2"
 
   dest="${duplicity_backup_backend}/$ds"
+
+  tmpfile=$(mktemp)
+  echo "${duplicity_backup_excludes}" > $tmpfile
   
   export PASSPHRASE=$(cat ~/.passphrase)
 
   duplicity \
     --allow-source-mismatch \
+    --gpg-options "${duplicity_backup_gpg_options}" \
     --exclude-other-filesystems \
-    --full-if-older-than "${duplcity_backup_full_if_older_than}" \
+    --exclude-filelist ${tmpfile} \
+    --progress --progress-rate 60 \
+    --full-if-older-than "${duplicity_backup_full_if_older_than}" \
     ${duplicity_backup_options} \
     "${src}" "${dest}"
 
