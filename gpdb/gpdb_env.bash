@@ -48,14 +48,21 @@ make_gpdb_project()
 
   git clone git@github.com:hardikar/gpdb.git
   git clone git@github.com:hardikar/gporca.git
+  git clone https://github.com/d/bug-free-fortnight
 
   git -C gpdb remote add upstream git@github.com:greenplum-db/gpdb.git
+  git -C gpdb remote update
   git -C gporca remote add upstream git@github.com:greenplum-db/gporca.git
+  git -C gporca remote update
 
   cp ${SOURCE_DIR}/CMakeLists.txt.all ./CMakeLists.txt
   cp ${SOURCE_DIR}/CMakeLists.txt.gpdb gpdb/CMakeLists.txt
 
-  cmake -G Xcode .
+  mkdir build.xcode
+  pushd build.xcode
 
+  cmake -G Xcode ..
+
+  popd
   popd
 }
