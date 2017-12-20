@@ -66,3 +66,52 @@ make_gpdb_project()
   popd
   popd
 }
+
+verify_version()
+{
+  file1="config/orca.m4"
+  m4_version_1=$(grep 'GPORCA_VERSION_STRING' ${file1} | grep -o '\d\+\.\d\+.')
+  m4_version_2=$(grep 'ORCA version' ${file1} | grep -o '\d\+\.\d\+.')
+
+  if [[ ${m4_version_1} != ${m4_version_2} ]]; then
+    echo "Mismatch found in ${file1}: \"${m4_version_1}\" and \"${m4_version_2}\"" 
+    error=$(($error + 1))
+  fi
+
+  file2="configure"
+  configure_version_1=$(grep 'GPORCA_VERSION_STRING' ${file2} | grep -o '\d\+\.\d\+.')
+  configure_version_2=$(grep 'ORCA version' ${file2} | grep -o '\d\+\.\d\+.')
+
+  if [[ ${configure_version_1} != ${configure_version_2} ]]; then
+    echo "Mismatch found in ${file2}: \"${configure_version_1}\" and \"${configure_version_2}\"" 
+    error=$(($error + 1))
+  fi
+
+  if [[ ${configure_version_1} != ${m4_version_1} ]]; then
+    echo "Mismatch found between ${file1} and ${file2} : \"${configure_version_1}\" and \"${m4_version_1}\"" 
+    error=$(($error + 1))
+  fi
+
+  # depends/conanfile_orca.txt | 2 +-
+  conanfile="depends/conanfile_orca.txt"
+  conan_version=$(grep 'orca' ${conanfile} | grep -o '\d\+\.\d\+.\d\+')
+
+  if ! [[ ${conan_version} =~ ${m4_version_1} ]]; then
+    echo "Mismatch found in ${conanfile} and ${file1}: \"${conan_version}\" and \"${m4_version_1}\"" 
+    error=$(($error + 1))
+  fi
+
+  relengfile="gpAux/releng/releng.mk"
+  releng_version=$(grep 'orca' ${relengfile} | grep -o '\d\+\.\d\+.\d\+')
+
+  if [[ ${conan_version} != ${releng_version} ]]; then
+    echo "Mismatch found in ${conanfile} and ${relengfile}: \"${conan_version}\" and \"${releng_version}\"" 
+    error=$(($error + 1))
+  fi
+
+  if [[ ! $error ]]; then
+    echo "All files contain the version: ${conan_version} (i.e. ${m4_version_1}XXX)"
+  else
+    return $error
+  fi
+}
