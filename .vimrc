@@ -25,6 +25,7 @@ Plug 'yssl/QFEnter'
 " Productivity plugins
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'jaxbot/semantic-highlight.vim'
+Plug 'nathangrigg/vim-beancount'
 
 " Language plugins
 Plug 'scrooloose/syntastic'
@@ -586,7 +587,6 @@ if Plugin_exists('vim-clang')
     let g:clang_diagsopt = ''
 endif
 " }}}
-" }}}
 " Buffergator  {{{
 " git clone https://github.com/jeetsukumaran/vim-buffergator
 if Plugin_exists('vim-buffergator')
@@ -598,8 +598,18 @@ if Plugin_exists('vim-buffergator')
     let g:buffergator_suppress_keymaps = 1
     nnoremap <Leader>b :BuffergatorToggle<CR>
 endif
-" }}}
 
+" }}}
+" vim-beancount  {{{
+" git clone https://github.com/nathangrigg/vim-beancount
+if Plugin_exists('vim-beancount')
+    let g:beancount_detailed_first = 1
+    let g:deoplete#enable_at_startup = 1
+    autocmd FileType beancount setlocal foldmethod=marker
+    " autocmd FileType beancount setlocal iskeyword=@,48-57,_,192-255,-,:
+endif
+
+" }}}
 " }}}
 
 " filetype settings ------------------------------------------------------- {{{
