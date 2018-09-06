@@ -32,6 +32,10 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'justmao945/vim-clang'
 
+Plug 'Shougo/deoplete.nvim' " needs pip3 install neovim
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -604,9 +608,16 @@ endif
 " git clone https://github.com/nathangrigg/vim-beancount
 if Plugin_exists('vim-beancount')
     let g:beancount_detailed_first = 1
-    let g:deoplete#enable_at_startup = 1
     autocmd FileType beancount setlocal foldmethod=marker
     " autocmd FileType beancount setlocal iskeyword=@,48-57,_,192-255,-,:
+endif
+
+" }}}
+" deoplete.nvim {{{
+" git clone https://github.com/nathangrigg/vim-beancount
+if Plugin_exists('deoplete.nvim')
+  command! EnableDeocomplete :call deoplete#enable()
+  command! DisableDeocomplete :call deoplete#disable()
 endif
 
 " }}}
