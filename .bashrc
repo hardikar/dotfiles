@@ -35,7 +35,7 @@ PROMPT+="]"
 
 PROMPT+=" [$Blu\t$RCol] \H "
 PROMPT+="
-$ "
+\\$ "
 export PS1=$PROMPT
 export GIT_PS1_SHOWDIRTYSTATE=1
 }
