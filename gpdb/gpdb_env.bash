@@ -4,6 +4,65 @@ ORCA_PREFIX=gporca
 GPDB_WORKSPACE=$HOME/workspace
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source_gpdb () {
+	path="$1"
+	source "$path/.build/greenplum_path.sh"
+	source "$path/gpAux/gpdemo/gpdemo-env.sh"
+}
+
+start_gpdb () {
+	source_gpdb "$1"
+	gpstart -a
+}
+
+stop_gpdb () {
+	source_gpdb "$1"
+	gpstop -a
+}
+
+GPDB4_PATH="$HOME/workspace/gpdb4"
+GPDB5_PATH="$HOME/workspace/gpdb5"
+GPDB6_PATH="$HOME/workspace/gpdb"
+
+cd6x () {
+	cd "$GPDB6_PATH"
+}
+start6x () {
+	start_gpdb "$GPDB6_PATH"
+}
+stop6x () {
+	stop_gpdb "$GPDB6_PATH"
+}
+source6x () {
+	source_gpdb "$GPDB6_PATH"
+}
+
+cd5x () {
+	cd "$GPDB5_PATH"
+}
+start5x () {
+	start_gpdb "$GPDB5_PATH"
+}
+stop5x () {
+	stop_gpdb "$GPDB5_PATH"
+}
+source5x () {
+	source_gpdb "$GPDB5_PATH"
+}
+
+cd4x () {
+	cd "$GPDB4_PATH"
+}
+start4x () {
+	start_gpdb "$GPDB4_PATH"
+}
+stop4x () {
+	stop_gpdb "$GPDB4_PATH"
+}
+source4x () {
+	source_gpdb "$GPDB4_PATH"
+}
+
 use_orca () {
 	local ver
   ver="$1"
