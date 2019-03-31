@@ -92,14 +92,7 @@ set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" Fancy line numbering
-if version >= 703
-    set relativenumber  " Show line numbers relative to current line
-    autocmd InsertEnter * :set number
-    autocmd InsertLeave * :set relativenumber
-else
-    set number
-endif
+set number
 
 " Brackets while editing
 set matchpairs=(:),{:},[:]   " Additional "bracket" types
@@ -372,12 +365,6 @@ set completeopt=longest,menuone
 " Limit the height of the menu
 set pumheight=10
 
-" A most standard IDE like keys
-inoremap <expr><Tab>   pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
-inoremap <expr><C-J>   pumvisible() ? "\<C-N>" : "\<C-J>"
-inoremap <expr><C-K>   pumvisible() ? "\<C-P>" : "\<C-K>"
-inoremap <expr><CR>    pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " Insert Mode Completion {{{
 " :help ins-completion
@@ -400,7 +387,7 @@ set wildmode=longest:full " complete till longest common string and start
                           " wildmenu
 
 set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.aux,*.toc                      " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.mp3,*.mp4,*.m4a                " other binary files
 set wildignore+=*.pdf                            " other binary files
@@ -608,8 +595,11 @@ endif
 " git clone https://github.com/nathangrigg/vim-beancount
 if Plugin_exists('vim-beancount')
     let g:beancount_detailed_first = 1
-    autocmd FileType beancount setlocal foldmethod=marker
-    " autocmd FileType beancount setlocal iskeyword=@,48-57,_,192-255,-,:
+
+    autocmd filetype beancount setlocal foldmethod=marker
+    autocmd filetype beancount setlocal foldlevel=0
+    autocmd filetype beancount setlocal foldlevelstart=0
+    autocmd FileType beancount setlocal iskeyword+=-
 endif
 
 " }}}
