@@ -599,7 +599,7 @@ if Plugin_exists('vim-beancount')
     autocmd filetype beancount setlocal foldmethod=marker
     autocmd filetype beancount setlocal foldlevel=0
     autocmd filetype beancount setlocal foldlevelstart=0
-    autocmd FileType beancount setlocal iskeyword+=-
+    autocmd FileType beancount setlocal iskeyword+=-,.
 endif
 
 " }}}
