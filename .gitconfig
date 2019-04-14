@@ -2,9 +2,11 @@
 	ui = true
 [user]
 	name = Shreedhar Hardikar
-	email = hardikar@cs.wisc.edu\n
+	email = hardikar@cs.wisc.edu
 [core]
 	editor = vim
 	autocrlf = input
 [push]
 	default = current
+[diff "beancount"]
+  xfuncname = "^(; \\{\\{\\{.*)$"
