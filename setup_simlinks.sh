@@ -9,44 +9,49 @@ function abspath(){
     echo $(cd $DIRNAME; pwd)
 }
 
-USAGE="
+show_usage() {
+	cat <<EOF
 USAGE:
-      ./setup_simlinks.sh [options] <from-dir> <to-dir>
-[options]:
-      The same options as from \"man ln\". 
-      Do not include -s, it is automatically added"
+./setup_simlinks.sh [options]
 
-if [[ "$#" == "2" ]]; then
-    OPTIONS="-s"
-    SRCDIR="$(abspath $1)"
-    DESTDIR="$(abspath $2)"
-elif [[ "$#" == "3" ]]; then
-    OPTIONS="-s $1"
-    SRCDIR="$(abspath $2)"
-    DESTDIR="$(abspath $3)"
-else
-    echo "$USAGE"
-    exit 1
-fi
+[options]:
+	The same options as from "man ln".
+	Do not include -s, it is automatically added
+EOF
+}
+
+for opt in "$@"; do
+    case "$opt" in
+    "-h"|"--help")
+        show_usage
+        exit 0
+        ;;
+    esac
+done
+
+SRCDIR=`abspath $0`
+DESTDIR="$HOME"
+OPTIONS="-s $@"
 
 # verbose output
 set -x
 
-ln $OPTIONS $SRCDIR/.vimrc $DESTDIR
-ln $OPTIONS $SRCDIR/.vim $DESTDIR
+ln $OPTIONS "$SRCDIR/.bash_profile" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.bashrc" "$DESTDIR"
 
-ln $OPTIONS $SRCDIR/.tmux.conf $DESTDIR
+ln $OPTIONS "$SRCDIR/.gdbinit" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.gitconfig" "$DESTDIR"
 
-ln $OPTIONS $SRCDIR/.zshrc $DESTDIR
-ln $OPTIONS $SRCDIR/.zsh $DESTDIR
-ln $OPTIONS $SRCDIR/.sh $DESTDIR
-ln $OPTIONS $SRCDIR/.bashrc $DESTDIR
+ln $OPTIONS "$SRCDIR/.gvimrc" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.vimrc" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.vim" "$DESTDIR"
 
-ln $OPTIONS $SRCDIR/.vimperator $DESTDIR
-ln $OPTIONS $SRCDIR/.vimperatorrc $DESTDIR
+ln $OPTIONS "$SRCDIR/.zshrc" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.zsh" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.sh" "$DESTDIR"
 
-ln $OPTIONS $SRCDIR/bin $DESTDIR
+ln $OPTIONS "$SRCDIR/.tmux.conf" "$DESTDIR"
 
-ln $OPTIONS $SRCDIR/.gdbinit $DESTDIR
+ln $OPTIONS "$SRCDIR/bin" "$DESTDIR"
 
 set +x
