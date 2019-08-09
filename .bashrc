@@ -43,9 +43,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # Prompt for BASH
 PROMPT_COMMAND=__prompt_command
 
-# CDPATH magic
-export CDPATH=.:$HOME/projects:$HOME/workplace:$HOME/workspace:$HOME/hacks:$HOME/vagrant
-
 # Path magic
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
 
