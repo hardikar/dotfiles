@@ -161,7 +161,11 @@ verify_version()
   fi
 
   relengfile="gpAux/releng/releng.mk"
-  releng_version=$(grep 'orca' ${relengfile} | grep -o '\d\+\.\d\+.\d\+')
+  if [ ! -e "${relengfile}" ]; then
+		# also check in concourse file (6x onwards)
+    relengfile="concourse/tasks/compile_gpdb.yml"
+  fi
+  releng_version=$(grep -i 'ORCA' ${relengfile} | grep -o '\d\+\.\d\+.\d\+')
 
   if [[ ${conan_version} != ${releng_version} ]]; then
     echo "Mismatch found in ${conanfile} and ${relengfile}: \"${conan_version}\" and \"${releng_version}\"" 
@@ -173,4 +177,9 @@ verify_version()
   else
     return $error
   fi
+}
+
+clean_gpopt()
+{
+	make -C src/backend/gpopt/ clean
 }
