@@ -64,7 +64,6 @@ set undolevels=700
 set autoindent      " Indent according to the previous line automatically
 set tabstop=2       " number of visual spaces per TAB
 set softtabstop=2   " number of spaces in tab when editing
-set expandtab       " tabs are spaces
 set shiftwidth=2
 
 " Search settings
