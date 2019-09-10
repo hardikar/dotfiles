@@ -24,17 +24,11 @@ Plug 'yssl/QFEnter'
 
 " Productivity plugins
 Plug 'jszakmeister/vim-togglecursor'
-Plug 'jaxbot/semantic-highlight.vim'
 Plug 'nathangrigg/vim-beancount'
 
 " Language plugins
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-Plug 'justmao945/vim-clang'
-
-Plug 'Shougo/deoplete.nvim' " needs pip3 install neovim
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -137,15 +131,6 @@ set t_Co=256
 let g:colors = ["hybrid", "wombat256mod"]
 nnoremap <F12> :ColorsNext<CR>:echo g:colors_name<CR>
 
-" Status line changes on mode changes
-if version > 700
-    hi link StatusLineInsert PMenuSel
-    hi link StatusLineNormal StatusLine
-    " Change colors when intering INSERT MODE
-    autocmd InsertEnter * hi! link StatusLine StatusLineInsert
-    autocmd InsertLeave * hi! link StatusLine StatusLineNormal
-endif
-
 " Setup fonts
 if has("gui_running")
   if has("gui_gtk2")
@@ -178,53 +163,6 @@ set statusline+=%c\      " Cursor column
 set statusline+=\|\      " Seperator
 set statusline+=%L       " Cursor line/total lines
 set statusline+=\ (%P)   " Percent through file
-
-" }}}
-
-" MakeIDE ----------------------------------------------------------------- {{{
-" =============================================================================
-
-if has('cscope')
-  " Create a cscope database
-  function! MakeCscope()
-    call system("find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.cc' -o -name '*.hpp' > cscope.files && cscope -bq")
-    if v:shell_error
-      echoerr "Cscope database update failed."
-    else
-      echo "Cscope database updated."
-    endif
-
-    " Load cscope database
-    if filereadable("cscope.out")
-      cscope add cscope.out
-    endif
-  endfunction
-
-  command! MakeCscope :call MakeCscope()
-
-  " Load cscope database
-  if filereadable("cscope.out")
-    cscope add cscope.out
-  endif
-endif
-
-" Create ctags database (sample), you're better of running this on a command
-" line
-function! MakeTags()
-  " Node that the command line options do matter: Keep -R at the end for fast
-  " speed
-  call system("ctags --exclude=build --exclude=.git --languages=c,c++ --fields=+iaS --extra=+q -R .")
-  if v:shell_error
-    echoerr "C/C++ tags update failed."
-  else
-    echo "C/C++ tags updated."
-  endif
-endfunction
-
-command! MakeTags :call MakeTags()
-
-" This will look in the current directory for "tags", and work up the tree towards root until one is found. 
-set tags=./tags;/
 
 " }}}
 
@@ -298,10 +236,6 @@ cnoremap <C-E> <End>
 " Mappings for insert mode
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
-
-" Mappings home row keys
-noremap H ^
-noremap L $
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -417,79 +351,6 @@ endif
 " VIM plugin settings ----------------------------------------------------- {{{
 " =============================================================================
 
-" Scope settings  {{{
-if has("cscope")
-    " Show a nice message when cscope is added
-    set cscopeverbose
-
-    " Use quickfix for showing results
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-
-	" The following maps all invoke one of the following cscope search types:
-    "
-    "   's'   symbol: find all references to the token under cursor
-    "   'g'   global: find global definition(s) of the token under cursor
-    "   'c'   calls:  find all calls to the function name under cursor
-    "   't'   text:   find all instances of the text under cursor
-    "   'e'   egrep:  egrep search for the word under cursor
-    "   'f'   file:   open the filename under cursor
-    "   'i'   includes: find files that include the current file
-    "   'd'   called: find functions that function under cursor calls
-	nnoremap \s :cs find s <C-R>=expand("<cword>")<CR><CR>
-	nnoremap \S :cs find s 
-    nnoremap \g :cs find g <C-R>=expand("<cword>")<CR><CR>
-	nnoremap \G :cs find g 
-    nnoremap \c :cs find c <C-R>=expand("<cword>")<CR><CR>
-	nnoremap \C :cs find c 
-    nnoremap \t :cs find t <C-R>=expand("<cword>")<CR><CR>
-	nnoremap \T :cs find t 
-    nnoremap \e :cs find e <C-R>=expand("<cword>")<CR><CR>
-	nnoremap \E :cs find e 
-    nnoremap \f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-	nnoremap \F :cs find f 
-    nnoremap \i :cs find i <C-R>=expand("%:t")<CR><CR>
-	nnoremap \I :cs find i 
-    nnoremap \d :cs find d <C-R>=expand("<cword>")<CR><CR>
-	nnoremap \D :cs find d 
-
-	nnoremap <C-W>\s :vertical scs find s <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-W>\S :vertical scs find s 
-    nnoremap <C-W>\g :vertical scs find g <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-W>\G :vertical scs find g 
-    nnoremap <C-W>\c :vertical scs find c <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-W>\C :vertical scs find c 
-    nnoremap <C-W>\t :vertical scs find t <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-W>\T :vertical scs find t 
-    nnoremap <C-W>\e :vertical scs find e <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-W>\E :vertical scs find e 
-    nnoremap <C-W>\f :vertical scs find f <C-R>=expand("<cfile>")<CR><CR>
-	nnoremap <C-W>\F :vertical scs find f 
-    nnoremap <C-W>\i :vertical scs find i <C-R>=expand("%:t")<CR><CR>
-	nnoremap <C-W>\I :vertical scs find i 
-    nnoremap <C-W>\d :vertical scs find d <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-W>\D :vertical scs find d 
-
-	nnoremap <C-X>\s :scs find s <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-X>\S :scs find s 
-    nnoremap <C-X>\g :scs find g <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-X>\G :scs find g 
-    nnoremap <C-X>\c :scs find c <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-X>\C :scs find c 
-    nnoremap <C-X>\t :scs find t <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-X>\T :scs find t 
-    nnoremap <C-X>\e :scs find e <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-X>\E :scs find e 
-    nnoremap <C-X>\f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-	nnoremap <C-X>\F :scs find f 
-    nnoremap <C-X>\i :scs find i <C-R>=expand("%:t")<CR><CR>
-	nnoremap <C-X>\I :scs find i 
-    nnoremap <C-X>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
-	nnoremap <C-X>\D :scs find d 
-
-  nnoremap <leader>? :ptag <C-R>=expand("<cword>")<CR><CR>
-endif
-
-" }}}
 " QFEnter settings  {{{
 if Plugin_exists('QFEnter')
     let g:qfenter_vopen_map = ['<C-v>']
@@ -511,11 +372,6 @@ if Plugin_exists('vim-fugitive')
 		endif
 	endfunction
 	command! ToggleGStatus :call ToggleGStatus()
-endif
-"}}}
-" Gitgutter settings  {{{
-if Plugin_exists('vim-gitgutter')
-    nnoremap <F10> :GitGutterToggle<CR>
 endif
 "}}}
 " Syntastic  {{{
@@ -555,28 +411,6 @@ if Plugin_exists('syntastic')
     nnoremap <leader>p :SyntasticCheck<CR>
     nnoremap <leader>P :SyntasticReset<CR>
 endif
-" vim-clang  {{{
-" cd ~/.vim/bundle && \
-" git clone https://github.com/justmao945/vim-clang
-if Plugin_exists('vim-clang')
-    let g:clang_auto = 1
-
-    " Limit include files to 3 levels
-    let includedirs = split(globpath('.','include'), '\n') + 
-                      \ split(globpath('.','*/include'), '\n') +
-                      \ split(globpath('.','*/*/include'), '\n')
-
-    " TODO remove repetition from syntastic settings
-    let g:clang_c_options = join(map(g:includedirs, '"-I " . getcwd() . "/" . v:val'), ' ') .
-                            \ ' -std=c11 -Wall -pedantic -Wextra' 
-
-    let g:clang_cpp_options = join(map(g:includedirs, '"-I " . getcwd() . v:val'), ' ') .
-                            \ ' -std=c++11' 
-
-    " disable diagnostics window
-    let g:clang_diagsopt = ''
-endif
-" }}}
 " Buffergator  {{{
 " git clone https://github.com/jeetsukumaran/vim-buffergator
 if Plugin_exists('vim-buffergator')
@@ -599,14 +433,6 @@ if Plugin_exists('vim-beancount')
     autocmd filetype beancount setlocal foldlevel=0
     autocmd filetype beancount setlocal foldlevelstart=0
     autocmd FileType beancount setlocal iskeyword+=-,.
-endif
-
-" }}}
-" deoplete.nvim {{{
-" git clone https://github.com/nathangrigg/vim-beancount
-if Plugin_exists('deoplete.nvim')
-  command! EnableDeocomplete :call deoplete#enable()
-  command! DisableDeocomplete :call deoplete#disable()
 endif
 
 " }}}
