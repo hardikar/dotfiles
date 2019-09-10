@@ -381,6 +381,15 @@ if Plugin_exists('syntastic')
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
+ 
+		" "mode" can be mapped to one of two values - "active" or "passive". When
+		" set to "active", syntastic does automatic checking whenever a buffer is
+		" saved or initially opened. When set to "passive" syntastic only checks
+		" when the user calls `:SyntasticCheck`.
+    let g:syntastic_mode_map = {
+        \ "mode": "passive",
+        \ "active_filetypes": [],
+        \ "passive_filetypes": [] }
 
     " Automatically close when no errors, but don't auto-open
     let g:syntastic_auto_loc_list = 2
