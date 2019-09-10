@@ -528,3 +528,5 @@ if filereadable($home."/.local/.vimrc")
 endif
 " }}}
 
+" Make sure this wasn't reset in the interim!
+set nocompatible
