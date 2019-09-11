@@ -46,6 +46,9 @@ ln $OPTIONS "$SRCDIR/.gvimrc" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/.vimrc" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/.vim" "$DESTDIR"
 
+ln $OPTIONS "$SRCDIR/.editrc" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.psqlrc" "$DESTDIR"
+
 ln $OPTIONS "$SRCDIR/.zshrc" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/.zsh" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/.sh" "$DESTDIR"
