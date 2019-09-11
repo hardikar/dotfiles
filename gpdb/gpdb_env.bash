@@ -1,8 +1,20 @@
-ORCA_INSTALL_PATH=/usr/local/
+ORCA_INSTALL_PATH=/usr/local
 ORCA_PREFIX=gporca
 
 GPDB_WORKSPACE=$HOME/workspace
 SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+configure_gpdb() {
+	CFLAGS="-O2" CC="ccache cc" CXX="ccache c++" LDFLAGS="-rpath ${CONF_RPATH}" \
+		./configure \
+		--with-includes="${CONF_INC}:/usr/local/include" \
+		--with-libraries="${CONF_LIB}:/usr/local/lib" \
+		--with-python --with-perl --with-libxml --enable-orca \
+		--disable-gpfdist \
+		--enable-debug \
+		"$@" \
+		--prefix="$(pwd)/.build"
+}
 
 source_gpdb () {
 	path="$1"
