@@ -18,8 +18,8 @@ case $host_os in
         ;;
 esac
 
-alias ls="ls ${colorflag}"
-alias l="ls -lah ${colorflag}"
+alias ls="ls -p ${colorflag}"
+alias l="ls -plah ${colorflag}"
 alias la="ls -AF ${colorflag}"
 alias ll="ls -lFh ${colorflag}"
 alias lld="ls -l | grep ^d"
