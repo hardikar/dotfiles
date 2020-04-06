@@ -438,6 +438,8 @@ endif
 if Plugin_exists('vim-beancount')
     let g:beancount_detailed_first = 1
 
+    autocmd BufEnter *.bc :setlocal filetype=beancount
+
     autocmd filetype beancount setlocal foldmethod=marker
     autocmd filetype beancount setlocal foldlevel=0
     autocmd filetype beancount setlocal foldlevelstart=0
