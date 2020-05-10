@@ -5,7 +5,6 @@ export SAVEHIST=$HISTSIZE
 setopt APPEND_HISTORY         # Append history file
 setopt INC_APPEND_HISTORY     # Append as you type, instead of end of session 
 setopt HIST_VERIFY
-setopt EXTENDED_HISTORY       # Save date & exec time
 setopt SHARE_HISTORY          # Share history with all open shells
 setopt HIST_IGNORE_ALL_DUPS   # Ignore duplicate commands
 setopt HIST_EXPIRE_DUPS_FIRST
