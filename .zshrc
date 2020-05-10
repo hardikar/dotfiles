@@ -9,15 +9,14 @@ setopt EXTENDED_HISTORY       # Save date & exec time
 setopt SHARE_HISTORY          # Share history with all open shells
 setopt HIST_IGNORE_ALL_DUPS   # Ignore duplicate commands
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt COMPLETE_ALIASES 
-
-setopt PROMPT_SUBST           # Enable prompt evaluation
 
 setopt AUTO_PUSHD
-setopt COMPLETE_IN_WORD
-setopt AUTO_MENU
 unsetopt FLOWCONTROL          # ^S doesn't block input
 
+setopt COMPLETE_ALIASES
+setopt AUTO_MENU
+setopt MENU_COMPLETE
+setopt COMPLETE_IN_WORD
 
 # set up a colored prompt
 autoload -U colors && colors
@@ -28,6 +27,9 @@ select-word-style bash
 
 # enable completion
 autoload -Uz compinit
+zstyle ':completion:*' menu interactive select
+# use up default colors
+zstyle ':completion:*' list-colors ''
 compinit
 
 # edit the command in a full-out editor
@@ -69,6 +71,12 @@ fi
 export PAGER='less'
 export MANPAGER='less'
 export EDITOR='vim'
+
+# setting editor to vim, set's the line-editor mode to vim also
+# so, reset it back to emacs till I get a hang of it
+bindkey -e
+
+setopt PROMPT_SUBST           # Enable prompt evaluation
 
 ZSH_PROMPT_DATE="%{$fg[blue]%}%D{%H:%M:%S}%{$reset_color%}"
 ZSH_PROMPT_HOST="%{$fg[green]%}%d%{$reset_color%}"
