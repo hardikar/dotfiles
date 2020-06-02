@@ -77,22 +77,17 @@ bindkey -e
 
 setopt PROMPT_SUBST           # Enable prompt evaluation
 
-ZSH_PROMPT_DATE="%{$fg[blue]%}%D{%H:%M:%S}%{$reset_color%}"
-ZSH_PROMPT_HOST="%{$fg[green]%}%d%{$reset_color%}"
-ZSH_PROMPT_GIT="$(__git_ps1 ':(%s)')"
+ZSH_PROMPT_DATE='%{$fg[blue]%}%D{%H:%M:%S}%{$reset_color%}'
+ZSH_PROMPT_HOST='%{$fg[green]%}%d%{$reset_color%}'
+ZSH_PROMPT_GIT='%{$fg[yellow]%}$(__git_ps1 ":(%s)")%{$reset_color%}'
 
-PROMPT='
+PROMPT="
 [${ZSH_PROMPT_HOST}${ZSH_PROMPT_GIT}] [${ZSH_PROMPT_DATE}] %M
-%(!.#.$) '
+%(!.#.$) "
 
 # Load local overrides
 if [[ -f ~/.local/.zshrc ]]; then
 	source ~/.local/.zshrc
-fi
-
-# Something fun :)
-if [[ -f ~/bin/epigrams ]]; then
-	~/bin/epigrams
 fi
 
 # ZSH highlighting plugin (must be last)
