@@ -34,64 +34,53 @@ configure_gpdb() {
 	set +x
 }
 
-source_gpdb () {
-	path="$1"
+GPDB4_PATH="$HOME/workspace/gpdb4"
+GPDB5_PATH="$HOME/workspace/gpdb5"
+GPDB6_PATH="$HOME/workspace/gpdb6"
+GPDB_MASTER_PATH="$HOME/workspace/gpdb"
+
+pick_gpdb () {
+	if [ "$1" = "4x" ]; then
+		echo "${GPDB4_PATH}"
+	elif [ "$1" = "5x" ]; then
+		echo "${GPDB5_PATH}"
+	elif [ "$1" = "6x" ]; then
+		echo "${GPDB6_PATH}"
+	elif [ "$1" = "master" ]; then
+		echo "${GPDB_MASTER_PATH}"
+	fi
+}
+
+gpcd () {
+	path="$(pick_gpdb $1)"
+	cd "$path"
+}
+
+gpsource () {
+	path="$(pick_gpdb $1)"
 	source "$path/.build/greenplum_path.sh"
 	source "$path/gpAux/gpdemo/gpdemo-env.sh"
 }
 
-start_gpdb () {
-	source_gpdb "$1"
+gpdb_start () {
+	gpsource "$1"
 	gpstart -a
 }
 
-stop_gpdb () {
-	source_gpdb "$1"
+gpdb_stop () {
+	gpsource "$1"
 	gpstop -a
 }
 
-GPDB4_PATH="$HOME/workspace/gpdb4"
-GPDB5_PATH="$HOME/workspace/gpdb5"
-GPDB6_PATH="$HOME/workspace/gpdb"
+start4x () { gpdb_start 4x; }
+start5x () { gpdb_start 5x; }
+start6x () { gpdb_start 6x; }
+startmaster () { gpdb_start master; }
 
-cd6x () {
-	cd "$GPDB6_PATH"
-}
-start6x () {
-	start_gpdb "$GPDB6_PATH"
-}
-stop6x () {
-	stop_gpdb "$GPDB6_PATH"
-}
-source6x () {
-	source_gpdb "$GPDB6_PATH"
-}
-
-cd5x () {
-	cd "$GPDB5_PATH"
-}
-start5x () {
-	start_gpdb "$GPDB5_PATH"
-}
-stop5x () {
-	stop_gpdb "$GPDB5_PATH"
-}
-source5x () {
-	source_gpdb "$GPDB5_PATH"
-}
-
-cd4x () {
-	cd "$GPDB4_PATH"
-}
-start4x () {
-	start_gpdb "$GPDB4_PATH"
-}
-stop4x () {
-	stop_gpdb "$GPDB4_PATH"
-}
-source4x () {
-	source_gpdb "$GPDB4_PATH"
-}
+stop4x () { gpdb_stop 4x; }
+stop5x () { gpdb_stop 5x; }
+stop6x () { gpdb_stop 6x; }
+stopmaster () { gpdb_stop master; }
 
 use_orca () {
 	local ver
