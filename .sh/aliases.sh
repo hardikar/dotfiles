@@ -4,11 +4,6 @@ host_os=$(uname -s)
 ################################################################################
 # Filesystem aliases
 ################################################################################
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
 case $host_os in
     Darwin|FreeBSD)
         colorflag="-G"
@@ -18,12 +13,10 @@ case $host_os in
         ;;
 esac
 
-alias ls="ls -p ${colorflag}"
-alias l="ls -plah ${colorflag}"
+alias ls="ls -F ${colorflag}"
 alias la="ls -AF ${colorflag}"
-alias ll="ls -lFh ${colorflag}"
-alias lld="ls -l | grep ^d"
-alias rmf="rm -rf"
+alias ll="ls -lhF ${colorflag}"
+alias lla="ls -AlhF ${colorflag}"
 
 alias grep='grep --color=auto'
 
@@ -41,6 +34,7 @@ alias gdc="git diff --cached"
 
 alias gco="git checkout"
 alias gs="git status"
+alias gsh="git show"
 alias gr="git reset"
 alias grh="git reset --hard"
 
@@ -66,7 +60,7 @@ alias tmux="tmux -2"
 # Process control aliases
 alias jobs='jobs -l'
 
-alias ldate="date +%Y-%m-%d-%H-%M"
+alias ldate="date +%Y-%m-%d_%H-%M"
 
 # Because I always forget this :(
 alias cl="clear"
