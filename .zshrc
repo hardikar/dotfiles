@@ -13,9 +13,6 @@ setopt AUTO_PUSHD
 unsetopt FLOWCONTROL          # ^S doesn't block input
 
 setopt COMPLETE_ALIASES
-setopt AUTO_MENU
-setopt MENU_COMPLETE
-setopt COMPLETE_IN_WORD
 
 # set up a colored prompt
 autoload -U colors && colors
@@ -26,7 +23,7 @@ select-word-style bash
 
 # enable completion
 autoload -Uz compinit
-zstyle ':completion:*' menu interactive select
+zstyle ':completion:*' menu select
 # use up default colors
 zstyle ':completion:*' list-colors ''
 compinit
