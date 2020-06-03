@@ -2,6 +2,19 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1024000
 export SAVEHIST=$HISTSIZE
 
+INCLUDES=(
+	$HOME/.sh/aliases.sh
+	$HOME/.sh/functions.sh
+	$HOME/.sh/exports.sh
+	$HOME/.sh/git-prompt.sh
+)
+
+for file in ${INCLUDES}; do
+    if [[ -f ${file} ]]; then
+        source ${file}
+    fi
+done
+
 setopt APPEND_HISTORY         # Append history file
 setopt INC_APPEND_HISTORY     # Append as you type, instead of end of session 
 setopt HIST_VERIFY
@@ -32,41 +45,6 @@ compinit
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
-
-INCLUDES=(
-	$HOME/.sh/aliases.sh
-	$HOME/.sh/functions.sh
-	$HOME/.sh/git-prompt.sh
-)
-
-for file in ${INCLUDES}; do
-    if [[ -f ${file} ]]; then
-        source ${file}
-    fi
-done
-
-export PATH=
-path=(
-	/usr/local/bin
-	/usr/bin
-	/bin
-	/usr/sbin
-	/sbin
-	/usr/texbin
-)
-
-# check for custom bin directory and add to path
-if [[ -d ~/bin ]]; then
-	export PATH=~/bin:$PATH
-fi
-if [[ -d ~/scripts ]]; then
-	export PATH=~/scripts:$PATH
-fi
-
-# export other environment variables
-export PAGER='less'
-export MANPAGER='less'
-export EDITOR='vim'
 
 # setting editor to vim, set's the line-editor mode to vim also
 # so, reset it back to emacs till I get a hang of it
