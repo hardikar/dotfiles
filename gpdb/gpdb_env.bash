@@ -4,7 +4,6 @@ ORCA_PREFIX=gporca
 export PGHOST=localhost
 
 GPDB_WORKSPACE=$HOME/workspace
-SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 configure_gpdb_old() {
 	set -x
@@ -35,55 +34,7 @@ configure_gpdb() {
 		--prefix="$(pwd)/.build"
 	set +x
 }
-
-GPDB4_PATH="$HOME/workspace/gpdb4"
-GPDB5_PATH="$HOME/workspace/gpdb5"
-GPDB6_PATH="$HOME/workspace/gpdb6"
-GPDB_MASTER_PATH="$HOME/workspace/gpdb"
-
-pick_gpdb () {
-	if [ "$1" = "4x" ]; then
-		echo "${GPDB4_PATH}"
-	elif [ "$1" = "5x" ]; then
-		echo "${GPDB5_PATH}"
-	elif [ "$1" = "6x" ]; then
-		echo "${GPDB6_PATH}"
-	elif [ "$1" = "master" ]; then
-		echo "${GPDB_MASTER_PATH}"
-	fi
-}
-
-gpcd () {
-	path="$(pick_gpdb $1)"
-	cd "$path"
-}
-
-gpsource () {
-	path="$(pick_gpdb $1)"
-	source "$path/.build/greenplum_path.sh"
-	source "$path/gpAux/gpdemo/gpdemo-env.sh"
-}
-
-gpdb_start () {
-	gpsource "$1"
-	gpstart -a
-}
-
-gpdb_stop () {
-	gpsource "$1"
-	gpstop -a
-}
-
-start4x () { gpdb_start 4x; }
-start5x () { gpdb_start 5x; }
-start6x () { gpdb_start 6x; }
-startmaster () { gpdb_start master; }
-
-stop4x () { gpdb_stop 4x; }
-stop5x () { gpdb_stop 5x; }
-stop6x () { gpdb_stop 6x; }
-stopmaster () { gpdb_stop master; }
-
+ 
 use_orca () {
 	local ver
   ver="$1"
@@ -93,6 +44,9 @@ use_orca () {
   echo_and_run export CONF_LIB="${ORCA_INSTALL_PATH}/$1/lib"
   echo_and_run export CONF_RPATH="${ORCA_INSTALL_PATH}/$1/lib"
 }
+
+alias cdregress="cd ${GPDB_PATH:-.}/src/test/regress"
+alias cdminidumps="cd $MASTER_DATA_DIRECTORY/minidumps"
 
 _use_orca_complete()
 {
@@ -106,47 +60,7 @@ _use_orca_complete()
   return 0
 }
 complete -o nospace -F _use_orca_complete use_orca
-
-
-make_gpdb_project()
-{
-  local projdir
-  projdir="$1"
-
-  if [[ -z "$projdir" ]]; then
-    echo "  ERROR: Usage $0 <project-dir>"
-    return 1
-  fi
-
-  if [[ -d "${GPDB_WORKSPACE}/$projdir" ]]; then
-    echo "  ERROR: Usage ${GPDB_WORKSPACE}/$projdir already exists!"
-    return 1
-  fi
-
-  mkdir -p "${GPDB_WORKSPACE}/$projdir"
-  pushd "${GPDB_WORKSPACE}/$projdir"
-
-  git clone git@github.com:hardikar/gpdb.git
-  git clone git@github.com:hardikar/gporca.git
-  git clone https://github.com/d/bug-free-fortnight
-
-  git -C gpdb remote add upstream git@github.com:greenplum-db/gpdb.git
-  git -C gpdb remote update
-  git -C gporca remote add upstream git@github.com:greenplum-db/gporca.git
-  git -C gporca remote update
-
-  cp ${SOURCE_DIR}/CMakeLists.txt.all ./CMakeLists.txt
-  cp ${SOURCE_DIR}/CMakeLists.txt.gpdb gpdb/CMakeLists.txt
-
-  mkdir build.xcode
-  pushd build.xcode
-
-  cmake -G Xcode ..
-
-  popd
-  popd
-}
-
+ 
 verify_version()
 {
   file1="config/orca.m4"
