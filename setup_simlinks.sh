@@ -58,6 +58,8 @@ ln $OPTIONS "$SRCDIR/.tmux.conf" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/bin" "$DESTDIR"
 
 mkdir -p "$DESTDIR"/.config
+ln $OPTIONS "$SRCDIR/.desk" "$DESTDIR"
+
 ln $OPTIONS "$SRCDIR/.config/jrnl" "$DESTDIR"/.config
 
 set +x

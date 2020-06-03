@@ -48,3 +48,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 if [[ -f ~/.local/.bashrc ]]; then
     source ~/.local/.bashrc
 fi
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true

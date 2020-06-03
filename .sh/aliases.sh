@@ -67,3 +67,5 @@ alias ldate="date +%Y-%m-%d_%H-%M"
 alias cl="clear"
 alias cls="clear"
 
+alias d="desk go"
+
