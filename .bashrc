@@ -1,14 +1,7 @@
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
-HISTFILESIZE=20000
-
-# color scheme
-#source $HOME/.zsh/themes/base16-solarized.dark.sh
-
-
 INCLUDES=(
     $HOME/.sh/aliases.sh
     $HOME/.sh/functions.sh
+    $HOME/.sh/exports.sh
     $HOME/.sh/git-prompt.sh
     $HOME/.sh/git-completion.bash
 )
@@ -43,22 +36,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # Prompt for BASH
 PROMPT_COMMAND=__prompt_command
 
-# Path magic
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-
-# check for custom bin directory and add to path
-if [[ -d ~/bin ]]; then
-    export PATH=~/bin:$PATH
-fi
-if [[ -d ~/scripts ]]; then
-    export PATH=~/scripts:$PATH
-fi
-
-# export other environment variables
-export PAGER='less'
-export MANPAGER='less'
-export EDITOR='vim'
-
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
@@ -66,18 +43,6 @@ shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
-# Usage: less $(DATA_DIR=$MASTER_DATA_DIRECTORY latest_log)
-function latest_log() {
-    LOG=$(ls -t $DATA_DIR/pg_log/ | grep '^gpdb' | head -n 1)
-    echo -n $DATA_DIR/pg_log/$LOG
-}
-
-# Usage: lldb -c $(CORE_DIR=/cores latest_core)
-function latest_core() {
-    CORE=$(ls -t $CORE_DIR | head -n 1)
-    echo -n $CORE_DIR/$CORE
-}
 
 # Load local overrides
 if [[ -f ~/.local/.bashrc ]]; then
