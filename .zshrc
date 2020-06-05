@@ -51,6 +51,7 @@ bindkey "^X^E" edit-command-line
 bindkey -e
 
 setopt PROMPT_SUBST           # Enable prompt evaluation
+export GIT_PS1_SHOWDIRTYSTATE=1
 
 ZSH_PROMPT_DATE='%{$fg[blue]%}%D{%H:%M:%S}%{$reset_color%}'
 ZSH_PROMPT_HOST='%{$fg[green]%}%d%{$reset_color%}'
