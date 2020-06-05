@@ -3,7 +3,7 @@
 # Description: environment for gpdb 5x development
 #
 
-GPDB_PATH=$HOME/workspace/gpdb
+GPDB_PATH=$HOME/workspace/gpdb5
 
 cd "${GPDB_PATH}"
 
