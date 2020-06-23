@@ -153,16 +153,21 @@ set showcmd      " Show's the current command at the bottom right corner
 set laststatus=2 " Always have a status line on
 set report=0     " Always report the number of lines yanked/deleted etc
 
-set statusline=          " Empty status bar
-set statusline+=%n:      " Buffer number
-set statusline+=%m\      " Modifiable flag
-set statusline+=%F       " Full path of the file
-set statusline+=%=       " left/right separator
-set statusline+=%l,      " Cursor line
-set statusline+=%c\      " Cursor column
-set statusline+=\|\      " Seperator
-set statusline+=%L       " Cursor line/total lines
-set statusline+=\ (%P)   " Percent through file
+set statusline=                              " Empty status bar
+set statusline+=%n:                          " Buffer number
+set statusline+=%{tabpagewinnr(tabpagenr())} " Window number
+set statusline+=\                            " Separator
+set statusline+=%m                           " Modifiable flag
+set statusline+=\                            " Separator
+set statusline+=%y                           " File type
+set statusline+=\                            " Separator
+set statusline+=%F                           " Full path of the file
+set statusline+=%=                           " left/right separator
+set statusline+=%l,                          " Cursor line
+set statusline+=%c                           " Cursor column
+set statusline+=\ \|\                        " Seperator
+set statusline+=%L                           " Cursor line/total lines
+set statusline+=\ (%P)                       " Percent through file
 
 " }}}
 
