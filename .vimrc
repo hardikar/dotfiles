@@ -285,6 +285,73 @@ function! ToggleQuickFix()
 endfunction
 nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
 autocmd BufWinEnter quickfix :nnoremap <buffer> <silent> q :call ToggleQuickFix()<CR>
+
+" }}}
+" SendToTerm {{{
+
+" Find a terminal buffer in the current tab.
+" tabpagebuflist([{arg}]) List list of buffer numbers in tab page
+" term_list()             List get the list of terminal buffers
+function! GetTermBufferInCurrentTab()
+	let terms = term_list()
+	if len(terms) <= 0
+		" echoerr "No available terminals!"
+		return 0
+	endif
+
+	for ibuf in tabpagebuflist()
+		let idx = index(terms, ibuf)
+		if idx != -1
+			return ibuf
+		endif
+	endfor
+	return terms[0]
+endfunction
+
+" Send characters in visual buffer to the given terminal.
+" Else find a terminal buffer in the current tab and send it there.
+" term_sendkeys({buf}, {keys}) none send keystrokes to a terminal
+" Inspiration:
+" - https://stackoverflow.com/questions/49318522/send-buffer-to-a-running-terminal-window-in-vim-8
+" - https://vi.stackexchange.com/questions/11025/passing-visual-range-to-a-command-as-its-argument
+function! SendToTerm(bufn=-1) range
+	" if no bufn is passed in, find a terminal in the current tab
+	if a:bufn <= 0
+		let c = GetTermBufferInCurrentTab()
+	else
+		let c = a:bufn
+	endif
+	" if no bufn found, stop
+	if c <= 0
+		echon "No available terminals!"
+		return
+	endif
+
+	" get the line and column of the visual selection marks
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+
+  " get all the lines represented by this range
+  let lines = getline(lnum1, lnum2)
+
+  " the last line might need to be cut
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  " the first line might need to be trimmed
+	let lines[0] = lines[0][col1 - 1:]
+
+	" clean up and send!
+	let keys = substitute(join(lines, "\n"), '\n$', '', '')
+	call term_sendkeys(c, keys . "\<cr>")
+
+	echon "Sent " . len(keys) . " chars to buf " . c . "."
+endfunction
+
+" visual select text to be sent, then hit <leader>r.
+" also takes count, e.g 5<leader>r to send to buffer 5.
+vnoremap <leader>r :call SendToTerm(v:count)<CR>
+nnoremap <leader>r V:call SendToTerm(v:count)<CR>
+command! -range SendToTerm call SendToTerm(v:count)
+
 " }}}
 " Omnicomplete navigation {{{
 
