@@ -563,6 +563,13 @@ augroup ft_llvm
 augroup end
 " }}}
 
+" javascript & json{{{
+augroup ft_javascript
+    au!
+    au FileType javascript setlocal expandtab
+    au FileType json setlocal expandtab
+augroup end
+" }}}
 " }}}
 
 " break bad habits -------------------------------------------------------- {{{
