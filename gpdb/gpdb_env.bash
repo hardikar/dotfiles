@@ -5,6 +5,14 @@ export PGHOST=localhost
 
 GPDB_WORKSPACE=$HOME/workspace
 
+echo -ne "\e]1;${GPDB_TITLE}\a"
+
+function finish() {
+	echo -ne "\e]1;\a"
+}
+
+trap finish EXIT
+
 configure_gpdb_old() {
 	set -x
 	CC="ccache cc" CXX="ccache c++" LDFLAGS="-rpath ${CONF_RPATH}" \
