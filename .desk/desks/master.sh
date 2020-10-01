@@ -4,6 +4,7 @@
 #
 
 GPDB_PATH=$HOME/workspace/gpdb
+GPDB_TITLE="master"
 
 cd "${GPDB_PATH}"
 
