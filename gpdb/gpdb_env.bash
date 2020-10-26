@@ -15,6 +15,7 @@ configure_gpdb_old() {
 		--with-python --with-perl --with-libxml --enable-orca \
 		--disable-gpfdist --disable-gpcloud \
 		--enable-debug \
+		--enable-depend \
 		"$@" \
 		--prefix="$(pwd)/.build"
 	set +x
@@ -29,6 +30,7 @@ configure_gpdb() {
 		--with-python --with-perl --with-libxml --enable-orca \
 		--disable-gpfdist --disable-gpcloud \
 		--enable-debug \
+		--enable-depend \
 		"$@" \
 		--prefix="$(pwd)/.build"
 	set +x
