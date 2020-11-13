@@ -38,6 +38,8 @@ call plug#end()
 " Map leader early on, so that all future mappings succeed
 let mapleader = " "
 
+packadd! matchit
+
 " }}}
 
 " Basic options ----------------------------------------------------------- {{{
