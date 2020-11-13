@@ -54,6 +54,7 @@ use_orca () {
 }
 
 alias cdregress="cd ${GPDB_PATH:-.}/src/test/regress"
+alias cdorca="cd ${GPDB_PATH:-.}/src/backend/gporca"
 alias cdminidumps="cd $MASTER_DATA_DIRECTORY/minidumps"
 
 _use_orca_complete()
