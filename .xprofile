@@ -1,0 +1,2 @@
+setxkbmap -option caps:escape_shifted_capslock
+xcape -e 'Super_L=Control_L|Escape'

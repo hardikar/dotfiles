@@ -61,6 +61,11 @@ PROMPT="
 [${ZSH_PROMPT_HOST}${ZSH_PROMPT_GIT}] [${ZSH_PROMPT_DATE}] %M
 %(!.#.$) "
 
+# Syntax highlighting
+if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 # Load local overrides
 if [[ -f ~/.local/.zshrc ]]; then
 	source ~/.local/.zshrc
