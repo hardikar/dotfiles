@@ -57,6 +57,8 @@ ln $OPTIONS "$SRCDIR/.tmux.conf" "$DESTDIR"
 
 ln $OPTIONS "$SRCDIR/bin" "$DESTDIR"
 
+ln $OPTIONS "$SRCDIR/.xprofile" "$DESTDIR"
+
 mkdir -p "$DESTDIR"/.config
 ln $OPTIONS "$SRCDIR/.desk" "$DESTDIR"
 
