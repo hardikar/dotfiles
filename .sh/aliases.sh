@@ -17,6 +17,7 @@ alias ls="ls -F ${colorflag}"
 alias la="ls -AF ${colorflag}"
 alias ll="ls -lhF ${colorflag}"
 alias lla="ls -AlhF ${colorflag}"
+alias cd="pushd"
 
 alias grep='grep --color=auto'
 
