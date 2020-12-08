@@ -1,108 +1,41 @@
 " .vimrc
 " Author : Shreedhar Hardikar (hardikar@cs.wisc.edu)
 "
-" Initializations --------------------------------------------------------- {{{
-" =============================================================================
+" Basic options ----------------------------------------------------------- {{{
 
-" Vim Plugin Manager {{{
-" Install the vim-plug VIM plugin manager
-"    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-"    curl -LSso ~/.vim/autoload/pathogen.vim \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-" Hacky check to see if a plugin exists using g:plugs which is set up by
-" the vim-plug plugin manager
-function! Plugin_exists(name)
-    return has_key(g:plugs, a:name) && isdirectory(g:plugs[a:name]['dir'])
-endfunction
-
-call plug#begin('~/.vim/bundle')
-
-" Navigation plugins
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'yssl/QFEnter'
-
-" Productivity plugins
-Plug 'jszakmeister/vim-togglecursor'
-Plug 'nathangrigg/vim-beancount'
-
-" Language plugins
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-fugitive'
-
-" Add plugins to &runtimepath
-call plug#end()
-
-" }}}
-
-" Map leader early on, so that all future mappings succeed
 let mapleader = " "
 
-packadd! matchit
-
-" }}}
-
-" Basic options ----------------------------------------------------------- {{{
-" =============================================================================
-
-" set term=xterm-256color
-" set term=screen-256color " because tmux REALLY likes term=screen
-
-" F*** vi
-set nocompatible " Must be the first line
-set modelines=0
-
-" Remember enough
+set nocompatible    " Disable vi compatibility
+set nomodeline      " Don't read editor config from file
 set history=750
 set undolevels=700
-
-" Tab incantations
-set autoindent      " Indent according to the previous line automatically
-set tabstop=2       " number of visual spaces per TAB
-set softtabstop=2   " number of spaces in tab when editing
-set shiftwidth=2
-
-" Search settings
-set ignorecase " Ignore cases while searching
-set smartcase  " /The matches only The but /the matches both The and the
-set incsearch  " Show the next matching thing right away
-
-" General
-set cursorline                 " Highlight the screen line of the cursor
-set ttyfast                    " Fast terminal connection
-set backspace=indent,eol,start " Allow backspace over autoindent, eol, start
-set tildeop                    " Change case is now an operator
-set hidden                     " Opening a new file when the current buffer
-                               " has unsaved changes " causes files to be hidden
-                               " instead of closed
-
-" Split settings
+set cursorline      " Highlight the screen line of the cursor
+set ttyfast         " Fast terminal connection
+set backspace=2     " Allow backspace over autoindent,eol,start
+set tildeop         " Change case is now an operator
+set hidden          " Opening a new file when the current buffer has unsaved
+                    " changes, causes files to be hidden instead of closed
 set splitbelow
 set splitright
+set mouse=a         " Enable mouse selection whenever possible
+set noesckeys       " Don't allow mappings that start with <Esc>
+set number
+set path+=**        " :find searches current directory recursively 
+
+set autoindent      " Indent according to the previous line automatically
+set smarttab        " Uses shiftwidth on a <Tab> in front of a line
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=0    " Use the tabstop value when shifting
+
+" Search settings
+set ignorecase      " Ignore cases while searching
+set smartcase       " /The matches only The but /the matches both The and the
+set incsearch       " Show the next matching thing right away
 
 " Backups and swap files
-" set nobackup
-" set nowritebackup
 set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-set number
-
-" Brackets while editing
-set matchpairs=(:),{:},[:]   " Additional "bracket" types
-" the cursor will briefly jump to the matching brace when you insert one
-set showmatch
-set matchtime=3
-
-" Enable mouse selection whenever possible
-set mouse=a
-
-" Don't allow mappings that start with <Esc>
-set noesckeys
-
-" Easy toggling insert modes
-set pastetoggle=<F6>
 
 " NetRW settings
 " Quick help for me:
@@ -113,41 +46,43 @@ set pastetoggle=<F6>
 " d          Create directory
 " D          Delete file/directory
 " %          New file in current directory
-
 let g:netrw_banner = 0     " Remove hideous banner
 let g:netrw_liststyle = 3  " tree listing
-let g:netrw_preview   = 1  " Split vertically for preview windows
-let g:netrw_alto = 0       " Split on right for preview windows
+let g:netrw_preview = 1    " Split vertically for preview windows
 
-" VIM's own fuzzy finding
-set path+=**
-
-" }}}
-
-" Color Theme ------------------------------------------------------------- {{{
-" =============================================================================
-
-" Explicitly tell vim that the terminal supports 256 colors"
-set t_Co=256
-
-let g:colors = ["hybrid", "wombat256mod"]
-nnoremap <F12> :ColorsNext<CR>:echo g:colors_name<CR>
+set background=dark
+colorscheme hybrid
 
 " Setup fonts
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Inconsolata\ 12
+    set guifont=JetbrainsMonoNL-Regular\ 12
   elseif has("gui_macvim")
-    set guifont=Inconsolata:h14
+    set guifont=JetBrainsMonoNL-Regular:h13
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI
   endif
 endif
 
-" }}}
+set scrolloff=2     " min lines to show when scrolling up/down
+set sidescrolloff=2 " min lines to show when scrolling left/right
 
+" Delete comment character when joining commented
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
+
+set listchars=tab:>\ ,extends:>,precedes:<,nbsp:+,eol:$
+
+" don't fold anything when file is opened
+set foldlevel=1000
+
+" resize splits once window is resized
+autocmd VimResized * execute "normal! \<c-w>="
+
+
+" }}}
 " Status bar -------------------------------------------------------------- {{{
-" =============================================================================
 
 " Verbose status
 set showmode     " Show current mode on the last line when in insert/visual etc
@@ -172,50 +107,10 @@ set statusline+=%L                           " Cursor line/total lines
 set statusline+=\ (%P)                       " Percent through file
 
 " }}}
-
-" Folding ----------------------------------------------------------------- {{{
-" =============================================================================
-
-set foldmethod=marker
-" Auto-fold everything above fold level 5
-set foldlevel=5
-
-" Folding key bindings
-nnoremap <Tab> za
-vnoremap <Tab> za
-
-" Focus mode that auto-folds all other folds
-nnoremap <leader>z zMzvzz
-
-" }}}
-
-" General Auto-commands --------------------------------------------------- {{{
-" =============================================================================
-
-" resize splits once window is resized
-autocmd VimResized * execute "normal! \<c-w>="
-
-" Silence output to prevent displaying "Press a Key to continue"
-command! -nargs=1 SilentExec execute ':silent !'.<q-args> | execute ':redraw!'
-
-
-" }}}
-
-" Major Mappings ---------------------------------------------------------- {{{
-" =============================================================================
-
-" Toggle spelling on/off
-nnoremap <silent> <leader>s :set spell!<CR>
-
-" Toggle invisibles
-nnoremap <silent> <Leader>l :set list!<CR>
-
-" Since <C-I> is <TAB> some times
-nnoremap <C-P> <C-I>
+" Mappings ---------------------------------------------------------- {{{
 
 " Vertical splits a tad bit better
 nnoremap <C-W>] :vertical stag <C-R>=expand("<cword>")<CR><CR>
-
 
 " Easier moving of code block
 vnoremap < <gv
@@ -225,30 +120,19 @@ vnoremap > >gv
 " Great for pasting Python lines into REPLs.
 nnoremap <leader>v ^<C-v>g_
 
-" Justify current paragraph with current wrap
-nnoremap Q gqip
-
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
-" Movement  {{{
-" Map emacs-like keys for moving to beginning/end of line
-nnoremap <C-a> <Home>
-nnoremap <C-e> <End>
+" Quick-access to omni-complete
+inoremap <c-o> <c-x><c-o>
 
-" Mappings for command mode
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
+" Toggle spelling on/off
+nnoremap <silent> <leader>s :set spell!<CR>
 
-" Mappings for insert mode
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
+" Toggle invisibles
+nnoremap <silent> <Leader>l :set list!<CR>
 
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-" }}}
-" ScrollLock {{{
+" ScrollLock
 " Setup a scroll lock so that j,k stay in the same place relative to the
 " window
 function! ToggleScrollLock()
@@ -263,14 +147,12 @@ function! ToggleScrollLock()
     endif
 endfunction
 nnoremap <silent> <Leader>- :call ToggleScrollLock()<CR>
-" }}}
-" QuickFix list mappings  {{{
+
 " Quick fix list traversal
 nnoremap <silent> <leader>n :cnext<CR>
 nnoremap <silent> <leader>N :cprevious<CR>
 
-" Search for the word under the cursor in the current file and open a quickfix
-" window
+" Search for the word under the cursor in the current file and open a quickfix window
 nnoremap <leader>* :execute 'noautocmd vimgrep /'.expand("<cword>").'/g %'<CR>:copen<CR>
 
 " Set up a command to search for any word in the directory
@@ -288,9 +170,22 @@ endfunction
 nnoremap <silent> <Leader>q :call ToggleQuickFix()<CR>
 autocmd BufWinEnter quickfix :nnoremap <buffer> <silent> q :call ToggleQuickFix()<CR>
 
+set complete=.,w,b,kspell,t
+" Better navigating through omnicomplete option list
+set completeopt=longest,menuone
+" Limit the height of the menu
+set pumheight=10
+
+" mark trailing white space, except when typing at the end of the line
+highlight extrawhitespace ctermbg=red guibg=red
+autocmd insertenter * match extrawhitespace /\s\+\%#\@<!$/
+autocmd insertleave * match extrawhitespace /\s\+$/
+
+" remove trailing whitespace
+nnoremap <leader>w :%s/\s\+$//<cr>
+
 " }}}
 " SendToTerm {{{
-
 " Find a terminal buffer in the current tab.
 " tabpagebuflist([{arg}]) List list of buffer numbers in tab page
 " term_list()             List get the list of terminal buffers
@@ -353,39 +248,6 @@ endfunction
 vnoremap <leader>r :call SendToTerm(v:count)<CR>
 nnoremap <leader>r V:call SendToTerm(v:count)<CR>
 command! -range SendToTerm call SendToTerm(v:count)
-
-" }}}
-" Omnicomplete navigation {{{
-
-" Change the default auto-complete changes.
-" The default is ".,w,b,u,t,i", which means to scan:
-" 	   1. . the current buffer
-" 	   2. w buffers in other windows
-" 	   3. b other loaded buffers
-" 	   4. u unloaded buffers
-" 	   5. t tags
-" 	   6. i included files
-set complete=.,w,b,u
-
-" Better navigating through omnicomplete option list
-set completeopt=longest,menuone
-" Limit the height of the menu
-set pumheight=10
-
-
-" Insert Mode Completion {{{
-" :help ins-completion
-inoremap <c-f> <c-x><c-f>
-" Because on the terminal, <C-space> becomes <C-@>
-imap <c-@> <c-Space>
-inoremap <c-Space> <c-x><c-o>
-inoremap <c-o> <c-x><c-o>
-
-" inoremap <c-]> <c-x><c-]>
-" inoremap <c-l> <c-x><c-l>
-
-" }}}
-
 " }}}
 " Wildmenu settings ------------------------------------------------------- {{{
 " =============================================================================
@@ -420,97 +282,89 @@ if version >= 703
     cnoremap <expr><S-Tab>   wildmenumode() ? "\<C-P>" : "\<C-Z>"
 endif
 " }}}
+" Plugins {{{
+
+" To install vim-plug:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/bundle')
+
+Plug 'https://github.com/tpope/vim-rsi'
+Plug 'nathangrigg/vim-beancount'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+
+call plug#end()
+
+" match more complex pairs (eg xml tags)
+packadd! matchit
+
+" disable meta maps; see :help rsi for details
+let g:rsi_no_meta = 1
+
+" ctrl-p mappings
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'git --git-dir=%s/.git ls-files -co --exclude-standard']
 
 " }}}
+" filetype settings ------------------------------------------------------- {{{
 
-" VIM plugin settings ----------------------------------------------------- {{{
-" =============================================================================
+filetype plugin indent on
+syntax enable
 
-" QFEnter settings  {{{
-if Plugin_exists('QFEnter')
-    let g:qfenter_vopen_map = ['<C-v>']
-    let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
-    let g:qfenter_topen_map = ['<C-t>']
-endif
-"}}}
-" Fugitive settings  {{{
-if Plugin_exists('vim-fugitive')
-    " Toggles Git blame window and shortens the window to name length
-    nnoremap <leader>gb :Gblame!<CR>
-    nnoremap <leader>gs :ToggleGStatus<CR>
+" turn on soft wrapping for text files
+autocmd FileType text setlocal wrap linebreak
 
-	function! ToggleGStatus()
-        if buflisted('.git/index')
-            bd .git/index
-        else
-            Gstatus
-		endif
-	endfunction
-	command! ToggleGStatus :call ToggleGStatus()
-endif
-"}}}
-" Syntastic  {{{
-" cd ~/.vim/bundle && \
-" git clone https://github.com/scrooloose/syntastic.git
-if Plugin_exists('syntastic')
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
- 
-		" "mode" can be mapped to one of two values - "active" or "passive". When
-		" set to "active", syntastic does automatic checking whenever a buffer is
-		" saved or initially opened. When set to "passive" syntastic only checks
-		" when the user calls `:SyntasticCheck`.
-    let g:syntastic_mode_map = {
-        \ "mode": "passive",
-        \ "active_filetypes": [],
-        \ "passive_filetypes": [] }
+augroup ft_java
+    au!
+    autocmd FileType java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
+    autocmd FileType java setlocal foldmethod=syntax
+augroup end
 
-    " Automatically close when no errors, but don't auto-open
-    let g:syntastic_auto_loc_list = 2
-    " But keep the list ready
-    let g:syntastic_always_populate_loc_list = 1
+augroup ft_python
+	au!
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal softtabstop=4
+    autocmd FileType python setlocal shiftwidth=4
+    autocmd FileType python setlocal expandtab
+augroup end
 
-    " When to run Syntastic
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 0
+augroup ft_cpp
+    au!
+    autocmd FileType c,cpp setlocal foldmethod=syntax
+    autocmd FileType c,cpp setlocal tabstop=2
+    autocmd FileType c,cpp setlocal softtabstop=2
+    autocmd FileType c,cpp setlocal shiftwidth=2
+	" Additional 'bracket' types for C++
+    autocmd FileType cpp setlocal matchpairs+=<:>
+augroup end
 
-    " Systastic check for python - maybe set this as an autocmd?
-    let g:syntastic_python_checkers = ['python']
-    let g:syntastic_python_pylint_quiet_messages = { "level": "warnings" }
+augroup ft_javascript
+    au!
+    au FileType javascript setlocal expandtab
+    au FileType json setlocal expandtab
+augroup end
 
-    " Limit include files to 3 levels
-    let includedirs = split(globpath('.','include'), '\n') + 
-                      \ split(globpath('.','*/include'), '\n') +
-                      \ split(globpath('.','*/*/include'), '\n')
+augroup ft_gitcommit
+	au!
+	au FileType gitcommit setlocal spell
+augroup end
 
-    " Systastic check for c
-    let g:syntastic_c_include_dirs = includedirs
-    let g:syntastic_c_compilter_options = ' -std=c11 -Wall -pedantic -Wextra'
+augroup ft_vim
+    au!
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal expandtab
+augroup end
 
-    " Systastic check for c++
-    let g:syntastic_cpp_include_dirs = includedirs
-    let g:syntastic_cpp_compiler_options = ' -std=c++11'
+augroup ft_fugitive
+	au!
+    autocmd FileType fugitive nmap <buffer> p 1p
+    autocmd FileType fugitive nmap <buffer> <Tab> =
+    autocmd FileType fugitive nmap <buffer> x X
+augroup end
 
-    nnoremap <leader>p :SyntasticCheck<CR>
-    nnoremap <leader>P :SyntasticReset<CR>
-endif
-" Buffergator  {{{
-" git clone https://github.com/jeetsukumaran/vim-buffergator
-if Plugin_exists('vim-buffergator')
-    let g:buffergator_viewport_split_policy = "B"
-    let g:buffergator_hsplit_size = 10
-
-
-    " Suppress the standard key maps
-    let g:buffergator_suppress_keymaps = 1
-    nnoremap <Leader>b :BuffergatorToggle<CR>
-endif
-
-" }}}
-" vim-beancount  {{{
-" git clone https://github.com/nathangrigg/vim-beancount
-if Plugin_exists('vim-beancount')
+augroup ft_beancount
     let g:beancount_detailed_first = 1
 
     autocmd BufEnter *.bc :setlocal filetype=beancount
@@ -520,98 +374,8 @@ if Plugin_exists('vim-beancount')
     autocmd filetype beancount setlocal foldlevelstart=0
     autocmd FileType beancount setlocal iskeyword+=-,.
     autocmd FileType beancount setlocal expandtab
-endif
-
-" }}}
-" }}}
-
-" filetype settings ------------------------------------------------------- {{{
-" =============================================================================
-
-filetype plugin indent on
-set omnifunc=syntaxcomplete#complete
-
-" turn on syntax highlighting
-syntax on
-
-" turn on soft wrapping for text files
-autocmd FileType text setlocal wrap linebreak
-
-" java {{{
-
-augroup ft_java
-    au!
-    autocmd FileType java syn region imports start='\n^\s*import'ms=s+2 end='^\s*[^i]'me=e-3  fold transparent
-    autocmd FileType java setlocal foldmethod=syntax
-    autocmd FileType cpp setlocal matchpairs+=<:>   " Additional 'bracket' types for C++
+    autocmd FileType beancount setlocal tabstop=2
+    autocmd FileType beancount setlocal softtabstop=2
 augroup end
 " }}}
 
-" c/c++ {{{
-augroup ft_cpp
-    au!
-    autocmd FileType c,cpp setlocal foldmethod=syntax
-    autocmd FileType c,cpp setlocal tabstop=2
-    autocmd FileType c,cpp setlocal softtabstop=2
-    autocmd FileType c,cpp setlocal shiftwidth=2
-    autocmd FileType cpp setlocal matchpairs+=<:>   " Additional 'bracket' types for C++
-
-augroup end
-" }}}
-
-" llvm {{{
-augroup ft_llvm
-    au!
-    au FileType llvm setlocal iskeyword=@,48-57,_,192-255,%
-augroup end
-" }}}
-
-" javascript & json{{{
-augroup ft_javascript
-    au!
-    au FileType javascript setlocal expandtab
-    au FileType json setlocal expandtab
-augroup end
-" }}}
-" }}}
-
-" break bad habits -------------------------------------------------------- {{{
-" =============================================================================
-
-" trailing whitespace {{{
-" mark trailing white space, except when typing at the end of the line
-highlight extrawhitespace ctermbg=red guibg=red
-autocmd insertenter * match extrawhitespace /\s\+\%#\@<!$/
-autocmd insertleave * match extrawhitespace /\s\+$/
-
-" clear trailing whitespace
-nnoremap <leader>w :%s/\s\+$//<cr>
-
-" }}}
-
-" remap the cursor keys to something else
-"nnoremap <up>       <nop>
-"nnoremap <down>     <nop>
-"nnoremap <left>     <nop>
-"nnoremap <right>    <nop>
-
-" }}}
-
-" nvim settings ----------------------------------------------------------- {{{
-" =============================================================================
-if has('nvim')
-    tnoremap <esc> <c-\><c-n>
-endif
-" }}}
-
-" finally ----------------------------------------------------------------- {{{
-" =============================================================================
-
-" override general settings with system specific ones
-if filereadable($home."/.local/.vimrc")
-    source ~/.local/.vimrc
-endif
-" }}}
-
-" Make sure this wasn't reset in the interim!
-set nocompatible
