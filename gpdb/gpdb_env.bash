@@ -204,3 +204,18 @@ clean_gpopt()
 {
 	make -C src/backend/gpopt/ clean
 }
+
+latest_mdp_path()
+{
+	path="$MASTER_DATA_DIRECTORY/minidumps"/$(ls -t "$MASTER_DATA_DIRECTORY/minidumps" | head -1)
+	if [[ -f $path ]]; then
+		echo "$path"
+	fi
+}
+
+latest_mdp()
+{
+	if [[ -f $(latest_mdp_path) ]]; then
+		xmllint --format $(latest_mdp_path)
+	fi
+}
