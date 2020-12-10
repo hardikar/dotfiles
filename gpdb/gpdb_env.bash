@@ -27,7 +27,7 @@ configure_gpdb() {
 		./configure \
 		--with-includes="/usr/local/include" \
 		--with-libraries="/usr/local/lib" \
-		--with-python --with-perl --with-libxml --enable-orca \
+		--with-python --with-perl --without-libxml --enable-orca \
 		--disable-gpfdist --disable-gpcloud \
 		--enable-debug \
 		--enable-depend \
