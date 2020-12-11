@@ -54,8 +54,11 @@ use_orca () {
 }
 
 alias cdregress="cd ${GPDB_PATH:-.}/src/test/regress"
-alias cdorca="cd ${GPDB_PATH:-.}/src/backend/gporca"
 alias cdminidumps="cd $MASTER_DATA_DIRECTORY/minidumps"
+
+cdorca () {
+  cd "${GPDB_PATH:-.}/src/backend/gporca/$1"
+}
 
 _use_orca_complete()
 {
@@ -136,7 +139,7 @@ latest_mdp_path()
 	fi
 }
 
-latest_mdp()
+last_mdp()
 {
 	if [[ -f $(latest_mdp_path) ]]; then
 		xmllint --format $(latest_mdp_path)
