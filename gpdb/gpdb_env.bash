@@ -42,6 +42,22 @@ configure_gpdb() {
 		--prefix="$(pwd)/.build"
 	set +x
 }
+
+configure_gpdb_official() {
+	set -x
+	CC="ccache cc" CXX="ccache c++" \
+		./configure \
+		--with-perl \
+		--with-python PYTHON=python3 \
+		--enable-gpcloud --with-libxml --enable-mapreduce \
+		--enable-orafce --enable-tap-tests \
+		--enable-orca \
+		--with-openssl \
+		--enable-debug \
+		--prefix="$(pwd)/.build"
+		"$@"
+	set +x
+}
  
 use_orca () {
 	local ver
