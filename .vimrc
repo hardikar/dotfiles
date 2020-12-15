@@ -347,6 +347,13 @@ augroup ft_vim
 	au FileType vim setlocal foldmethod=marker
 augroup end
 
+augroup ft_fugitive
+	au!
+    autocmd FileType fugitive nmap <buffer> p 1p
+    autocmd FileType fugitive nmap <buffer> <Tab> =
+    autocmd FileType fugitive nmap <buffer> x X
+augroup end
+
 augroup ft_beancount
     let g:beancount_detailed_first = 1
 
