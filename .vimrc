@@ -316,7 +316,7 @@ endfunction
 " Inspiration:
 " - https://stackoverflow.com/questions/49318522/send-buffer-to-a-running-terminal-window-in-vim-8
 " - https://vi.stackexchange.com/questions/11025/passing-visual-range-to-a-command-as-its-argument
-function! SendToTerm(bufn=-1) range
+function! SendToTerm(bufn) range
 	" if no bufn is passed in, find a terminal in the current tab
 	if a:bufn <= 0
 		let c = GetTermBufferInCurrentTab()
