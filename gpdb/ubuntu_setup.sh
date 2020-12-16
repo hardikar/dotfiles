@@ -75,3 +75,4 @@ popd
 cpan -i IPC::Run
 
 sudo bash -c "echo "/usr/local/lib" > /etc/ld.so.conf.d/usr_local.conf"
+sudo pip3 install pygresql psutil pg
