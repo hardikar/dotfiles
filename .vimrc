@@ -284,6 +284,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'nathangrigg/vim-beancount'
 Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
@@ -292,6 +293,11 @@ packadd! matchit
 
 " disable meta maps; see :help rsi for details
 let g:rsi_no_meta = 1
+
+" ctrl-p mappings
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_working_path = 'ra'
+
 " }}}
 " filetype settings ------------------------------------------------------- {{{
 
