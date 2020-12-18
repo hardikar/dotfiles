@@ -147,6 +147,20 @@ clean_gpopt()
 	make -C src/backend/gpopt/ clean
 }
 
+icg_diff_orca()
+{
+	testname="$1"
+	orca_expect_file="expected/$1_optimizer.out"
+	planner_expect_file="expected/$1.out"
+	results_file="results/$1.out"
+
+	if [[ ! -f "$orca_expect_file" ]]; then
+		orca_expect_file="$planner_expect_file"
+	fi
+
+	vimdiff "$orca_expect_file" "$results_file"
+}
+
 latest_mdp_path()
 {
 	path="$MASTER_DATA_DIRECTORY/minidumps"/$(ls -t "$MASTER_DATA_DIRECTORY/minidumps" | head -1)
