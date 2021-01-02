@@ -343,8 +343,9 @@ augroup ft_gitcommit
 augroup end
 
 augroup ft_vim
-	au!
-	au FileType vim setlocal foldmethod=marker
+    au!
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal expandtab
 augroup end
 
 augroup ft_fugitive
@@ -364,6 +365,8 @@ augroup ft_beancount
     autocmd filetype beancount setlocal foldlevelstart=0
     autocmd FileType beancount setlocal iskeyword+=-,.
     autocmd FileType beancount setlocal expandtab
+    autocmd FileType beancount setlocal tabstop=2
+    autocmd FileType beancount setlocal softtabstop=2
 augroup end
 " }}}
 
