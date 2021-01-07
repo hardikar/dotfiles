@@ -2,10 +2,11 @@
 	ui = true
 [user]
 	name = Shreedhar Hardikar
-	email = hardikar@cs.wisc.edu
+	email = shardikar@vmware.com
 [core]
 	editor = vim
 	autocrlf = input
+	excludesfile = ~/.gitignore_global
 [push]
 	default = current
 [diff "beancount"]

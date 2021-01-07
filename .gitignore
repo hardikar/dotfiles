@@ -3,15 +3,6 @@
 
 .vim/.netrwhist
 
-# Local to laptop settings
-.vimperator/info/
-.vimperator/plugin/hilltor.js
-
 # Ignore where vim-plug downloads plugins
 .vim/bundle
-
-# Special case eclim plugin - install from the website:
-# http://eclim.org/install.html
-.vim/eclim
-.vim/plugin/eclim.vim
 

@@ -41,6 +41,7 @@ ln $OPTIONS "$SRCDIR/.bashrc" "$DESTDIR"
 
 ln $OPTIONS "$SRCDIR/.gdbinit" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/.gitconfig" "$DESTDIR"
+ln $OPTIONS "$SRCDIR/.gitignore_global" "$DESTDIR"
 
 ln $OPTIONS "$SRCDIR/.gvimrc" "$DESTDIR"
 ln $OPTIONS "$SRCDIR/.vimrc" "$DESTDIR"
