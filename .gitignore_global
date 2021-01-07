@@ -1,0 +1,10 @@
+.DS_Store
+*.pyc
+
+.vim/.netrwhist
+
+.build/
+xcode-build/
+xcode-debug/
+.idea/
+
