@@ -304,7 +304,8 @@ let g:rsi_no_meta = 1
 
 " ctrl-p mappings
 let g:ctrlp_map = '<leader>f'
-let g:ctrlp_working_path = 'ra'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'git --git-dir=%s/.git ls-files -co --exclude-standard']
 
 " }}}
 " filetype settings ------------------------------------------------------- {{{
