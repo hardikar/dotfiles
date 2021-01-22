@@ -61,3 +61,13 @@ function gpr() {
 
   git fetch ${remote} pull/"$pr"/head:"pr-$pr"
 }
+
+function vimf() {
+  IFS=: read filename lineno <<< "$1"
+  if [[ -n "$lineno" ]]; then
+	vim +"$lineno" $(find . -name "$filename")
+  else
+	vim $(find . -name "$1")
+  fi
+}
+
