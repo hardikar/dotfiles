@@ -123,6 +123,14 @@ nnoremap <leader>v ^<C-v>g_
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
+" Quick-access to omni-complete
+inoremap <c-o> <c-x><c-o>
+
+" Toggle spelling on/off
+nnoremap <silent> <leader>s :set spell!<CR>
+
+" Toggle invisibles
+nnoremap <silent> <Leader>l :set list!<CR>
 
 " ScrollLock
 " Setup a scroll lock so that j,k stay in the same place relative to the
