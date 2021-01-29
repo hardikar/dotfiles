@@ -149,7 +149,6 @@ clean_gpopt()
 
 icg_diff_orca()
 {
-	testname="$1"
 	orca_expect_file="expected/$1_optimizer.out"
 	planner_expect_file="expected/$1.out"
 	results_file="results/$1.out"
@@ -161,6 +160,14 @@ icg_diff_orca()
 	vimdiff "$orca_expect_file" "$results_file"
 }
 
+icg_diff_planner()
+{
+	planner_expect_file="expected/$1.out"
+	results_file="results/$1.out"
+
+	vimdiff "$planner_expect_file" "$results_file"
+}
+
 latest_mdp_path()
 {
 	path="$MASTER_DATA_DIRECTORY/minidumps"/$(ls -t "$MASTER_DATA_DIRECTORY/minidumps" | head -1)
@@ -169,7 +176,7 @@ latest_mdp_path()
 	fi
 }
 
-last_mdp()
+latest_mdp()
 {
 	if [[ -f $(latest_mdp_path) ]]; then
 		xmllint --format $(latest_mdp_path)
