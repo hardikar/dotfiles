@@ -293,6 +293,7 @@ Plug 'https://github.com/tpope/vim-rsi'
 Plug 'nathangrigg/vim-beancount'
 Plug 'tpope/vim-fugitive'
 Plug 'kien/ctrlp.vim'
+Plug 'junegunn/vim-easy-align'
 
 call plug#end()
 
@@ -306,6 +307,12 @@ let g:rsi_no_meta = 1
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = ['.git', 'git --git-dir=%s/.git ls-files -co --exclude-standard']
+
+" easy-align mappings
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " }}}
 " filetype settings ------------------------------------------------------- {{{
