@@ -337,6 +337,14 @@ augroup ft_python
     autocmd FileType python setlocal expandtab
 augroup end
 
+augroup ft_yaml
+	au!
+    autocmd FileType python setlocal tabstop=2
+    autocmd FileType python setlocal softtabstop=2
+    autocmd FileType python setlocal shiftwidth=2
+    autocmd FileType python setlocal expandtab
+augroup end
+
 augroup ft_cpp
     au!
     autocmd FileType c,cpp setlocal foldmethod=syntax
