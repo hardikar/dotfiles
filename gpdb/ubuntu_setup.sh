@@ -8,50 +8,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /u
 sudo update-alternatives --config gcc 
 sudo gcc --version && g++ --version 
 
-sudo apt-get install -y --no-install-recommends ant \
-    bison \
-    build-essential \
-    ccache \
-    curl \
-    dirmngr \
-    flex \
-    git-core \
-    iputils-ping \
-    iproute2 \
-    jq \
-    libapr1-dev \
-    libbz2-dev \
-    libcurl4-gnutls-dev \
-    libevent-dev \
-    libkrb5-dev \
-    libpam-dev \
-    libperl-dev \
-    libreadline-dev \
-    libssl-dev \
-    $([ "$BASE_IMAGE" = ubuntu:16.04 ] && echo libxerces-c-dev) \
-    libxml2-dev \
-    libyaml-dev \
-    libzstd1-dev \
-    locales \
-    maven \
-    net-tools \
-    ninja-build \
-    openssh-server \
-    pkg-config \
-    python-dev \
-    python-pip \
-    python-psutil \
-    python-setuptools \
-    python3-dev \
-    less \
-    rsync \
-    ssh \
-    sudo \
-    time \
-    unzip \
-    vim \
-    wget \
-    zlib1g-dev
+sudo apt install ant bison build-essential ccache curl dirmngr flex git-core iputils-ping iproute2 jq libapr1-dev libbz2-dev libcurl4-gnutls-dev libevent-dev libkrb5-dev libpam-dev libperl-dev libreadline-dev libssl-dev libxml2-dev libyaml-dev maven net-tools ninja-build openssh-server pkg-config python3-pip python3-psutil python3-setuptools python3-dev less rsync ssh sudo time unzip vim wget zlib1g-dev libzstd-dev python3-pygresql
 
 sudo rm -rf /var/lib/apt/lists/*
  
