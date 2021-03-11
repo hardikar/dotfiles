@@ -6,6 +6,7 @@ export PGHOST=localhost
 GPDB_WORKSPACE=$HOME/workspace
 
 echo -ne "\e]1;${GPDB_TITLE}\a"
+echo -en "\033]0;${GPDB_TITLE}\a"
 
 function finish() {
 	echo -ne "\e]1;\a"
@@ -21,6 +22,23 @@ configure_gpdb_old() {
 		--with-libraries="${CONF_LIB}:/usr/local/lib" \
 		--with-python --with-perl --with-libxml --enable-orca \
 		--disable-gpfdist --disable-gpcloud \
+		--enable-debug \
+		--enable-depend \
+		"$@" \
+		--prefix="$(pwd)/.build"
+	set +x
+}
+
+configure_gpdb_clang() {
+	set -x
+	CC="ccache clang" CXX="ccache clang++"\
+		./configure \
+		--with-includes="/usr/local/include" \
+		--with-libraries="/usr/local/lib" \
+		--with-python PYTHON=python3 \
+		--with-perl --with-libxml \
+		--enable-orca \
+		--enable-orafce --enable-tap-tests \
 		--enable-debug \
 		--enable-depend \
 		"$@" \
@@ -181,4 +199,31 @@ latest_mdp()
 	if [[ -f $(latest_mdp_path) ]]; then
 		xmllint --format $(latest_mdp_path)
 	fi
+}
+
+setup_git_graft()
+{
+	git remote add old-orca git@github.com:Pivotal/gp-qp-orca.git
+	git remote add old-gpos git@github.com:Pivotal/gp-qp-gpos.git
+	git remote add hist-gpdb git@github.com:Pivotal/gp-gpdb-historical.git
+	git remote add old-gpdb git@github.com:Pivotal/gp-qp.git
+
+	git remote update
+
+	git replace --graft 6b0e52beadd678c5 9de71fa31b2ab2d8 2f52d7260ceac8e5
+	git replace --graft 18cd409afb75b6d5 7123bd8cb2884647
+	git replace --graft 306cd19727f955ff f5555223b55418b7
+	git replace --graft d089a971e2389dc5 cc881d1ef2de4961 5a8a7639ba576a2c
+	git replace --graft 82e3ab04e691f4d3 346aff04be3311ce
+
+	readonly OSS_GPOS=644d31318268f514
+	readonly QP_GPOS=7d1b9b8772ee5f56
+	readonly OSS_ORCA=76feb99efdc92bf2
+	readonly QP_ORCA=ad3d9efd892fdbb4
+	readonly QP_GPOS_ENGINF372=22e278c258f60e9b
+	readonly QP_ORCA_ENGINF372=d8d3577a3e77ec14
+
+	git replace --graft "${OSS_GPOS}" "${QP_GPOS}"
+	git replace --graft "${OSS_ORCA}" "${QP_ORCA}"
+	git replace --graft "${QP_GPOS_ENGINF372}" "${QP_ORCA_ENGINF372}~"
 }
