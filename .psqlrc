@@ -1,3 +1,4 @@
 \timing on
 \pset pager off
+\setenv PAGER less
 
