@@ -41,6 +41,9 @@ gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/k
 gsettings set org.gnome.mutter overlay-key "Super_R"
 gsettings reset org.gnome.desktop.wm.keybindings switch-input-source
 gsettings reset org.freedesktop.ibus.general.hotkey triggers
+
+# Remove Alt+<Key> selecting menu items
+gsettings set org.gnome.desktop.interface automatic-mnemonics true
 ```
 
 ## Make the Dock more macOS-like
