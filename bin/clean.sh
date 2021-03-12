@@ -1,1 +1,0 @@
-gpdb/clean.sh
