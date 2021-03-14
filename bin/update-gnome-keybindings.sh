@@ -1,36 +1,38 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -ex
+set -e
+
+KEYS_GNOME_WM=/org/gnome/desktop/wm/keybindings
+KEYS_GNOME_SHELL=/org/gnome/shell/keybindings
+KEYS_GNOME_EXT=/org/gnome/shell/extensions
+KEYS_MUTTER=/org/gnome/mutter/keybindings
+KEYS_MEDIA=/org/gnome/settings-daemon/plugins/media-keys
+KEYS_MUTTER_WAYLAND_RESTORE=/org/gnome/mutter/wayland/keybindings/restore-shortcuts
+
+KEYS_TERMINAL=/org/gnome/terminal/legacy/keybindings
 
 # NB: This updates the defaults from pop-os shell, if installed.
 # Useful on Ubuntu also, but works better with pop-shell.
 set_keybindings() {
-    KEYS_GNOME_WM=/org/gnome/desktop/wm/keybindings
-    KEYS_GNOME_SHELL=/org/gnome/shell/keybindings
-    KEYS_GNOME_EXT=/org/gnome/shell/extensions
-    KEYS_MUTTER=/org/gnome/mutter/keybindings
-    KEYS_MEDIA=/org/gnome/settings-daemon/plugins/media-keys
-    KEYS_MUTTER_WAYLAND_RESTORE=/org/gnome/mutter/wayland/keybindings/restore-shortcuts
+	set -x
 
 	# remove more conflicting keybindings
-    dconf write ${KEYS_GNOME_WM}/show-desktop "@as []"
-    dconf write ${KEYS_GNOME_WM}/begin-move "@as []"
+	dconf write ${KEYS_GNOME_WM}/show-desktop "@as []"
+	dconf write ${KEYS_GNOME_WM}/begin-move "@as []"
 
-    dconf write ${KEYS_GNOME_SHELL}/toggle-application-view "@as []"
-    dconf write ${KEYS_GNOME_SHELL}/focus-active-notification "@as []"
+	dconf write ${KEYS_GNOME_SHELL}/toggle-application-view "@as []"
+	dconf write ${KEYS_GNOME_SHELL}/focus-active-notification "@as []"
 
-    dconf write ${KEYS_GNOME_EXT}/dash-to-dock/shortcut "@as []"
+	dconf write ${KEYS_GNOME_EXT}/dash-to-dock/shortcut "@as []"
 
-    dconf write ${KEYS_MUTTER}/switch-monitor "@as []"
+	dconf write ${KEYS_MUTTER}/switch-monitor "@as []"
 
 	# remove bindings introduced by pop-os-shell
     # Lock screen
-    dconf write ${KEYS_MEDIA}/home "@as []"
-    dconf write ${KEYS_MEDIA}/email "@as []"
-    dconf write ${KEYS_MEDIA}/www "@as []"
-    dconf write ${KEYS_MEDIA}/terminal "@as []"
-
-	KEYS_TERMINAL=/org/gnome/terminal/legacy/keybindings
+	dconf write ${KEYS_MEDIA}/home "@as []"
+	dconf write ${KEYS_MEDIA}/email "@as []"
+	dconf write ${KEYS_MEDIA}/www "@as []"
+	dconf write ${KEYS_MEDIA}/terminal "@as []"
 
 	dconf write ${KEYS_TERMINAL}/next-tab "'<Super>braceright'"
 	dconf write ${KEYS_TERMINAL}/prev-tab "'<Super>braceleft'"
@@ -41,6 +43,59 @@ set_keybindings() {
 
 	# Remove Alt+<Key> selecting menu items
 	gsettings set org.gnome.desktop.interface automatic-mnemonics true
+
+	set +x
 }
 
-set_keybindings
+reset_keybindings() {
+	set -x
+
+	# remove more conflicting keybindings
+	# remove more conflicting keybindings
+	dconf reset ${KEYS_GNOME_WM}/show-desktop
+	dconf reset ${KEYS_GNOME_WM}/begin-move
+
+	dconf reset ${KEYS_GNOME_SHELL}/toggle-application-view
+	dconf reset ${KEYS_GNOME_SHELL}/focus-active-notification
+
+	dconf reset ${KEYS_GNOME_EXT}/dash-to-dock/shortcut
+
+	dconf reset ${KEYS_MUTTER}/switch-monitor
+
+	# remove bindings introduced by pop-os-shell
+    # Lock screen
+	dconf reset ${KEYS_MEDIA}/home
+	dconf reset ${KEYS_MEDIA}/email
+	dconf reset ${KEYS_MEDIA}/www
+	dconf reset ${KEYS_MEDIA}/terminal
+
+	dconf reset ${KEYS_TERMINAL}/next-tab
+	dconf reset ${KEYS_TERMINAL}/prev-tab
+	dconf reset ${KEYS_TERMINAL}/close-tab
+
+	# Move the "Activities overview" shortcut to Super_R
+	dconf reset ${KEYS_MUTTER}/overlay-key
+
+	# Remove Alt+<Key> selecting menu items
+	gsettings reset org.gnome.desktop.interface automatic-mnemonics
+
+	set +x
+}
+
+usage() {
+	echo "USAGE: $0 COMMAND"
+	echo
+	echo "Commands:"
+	echo "    set      sets opinionated keybindings"
+	echo "    reset    resets keybindings to original defaults"
+}
+
+main() {
+	case "$1" in
+		set) set_keybindings ;;
+		reset) reset_keybindings ;;
+		*) usage ;;
+	esac
+}
+
+main "$@"
