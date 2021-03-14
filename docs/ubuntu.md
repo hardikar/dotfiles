@@ -25,6 +25,7 @@ Note: if installed as a gnome-extension, dconf settings are saved in different d
 POPDIR=$HOME/.local/share/gnome-shell/extensions/pop-shell\@system76.com/schemas
 
 gsettings --schemadir $POPDIR  list-recursively org.gnome.shell.extensions.pop-shell
+```
 
 
 ## Override some Gnome keybindings
