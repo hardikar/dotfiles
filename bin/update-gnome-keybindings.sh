@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -o pipefail
 
 KEYS_GNOME_WM=/org/gnome/desktop/wm/keybindings
 KEYS_GNOME_SHELL=/org/gnome/shell/keybindings
@@ -11,6 +11,9 @@ KEYS_MUTTER_WAYLAND_RESTORE=/org/gnome/mutter/wayland/keybindings/restore-shortc
 
 KEYS_TERMINAL=/org/gnome/terminal/legacy/keybindings
 
+POPOS_SCHEMA_DIR=$HOME/.local/share/gnome-shell/extensions/pop-shell\@system76.com/schemas
+KEYS_POP_OS=org.gnome.shell.extensions.pop-shell
+
 # NB: This updates the defaults from pop-os shell, if installed.
 # Useful on Ubuntu also, but works better with pop-shell.
 set_keybindings() {
@@ -19,6 +22,7 @@ set_keybindings() {
 	# remove more conflicting keybindings
 	dconf write ${KEYS_GNOME_WM}/show-desktop "@as []"
 	dconf write ${KEYS_GNOME_WM}/begin-move "@as []"
+	dconf write ${KEYS_GNOME_WM}/toggle-maximized "['<Ctrl><Super>m']"
 
 	dconf write ${KEYS_GNOME_SHELL}/toggle-application-view "@as []"
 	dconf write ${KEYS_GNOME_SHELL}/focus-active-notification "@as []"
@@ -44,6 +48,12 @@ set_keybindings() {
 	# Remove Alt+<Key> selecting menu items
 	gsettings set org.gnome.desktop.interface automatic-mnemonics true
 
+	# conflicting bindings introduces by pop-os
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" set ${KEYS_POP_OS} toggle-tiling "['<Ctrl><Super>y']"
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" set ${KEYS_POP_OS} toggle-floating "['<Ctrl><Super>g']"
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" set ${KEYS_POP_OS} toggle-stacking-global "['<Ctrl><Super>s']"
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" set ${KEYS_POP_OS} tile-orientation "['<Ctrl><Super>o']"
+
 	set +x
 }
 
@@ -54,6 +64,7 @@ reset_keybindings() {
 	# remove more conflicting keybindings
 	dconf reset ${KEYS_GNOME_WM}/show-desktop
 	dconf reset ${KEYS_GNOME_WM}/begin-move
+	dconf reset ${KEYS_GNOME_WM}/toggle-maximized
 
 	dconf reset ${KEYS_GNOME_SHELL}/toggle-application-view
 	dconf reset ${KEYS_GNOME_SHELL}/focus-active-notification
@@ -78,6 +89,12 @@ reset_keybindings() {
 
 	# Remove Alt+<Key> selecting menu items
 	gsettings reset org.gnome.desktop.interface automatic-mnemonics
+
+	# conflicting bindings introduces by pop-os
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" reset ${KEYS_POP_OS} toggle-tiling
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" reset ${KEYS_POP_OS} toggle-floating
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" reset ${KEYS_POP_OS} tile-orientation
+	gsettings --schemadir "${POPOS_SCHEMA_DIR}" reset ${KEYS_POP_OS} toggle-stacking-global
 
 	set +x
 }
