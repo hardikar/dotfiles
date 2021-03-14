@@ -61,11 +61,11 @@ alias tmux="tmux -2"
 # Process control aliases
 alias jobs='jobs -l'
 
-alias ldate="date +%Y-%m-%d_%H-%M"
+alias ldate="date +%Y-%m-%d"
+alias tdate="date +%Y-%m-%d_%H.%M.%S"
 
 # Because I always forget this :(
 alias cl="clear"
 alias cls="clear"
 
 alias d="desk go"
-
