@@ -35,6 +35,29 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock unity-backlit-items true
 ```
 
+## Tilix
+
+Install using `sudo apt install tilix`
+Set as default terminal program in gnome:
+```
+sudo update-alternatives --config x-terminal-emulator
+```
+
+Configuration:
+```
+dconf write /com/gexperts/Tilix/keybindings/terminal-maximize "'<Shift><Super>Return'"
+dconf write /com/gexperts/Tilix/keybindings/session-add-down "'<Super>d'"
+dconf write /com/gexperts/Tilix/keybindings/session-add-right "'<Shift><Super>d'"
+
+dconf write /com/gexperts/Tilix/keybindings/session-switch-to-next-terminal "'<Super>bracketright'"
+dconf write /com/gexperts/Tilix/keybindings/session-switch-to-previous-terminal "'<Super>bracketleft'"
+
+dconf write /com/gexperts/Tilix/keybindings/win-switch-to-next-session "'<Super>braceright'"
+dconf write /com/gexperts/Tilix/keybindings/win-switch-to-previous-session "'<Super>braceleft'"
+
+```
+
+
 ## CLion
 
 Add "macOS" keybindings. Copy it & modify them as follows:
