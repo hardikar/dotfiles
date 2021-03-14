@@ -1,6 +1,14 @@
 Inspiration:
 * https://kvz.io/tobuntu.html
 
+## Keylayout setups
+
+1. Install gnome-tweaks: `apt install gnome-tweaks`
+2. Go to Tweaks > Keyboard & Mouse > Additional Layout Options
+3. Enable:
+   - Alt/Win key behaviour > Meta is mapped to Win
+   - Caps block behavior > Make unmodified caps to an additional Escape
+
 ## Gnome shorcuts
 ```
 # Fixup the window placement shortcuts
