@@ -11,3 +11,5 @@
 	default = current
 [diff "beancount"]
   xfuncname = "^(; \\{\\{\\{.*)$"
+[pull]
+	rebase = true
