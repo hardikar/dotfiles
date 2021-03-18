@@ -32,6 +32,7 @@ set_keybindings() {
 
 	dconf write ${KEYS_GNOME_SHELL}/toggle-application-view "@as []"
 	dconf write ${KEYS_GNOME_SHELL}/focus-active-notification "@as []"
+	dconf write ${KEYS_GNOME_SHELL}/toggle-message-tray "@as []"
 
 	dconf write ${KEYS_GNOME_EXT}/dash-to-dock/shortcut "@as []"
 
@@ -59,6 +60,7 @@ set_keybindings() {
 	${POPOS_GSETTINGS} set ${KEYS_POP_OS} toggle-floating "['<Ctrl><Super>g']"
 	${POPOS_GSETTINGS} set ${KEYS_POP_OS} toggle-stacking-global "['<Ctrl><Super>s']"
 	${POPOS_GSETTINGS} set ${KEYS_POP_OS} tile-orientation "['<Ctrl><Super>o']"
+	${POPOS_GSETTINGS} set ${KEYS_POP_OS} activate-launcher "['<Super>space']"
 
 	set +x
 }
@@ -74,6 +76,7 @@ reset_keybindings() {
 
 	dconf reset ${KEYS_GNOME_SHELL}/toggle-application-view
 	dconf reset ${KEYS_GNOME_SHELL}/focus-active-notification
+	dconf reset ${KEYS_GNOME_SHELL}/toggle-message-tray
 
 	dconf reset ${KEYS_GNOME_EXT}/dash-to-dock/shortcut
 
@@ -101,6 +104,7 @@ reset_keybindings() {
 	${POPOS_GSETTINGS} reset ${KEYS_POP_OS} toggle-floating
 	${POPOS_GSETTINGS} reset ${KEYS_POP_OS} tile-orientation
 	${POPOS_GSETTINGS} reset ${KEYS_POP_OS} toggle-stacking-global
+	${POPOS_GSETTINGS} reset ${KEYS_POP_OS} activate-launcher
 
 	set +x
 }
