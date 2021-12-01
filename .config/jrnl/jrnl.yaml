@@ -10,7 +10,7 @@ encrypt: true
 highlight: true
 indent_character: '|'
 journals:
-  default: /Users/hardikar/Documents/journal.txt
+  default: /Users/hardikar/Notes/journal.txt
 linewrap: 79
 tagsymbols: '@'
 template: false
