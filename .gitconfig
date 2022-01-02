@@ -2,7 +2,7 @@
 	ui = true
 [user]
 	name = Shreedhar Hardikar
-	email = shardikar@vmware.com
+	email = hardikar@cs.wisc.edu
 [core]
 	editor = vim
 	autocrlf = input

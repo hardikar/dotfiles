@@ -16,8 +16,6 @@ DESTDIR="$HOME"
 OPTIONS="-s $@"
 
 declare -a FILES=(
-	"$SRCDIR/bin"
-
 	"$SRCDIR/.bash_profile"
 	"$SRCDIR/.bashrc"
 	"$SRCDIR/.zshrc"
@@ -39,7 +37,6 @@ declare -a FILES=(
 	"$SRCDIR/.psqlrc"
 
 	"$SRCDIR/.xprofile"
-	"$SRCDIR/.config/jrnl"
 )
 
 declare -a DIRS=(
