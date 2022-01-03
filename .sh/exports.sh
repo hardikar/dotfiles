@@ -9,10 +9,7 @@ export EDITOR='vim'
 # PATH="/bin:$PATH"
 # PATH="/usr/bin:$PATH"
 # PATH="/usr/local/bin:$PATH"
+# PATH="/Users/hardikar/Library/Python/3.8/bin:$PATH"
 
 export PATH
 
-# check for custom bin directory and add to path
-if [[ -d $HOME/bin ]]; then
-	export PATH=~/bin:$PATH
-fi
