@@ -18,7 +18,6 @@ set hidden          " Opening a new file when the current buffer has unsaved
 set splitbelow
 set splitright
 set mouse=a         " Enable mouse selection whenever possible
-set noesckeys       " Don't allow mappings that start with <Esc>
 set number
 set path+=**        " :find searches current directory recursively 
 
