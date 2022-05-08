@@ -380,6 +380,7 @@ augroup end
 
 augroup ft_beancount
     let g:beancount_detailed_first = 1
+    let b:beancount_root = 'joint-ledger.beancount'
 
     autocmd BufEnter *.bc :setlocal filetype=beancount
 
