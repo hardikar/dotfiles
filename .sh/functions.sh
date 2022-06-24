@@ -71,3 +71,7 @@ function vimf() {
   fi
 }
 
+# Python calculator
+function pc() {
+	python3 -c "from math import *; from datetime import date, timedelta as td; print($*)"
+}
