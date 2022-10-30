@@ -3,6 +3,8 @@ export PAGER='less'
 export MANPAGER='less'
 export EDITOR='vim'
 
+export PYTHONSTARTUP=$HOME/.pythonrc
+
 # PATH="/usr/texbin"
 # PATH="/sbin:$PATH"
 # PATH="/usr/sbin:$PATH"

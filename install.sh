@@ -33,6 +33,8 @@ declare -a FILES=(
 	"$SRCDIR/.vimrc"
 	"$SRCDIR/.vim"
 
+	"$SRCDIR/.pythonrc"
+
 	"$SRCDIR/.editrc"
 	"$SRCDIR/.psqlrc"
 

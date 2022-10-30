@@ -73,5 +73,5 @@ function vimf() {
 
 # Python calculator
 function pc() {
-	python3 -c "from math import *; from datetime import date, timedelta as td; print($*)"
+	python3 -c "from math import *; from datetime import datetime, timedelta as td; date = lambda d: datetime.strptime(d, '%Y-%m-%d'); print($*)"
 }
