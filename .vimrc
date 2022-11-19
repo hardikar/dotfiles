@@ -332,16 +332,14 @@ augroup ft_python
 	au!
     autocmd FileType python setlocal tabstop=4
     autocmd FileType python setlocal softtabstop=4
-    autocmd FileType python setlocal shiftwidth=4
     autocmd FileType python setlocal expandtab
 augroup end
 
 augroup ft_yaml
 	au!
-    autocmd FileType python setlocal tabstop=2
-    autocmd FileType python setlocal softtabstop=2
-    autocmd FileType python setlocal shiftwidth=2
-    autocmd FileType python setlocal expandtab
+    autocmd FileType yaml setlocal tabstop=2
+    autocmd FileType yaml setlocal softtabstop=2
+    autocmd FileType yaml setlocal expandtab
 augroup end
 
 augroup ft_cpp
@@ -349,7 +347,6 @@ augroup ft_cpp
     autocmd FileType c,cpp setlocal foldmethod=syntax
     autocmd FileType c,cpp setlocal tabstop=2
     autocmd FileType c,cpp setlocal softtabstop=2
-    autocmd FileType c,cpp setlocal shiftwidth=2
 	" Additional 'bracket' types for C++
     autocmd FileType cpp setlocal matchpairs+=<:>
 augroup end
