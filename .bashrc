@@ -3,6 +3,7 @@ INCLUDES=(
     $HOME/.sh/functions.sh
     $HOME/.sh/exports.sh
     $HOME/.sh/git-prompt.sh
+    $HOME/.sh/hg-prompt.sh
     $HOME/.sh/git-completion.bash
 )
 
@@ -24,6 +25,7 @@ PROMPT="
 [$Gre\w$RCol"
 
 PROMPT+="$BYel$(__git_ps1 ':(%s)')$RCol"
+PROMPT+="$BYel$(__hg_ps1 ':(%s)')$RCol"
 PROMPT+="]"
 
 PROMPT+=" [$Blu\t$RCol] \H "
@@ -31,6 +33,7 @@ PROMPT+="
 \\$ "
 export PS1=$PROMPT
 export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 }
 
 # Prompt for BASH

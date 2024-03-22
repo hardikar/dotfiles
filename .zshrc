@@ -7,6 +7,7 @@ INCLUDES=(
 	$HOME/.sh/functions.sh
 	$HOME/.sh/exports.sh
 	$HOME/.sh/git-prompt.sh
+	$HOME/.sh/hg-prompt.sh
 )
 
 for file in ${INCLUDES}; do
@@ -52,13 +53,15 @@ bindkey -e
 
 setopt PROMPT_SUBST           # Enable prompt evaluation
 export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 ZSH_PROMPT_DATE='%{$fg[blue]%}%D{%H:%M:%S}%{$reset_color%}'
 ZSH_PROMPT_HOST='%{$fg[green]%}%d%{$reset_color%}'
 ZSH_PROMPT_GIT='%{$fg[yellow]%}$(__git_ps1 ":(%s)")%{$reset_color%}'
+ZSH_PROMPT_HG='%{$fg[yellow]%}$(__hg_ps1 ":(%s)")%{$reset_color%}'
 
 PROMPT="
-[${ZSH_PROMPT_HOST}${ZSH_PROMPT_GIT}] [${ZSH_PROMPT_DATE}] %M
+[${ZSH_PROMPT_HOST}${ZSH_PROMPT_GIT}${ZSH_PROMPT_HG}] [${ZSH_PROMPT_DATE}] %M
 %(!.#.$) "
 
 # Syntax highlighting

@@ -5,13 +5,3 @@ export EDITOR='vim'
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 
-# PATH="/usr/texbin"
-# PATH="/sbin:$PATH"
-# PATH="/usr/sbin:$PATH"
-# PATH="/bin:$PATH"
-# PATH="/usr/bin:$PATH"
-# PATH="/usr/local/bin:$PATH"
-# PATH="/Users/hardikar/Library/Python/3.8/bin:$PATH"
-
-export PATH
-
